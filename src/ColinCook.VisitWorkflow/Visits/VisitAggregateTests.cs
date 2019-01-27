@@ -25,6 +25,7 @@ using System;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using ColinCook.VisitWorkflow.Operatives.Identities;
 using ColinCook.VisitWorkflow.Visits.Aggregates;
 using ColinCook.VisitWorkflow.Visits.Commands;
 using ColinCook.VisitWorkflow.Visits.Identities;

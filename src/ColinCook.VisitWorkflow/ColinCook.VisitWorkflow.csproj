@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="Works\" />
-    <Folder Include="Operatives\" />
     <Folder Include="Sites\" />
   </ItemGroup>
 

@@ -23,6 +23,7 @@
 // 
 
 using System;
+using ColinCook.VisitWorkflow.Operatives.Identities;
 using ColinCook.VisitWorkflow.Visits.Aggregates;
 using ColinCook.VisitWorkflow.Visits.Identities;
 using EventFlow.Aggregates;

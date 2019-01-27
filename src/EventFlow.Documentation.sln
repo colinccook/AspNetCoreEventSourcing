@@ -5,11 +5,11 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventFlow.Documentation", "Source\EventFlow.Documentation\EventFlow.Documentation.csproj", "{C32BA32F-CC4E-4E2B-9575-EA68D23B4301}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColinCook.Documentation", "ColinCook.Documentation\ColinCook.Documentation.csproj", "{1901AE7D-7422-4289-A338-8A0C8EAD44A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColinCook.Documentation", "ColinCook.Documentation\ColinCook.Documentation.csproj", "{1901AE7D-7422-4289-A338-8A0C8EAD44A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColinCook.VisitWorkflow", "ColinCook.VisitWorkflow\ColinCook.VisitWorkflow.csproj", "{6BE58AC4-0FBA-48AC-9B24-4563D01A4ECD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColinCook.VisitWorkflow", "ColinCook.VisitWorkflow\ColinCook.VisitWorkflow.csproj", "{6BE58AC4-0FBA-48AC-9B24-4563D01A4ECD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColinCook.Mvc", "ColinCook.Mvc\ColinCook.Mvc.csproj", "{D34BA6A0-D177-44AA-8C25-AEF4CCA5A4E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColinCook.Mvc", "ColinCook.Mvc\ColinCook.Mvc.csproj", "{D34BA6A0-D177-44AA-8C25-AEF4CCA5A4E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

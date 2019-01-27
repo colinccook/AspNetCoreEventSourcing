@@ -21,6 +21,7 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+using ColinCook.VisitWorkflow.Operatives.Identities;
 using ColinCook.VisitWorkflow.Visits.Aggregates;
 using ColinCook.VisitWorkflow.Visits.Identities;
 using EventFlow.Aggregates.ExecutionResults;

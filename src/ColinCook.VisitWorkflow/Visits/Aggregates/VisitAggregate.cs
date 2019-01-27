@@ -24,6 +24,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ColinCook.VisitWorkflow.Operatives.Identities;
 using ColinCook.VisitWorkflow.Visits.Events;
 using ColinCook.VisitWorkflow.Visits.Identities;
 using EventFlow.Aggregates;
