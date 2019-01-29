@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ColinCook.VisitWorkflow;
 using ColinCook.VisitWorkflow.Operatives.Entities;
+using ColinCook.VisitWorkflow.Operatives.Identities;
+using ColinCook.VisitWorkflow.Visits.Aggregates;
 using LiteDB;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +16,12 @@ namespace ColinCook.Mvc.Controllers
     public class OperativeController : Controller
     {
         private readonly LiteRepository _repository;
+        private readonly AggregateRootRepository<OperativeAggregate, OperativeId> _operativeRepository;
 
-        public OperativeController(LiteRepository repository)
+        public OperativeController(LiteRepository repository, AggregateRootRepository<OperativeAggregate,OperativeId> operativeRepository)
         {
             _repository = repository;
+            _operativeRepository = operativeRepository;
         }
 
         // GET: Operative
@@ -24,6 +29,16 @@ namespace ColinCook.Mvc.Controllers
         public IActionResult Index()
         {
             var operatives = _repository.Fetch<OperativeEntity>();
+
+            // return View(operatives);
+            return new JsonResult(operatives);
+        }
+
+                // GET: Operative
+        [HttpGet("colin2")]
+        public IActionResult colin2()
+        {
+            var operatives = _operativeRepository.GetAll();
 
             // return View(operatives);
             return new JsonResult(operatives);

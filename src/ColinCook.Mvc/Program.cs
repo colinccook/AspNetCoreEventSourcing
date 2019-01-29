@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using ColinCook.VisitWorkflow;
 using ColinCook.VisitWorkflow.Operatives.Entities;
 using ColinCook.VisitWorkflow.Operatives.Identities;
+using ColinCook.VisitWorkflow.Visits.Aggregates;
 using LiteDB;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +32,13 @@ namespace ColinCook.Mvc
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
+
+                var operativeRepository = services.GetRequiredService<AggregateRootRepository<OperativeAggregate,OperativeId>>();
+
+                operativeRepository.Insert(new OperativeAggregate(OperativeId.New));
+                operativeRepository.Insert(new OperativeAggregate(OperativeId.New));
+                operativeRepository.Insert(new OperativeAggregate(OperativeId.New));
+                operativeRepository.Insert(new OperativeAggregate(OperativeId.New));
 
                 var database = services.GetRequiredService<LiteRepository>();
 

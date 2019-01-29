@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using ColinCook.VisitWorkflow;
 using ColinCook.VisitWorkflow.Visits.ReadModels;
 using EventFlow;
 using EventFlow.AspNetCore.Middlewares;
@@ -45,6 +46,7 @@ namespace ColinCook.Mvc
 
             // In memory database for entities
             services.AddSingleton(x => new LiteRepository(new MemoryStream()));
+            services.AddSingleton(typeof(AggregateRootRepository<,>), typeof(AggregateRootRepository<,>));
 
             // Create the container builder.
             var builder = new ContainerBuilder();
