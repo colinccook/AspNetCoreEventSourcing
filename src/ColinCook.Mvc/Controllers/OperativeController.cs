@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using ColinCook.VisitWorkflow;
+using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries;
+using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
+using EventFlow.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,15 +15,21 @@ namespace ColinCook.Mvc.Controllers
     [Route("/operatives")]
     public class OperativeController : Controller
     {
+        private readonly IQueryProcessor _queryProcessor;
+
+        public OperativeController(IQueryProcessor queryProcessor)
+        {
+            _queryProcessor = queryProcessor;
+        }
+
         // GET: Operative
-        [HttpGet("colin")]
+        [HttpGet("index")]
         public IActionResult Index()
         {
-            //var operatives = _repository.Fetch<OperativeEntity>();
+            var allOperatives = _queryProcessor.Process(
+                    new AllOperativesQuery(), CancellationToken.None);
 
-            //// return View(operatives);
-            //return new JsonResult(operatives);
-            return Ok();
+            return new JsonResult(allOperatives);
         }
 
                 // GET: Operative

@@ -4,6 +4,7 @@ using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using ColinCook.VisitWorkflow;
+using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Visits.ReadModels;
 using EventFlow;
 using EventFlow.AspNetCore.Middlewares;
@@ -54,6 +55,7 @@ namespace ColinCook.Mvc
                 .UseAutofacContainerBuilder(builder) // Must be the first line!
                 .AddDefaults(Assembly.LoadFrom("bin/Debug/netcoreapp2.1/ColinCook.VisitWorkflow.dll"))
                 .UseInMemoryReadStoreFor<VisitReadModel>()
+                .UseInMemoryReadStoreFor<AllOperativesReadModel>()
                 .UseConsoleLog();
 
             builder.Populate(services);

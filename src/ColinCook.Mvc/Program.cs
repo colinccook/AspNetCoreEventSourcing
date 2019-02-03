@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using ColinCook.VisitWorkflow;
+﻿using System.Threading;
+using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Command;
+using ColinCook.VisitWorkflow.Identities;
+using EventFlow;
+using EventFlow.Extensions;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace ColinCook.Mvc
 {
@@ -28,6 +25,12 @@ namespace ColinCook.Mvc
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
+
+                var commandBus = services.GetService<ICommandBus>();
+
+                commandBus.Publish(new OperativeHiredCommand(OperativeId.New, "Phillip", "Johnson"), CancellationToken.None);
+                commandBus.Publish(new OperativeHiredCommand(OperativeId.New, "Robert", "Smith"), CancellationToken.None);
+                commandBus.Publish(new OperativeHiredCommand(OperativeId.New, "James", "Law"), CancellationToken.None);
             }
         }
 
