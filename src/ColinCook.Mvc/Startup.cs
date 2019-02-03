@@ -9,7 +9,6 @@ using EventFlow;
 using EventFlow.AspNetCore.Middlewares;
 using EventFlow.Autofac.Extensions;
 using EventFlow.Extensions;
-using LiteDB;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -43,10 +42,6 @@ namespace ColinCook.Mvc
         {
             // Add services to the collection.
             services.AddMvc();
-
-            // In memory database for entities
-            services.AddSingleton(x => new LiteRepository(new MemoryStream()));
-            services.AddSingleton(typeof(AggregateRootRepository<,>), typeof(AggregateRootRepository<,>));
 
             // Create the container builder.
             var builder = new ContainerBuilder();

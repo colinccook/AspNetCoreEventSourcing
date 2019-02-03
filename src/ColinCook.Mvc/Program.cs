@@ -7,7 +7,6 @@ using ColinCook.VisitWorkflow;
 using ColinCook.VisitWorkflow.Operatives.Entities;
 using ColinCook.VisitWorkflow.Operatives.Identities;
 using ColinCook.VisitWorkflow.Visits.Aggregates;
-using LiteDB;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -32,24 +31,6 @@ namespace ColinCook.Mvc
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-
-                var operativeRepository = services.GetRequiredService<AggregateRootRepository<OperativeAggregate,OperativeId>>();
-
-                operativeRepository.Insert(new OperativeAggregate(OperativeId.New));
-                operativeRepository.Insert(new OperativeAggregate(OperativeId.New));
-                operativeRepository.Insert(new OperativeAggregate(OperativeId.New));
-                operativeRepository.Insert(new OperativeAggregate(OperativeId.New));
-
-                var database = services.GetRequiredService<LiteRepository>();
-
-                    IEnumerable<OperativeEntity> operatives = new List<OperativeEntity>
-                    {
-                        new OperativeEntity {Forename = "Bob", Surname = "Smith"},
-                        new OperativeEntity {Forename = "Simon", Surname = "Jenkins"},
-                        new OperativeEntity {Forename = "Phillip", Surname = "Sea-more"}
-                    };
-
-                    database.Insert(operatives);
             }
         }
 
