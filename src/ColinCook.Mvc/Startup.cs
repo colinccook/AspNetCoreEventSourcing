@@ -4,7 +4,7 @@ using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using ColinCook.VisitWorkflow;
-using ColinCook.VisitWorkflow.Visits.ReadModels;
+using ColinCook.VisitWorkflow.AggregateRoots.Visits.ReadModels;
 using EventFlow;
 using EventFlow.AspNetCore.Middlewares;
 using EventFlow.Autofac.Extensions;

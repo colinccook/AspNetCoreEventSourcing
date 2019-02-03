@@ -20,27 +20,19 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// 
 
-using ColinCook.VisitWorkflow.Visits.Aggregates;
-using ColinCook.VisitWorkflow.Visits.Identities;
-using EventFlow.Aggregates.ExecutionResults;
-using EventFlow.Commands;
+using EventFlow.Core;
+using EventFlow.ValueObjects;
+using Newtonsoft.Json;
 
-namespace ColinCook.VisitWorkflow.Visits.Commands
+namespace ColinCook.VisitWorkflow.Identities
 {
-    /// Command for update magic number
-    public class AddSiteCommand :
-        Command<VisitAggregate, VisitId, IExecutionResult>
+    /// Represents the aggregate identity (ID)
+    [JsonConverter(typeof(SingleValueObjectConverter))] 
+    public class SiteId :
+        Identity<SiteId>
     {
-        public AddSiteCommand(
-            VisitId aggregateId,
-            SiteId siteId)
-            : base(aggregateId)
-        {
-            SiteId = siteId;
-        }
-
-        public SiteId SiteId { get; }
-        public int Colin { get; set; }     
+        public SiteId(string value) : base(value) { }
     }
 }

@@ -21,16 +21,10 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using ColinCook.VisitWorkflow.Operatives.Identities;
-using ColinCook.VisitWorkflow.Visits.Events;
-using ColinCook.VisitWorkflow.Visits.Identities;
+using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates;
-using EventFlow.Aggregates.ExecutionResults;
 
-namespace ColinCook.VisitWorkflow.Visits.Aggregates
+namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives
 {
     /// The aggregate root
     public class OperativeAggregate :

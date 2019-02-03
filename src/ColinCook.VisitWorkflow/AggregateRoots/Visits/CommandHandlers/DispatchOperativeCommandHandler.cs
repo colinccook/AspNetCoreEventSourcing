@@ -23,24 +23,23 @@
 
 using System.Threading;
 using System.Threading.Tasks;
-using ColinCook.VisitWorkflow.Visits.Aggregates;
-using ColinCook.VisitWorkflow.Visits.Commands;
-using ColinCook.VisitWorkflow.Visits.Identities;
+using ColinCook.VisitWorkflow.AggregateRoots.Visits.Commands;
+using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;
 
-namespace ColinCook.VisitWorkflow.Visits.CommandHandlers
+namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.CommandHandlers
 {
     /// Command handler for our command
-    public class AddSiteCommandHandler :
-        CommandHandler<VisitAggregate, VisitId, IExecutionResult, AddSiteCommand>
+    public class DispatchOperativeCommandHandler :
+        CommandHandler<VisitAggregate, VisitId, IExecutionResult, DispatchOperativeCommand>
     {
         public override Task<IExecutionResult> ExecuteCommandAsync(
             VisitAggregate aggregate,
-            AddSiteCommand command,
+            DispatchOperativeCommand command,
             CancellationToken cancellationToken)
         {
-            var executionResult = aggregate.AddSite(command.SiteId);
+            var executionResult = aggregate.DispatchOperative(command.OperativeId, command.EstimatedArrival);
             return Task.FromResult(executionResult);
         }
     }

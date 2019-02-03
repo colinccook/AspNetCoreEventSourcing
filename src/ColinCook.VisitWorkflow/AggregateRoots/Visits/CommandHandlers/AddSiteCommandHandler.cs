@@ -20,29 +20,27 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-// 
 
-using System;
-using ColinCook.VisitWorkflow.Operatives.Identities;
-using ColinCook.VisitWorkflow.Visits.Aggregates;
-using ColinCook.VisitWorkflow.Visits.Identities;
-using EventFlow.Aggregates;
-using EventFlow.EventStores;
+using System.Threading;
+using System.Threading.Tasks;
+using ColinCook.VisitWorkflow.AggregateRoots.Visits.Commands;
+using ColinCook.VisitWorkflow.Identities;
+using EventFlow.Aggregates.ExecutionResults;
+using EventFlow.Commands;
 
-namespace ColinCook.VisitWorkflow.Visits.Events
+namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.CommandHandlers
 {
-    /// A basic event containing some information
-    [EventVersion(nameof(DispatchOperativeEvent), 1)]
-    public class DispatchOperativeEvent :
-        AggregateEvent<VisitAggregate, VisitId>
+    /// Command handler for our command
+    public class AddSiteCommandHandler :
+        CommandHandler<VisitAggregate, VisitId, IExecutionResult, AddSiteCommand>
     {
-        public DispatchOperativeEvent(OperativeId operativeId, DateTime estimatedArrival)
+        public override Task<IExecutionResult> ExecuteCommandAsync(
+            VisitAggregate aggregate,
+            AddSiteCommand command,
+            CancellationToken cancellationToken)
         {
-            OperativeId = operativeId;
-            EstimatedArrival = estimatedArrival;
+            var executionResult = aggregate.AddSite(command.SiteId);
+            return Task.FromResult(executionResult);
         }
-
-        public OperativeId OperativeId { get; }
-        public DateTime EstimatedArrival { get; }
     }
 }

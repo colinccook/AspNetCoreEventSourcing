@@ -22,23 +22,25 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
 
-using ColinCook.VisitWorkflow.Visits.Aggregates;
-using ColinCook.VisitWorkflow.Visits.Identities;
+using System;
+using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.EventStores;
 
-namespace ColinCook.VisitWorkflow.Visits.Events
+namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.Events
 {
     /// A basic event containing some information
-    [EventVersion(nameof(AddSiteEvent), 1)]
-    public class AddSiteEvent :
+    [EventVersion(nameof(DispatchOperativeEvent), 1)]
+    public class DispatchOperativeEvent :
         AggregateEvent<VisitAggregate, VisitId>
     {
-        public AddSiteEvent(SiteId siteId)
+        public DispatchOperativeEvent(OperativeId operativeId, DateTime estimatedArrival)
         {
-            SiteId = siteId;
+            OperativeId = operativeId;
+            EstimatedArrival = estimatedArrival;
         }
 
-        public SiteId SiteId { get; }
+        public OperativeId OperativeId { get; }
+        public DateTime EstimatedArrival { get; }
     }
 }

@@ -23,14 +23,12 @@
 // 
 
 using System.Collections.Generic;
-using ColinCook.VisitWorkflow.Operatives.Identities;
-using ColinCook.VisitWorkflow.Visits.Aggregates;
-using ColinCook.VisitWorkflow.Visits.Events;
-using ColinCook.VisitWorkflow.Visits.Identities;
+using ColinCook.VisitWorkflow.AggregateRoots.Visits.Events;
+using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.ReadStores;
 
-namespace ColinCook.VisitWorkflow.Visits.ReadModels
+namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.ReadModels
 {
     /// Read model for our aggregate
     public class VisitReadModel :

@@ -20,28 +20,19 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// 
 
-using System.Threading;
-using System.Threading.Tasks;
-using ColinCook.VisitWorkflow.Visits.Aggregates;
-using ColinCook.VisitWorkflow.Visits.Commands;
-using ColinCook.VisitWorkflow.Visits.Identities;
-using EventFlow.Aggregates.ExecutionResults;
-using EventFlow.Commands;
+using EventFlow.Core;
+using EventFlow.ValueObjects;
+using Newtonsoft.Json;
 
-namespace ColinCook.VisitWorkflow.Visits.CommandHandlers
+namespace ColinCook.VisitWorkflow.Identities
 {
-    /// Command handler for our command
-    public class AssignOperativeCommandHandler :
-        CommandHandler<VisitAggregate, VisitId, IExecutionResult, AssignOperativeCommand>
+    /// Represents the aggregate identity (ID)
+    [JsonConverter(typeof(SingleValueObjectConverter))]
+    public class OperativeId :
+        Identity<OperativeId>
     {
-        public override Task<IExecutionResult> ExecuteCommandAsync(
-            VisitAggregate aggregate,
-            AssignOperativeCommand command,
-            CancellationToken cancellationToken)
-        {
-            var executionResult = aggregate.AssignOperative(command.OperativeId);
-            return Task.FromResult(executionResult);
-        }
+        public OperativeId(string value) : base(value) { }
     }
 }

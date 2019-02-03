@@ -25,11 +25,9 @@ using System;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using ColinCook.VisitWorkflow.Operatives.Identities;
-using ColinCook.VisitWorkflow.Visits.Aggregates;
-using ColinCook.VisitWorkflow.Visits.Commands;
-using ColinCook.VisitWorkflow.Visits.Identities;
-using ColinCook.VisitWorkflow.Visits.ReadModels;
+using ColinCook.VisitWorkflow.AggregateRoots.Visits.Commands;
+using ColinCook.VisitWorkflow.AggregateRoots.Visits.ReadModels;
+using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;
@@ -38,7 +36,7 @@ using EventFlow.Queries;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace ColinCook.VisitWorkflow.Visits
+namespace ColinCook.VisitWorkflow.AggregateRoots.Visits
 {
     public class VisitAggregateTests
     {

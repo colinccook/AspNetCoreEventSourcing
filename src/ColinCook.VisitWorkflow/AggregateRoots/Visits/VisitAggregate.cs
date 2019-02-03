@@ -24,13 +24,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ColinCook.VisitWorkflow.Operatives.Identities;
-using ColinCook.VisitWorkflow.Visits.Events;
-using ColinCook.VisitWorkflow.Visits.Identities;
+using ColinCook.VisitWorkflow.AggregateRoots.Visits.Events;
+using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.Aggregates.ExecutionResults;
 
-namespace ColinCook.VisitWorkflow.Visits.Aggregates
+namespace ColinCook.VisitWorkflow.AggregateRoots.Visits
 {
     class OperativeWorkflow
     {

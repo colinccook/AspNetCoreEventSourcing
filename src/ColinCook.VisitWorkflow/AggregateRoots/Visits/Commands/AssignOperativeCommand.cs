@@ -20,22 +20,21 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-// 
 
-using ColinCook.VisitWorkflow.Operatives.Identities;
-using ColinCook.VisitWorkflow.Visits.Aggregates;
-using ColinCook.VisitWorkflow.Visits.Identities;
-using EventFlow.Aggregates;
-using EventFlow.EventStores;
+using ColinCook.VisitWorkflow.Identities;
+using EventFlow.Aggregates.ExecutionResults;
+using EventFlow.Commands;
 
-namespace ColinCook.VisitWorkflow.Visits.Events
+namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.Commands
 {
-    /// A basic event containing some information
-    [EventVersion(nameof(AssignOperativeEvent), 1)]
-    public class AssignOperativeEvent :
-        AggregateEvent<VisitAggregate, VisitId>
+    /// Command for update magic number
+    public class AssignOperativeCommand :
+        Command<VisitAggregate, VisitId, IExecutionResult>
     {
-        public AssignOperativeEvent(OperativeId operativeId)
+        public AssignOperativeCommand(
+            VisitId aggregateId,
+            OperativeId operativeId)
+            : base(aggregateId)
         {
             OperativeId = operativeId;
         }

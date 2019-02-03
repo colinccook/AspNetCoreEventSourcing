@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using ColinCook.VisitWorkflow.Visits.Aggregates;
-using ColinCook.VisitWorkflow.Visits.Commands;
-using ColinCook.VisitWorkflow.Visits.Identities;
-using ColinCook.VisitWorkflow.Visits.ReadModels;
+using ColinCook.VisitWorkflow.AggregateRoots.Visits.Commands;
+using ColinCook.VisitWorkflow.AggregateRoots.Visits.ReadModels;
+using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;

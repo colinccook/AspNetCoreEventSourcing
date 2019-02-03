@@ -22,17 +22,22 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
 
-using EventFlow.Core;
-using EventFlow.ValueObjects;
-using Newtonsoft.Json;
+using ColinCook.VisitWorkflow.Identities;
+using EventFlow.Aggregates;
+using EventFlow.EventStores;
 
-namespace ColinCook.VisitWorkflow.Visits.Identities
+namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.Events
 {
-    /// Represents the aggregate identity (ID)
-    [JsonConverter(typeof(SingleValueObjectConverter))]
-    public class VisitId :
-        Identity<VisitId>
+    /// A basic event containing some information
+    [EventVersion(nameof(AddSiteEvent), 1)]
+    public class AddSiteEvent :
+        AggregateEvent<VisitAggregate, VisitId>
     {
-        public VisitId(string value) : base(value) { }
+        public AddSiteEvent(SiteId siteId)
+        {
+            SiteId = siteId;
+        }
+
+        public SiteId SiteId { get; }
     }
 }

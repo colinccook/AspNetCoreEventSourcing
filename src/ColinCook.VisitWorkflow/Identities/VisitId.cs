@@ -20,31 +20,19 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// 
 
-using System;
-using ColinCook.VisitWorkflow.Operatives.Identities;
-using ColinCook.VisitWorkflow.Visits.Aggregates;
-using ColinCook.VisitWorkflow.Visits.Identities;
-using EventFlow.Aggregates.ExecutionResults;
-using EventFlow.Commands;
+using EventFlow.Core;
+using EventFlow.ValueObjects;
+using Newtonsoft.Json;
 
-namespace ColinCook.VisitWorkflow.Visits.Commands
+namespace ColinCook.VisitWorkflow.Identities
 {
-    /// Command for update magic number
-    public class DispatchOperativeCommand :
-        Command<VisitAggregate, VisitId, IExecutionResult>
+    /// Represents the aggregate identity (ID)
+    [JsonConverter(typeof(SingleValueObjectConverter))]
+    public class VisitId :
+        Identity<VisitId>
     {
-        public DispatchOperativeCommand(
-            VisitId aggregateId,
-            OperativeId operativeId,
-            DateTime estimatedArrival)
-            : base(aggregateId)
-        {
-            OperativeId = operativeId;
-            EstimatedArrival = estimatedArrival;
-        }
-
-        public OperativeId OperativeId { get; }
-        public DateTime EstimatedArrival { get; }
+        public VisitId(string value) : base(value) { }
     }
 }

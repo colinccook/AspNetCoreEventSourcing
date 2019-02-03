@@ -21,27 +21,25 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System.Threading;
-using System.Threading.Tasks;
-using ColinCook.VisitWorkflow.Visits.Aggregates;
-using ColinCook.VisitWorkflow.Visits.Commands;
-using ColinCook.VisitWorkflow.Visits.Identities;
+using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;
 
-namespace ColinCook.VisitWorkflow.Visits.CommandHandlers
+namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.Commands
 {
-    /// Command handler for our command
-    public class DispatchOperativeCommandHandler :
-        CommandHandler<VisitAggregate, VisitId, IExecutionResult, DispatchOperativeCommand>
+    /// Command for update magic number
+    public class AddSiteCommand :
+        Command<VisitAggregate, VisitId, IExecutionResult>
     {
-        public override Task<IExecutionResult> ExecuteCommandAsync(
-            VisitAggregate aggregate,
-            DispatchOperativeCommand command,
-            CancellationToken cancellationToken)
+        public AddSiteCommand(
+            VisitId aggregateId,
+            SiteId siteId)
+            : base(aggregateId)
         {
-            var executionResult = aggregate.DispatchOperative(command.OperativeId, command.EstimatedArrival);
-            return Task.FromResult(executionResult);
+            SiteId = siteId;
         }
+
+        public SiteId SiteId { get; }
+        public int Colin { get; set; }     
     }
 }
