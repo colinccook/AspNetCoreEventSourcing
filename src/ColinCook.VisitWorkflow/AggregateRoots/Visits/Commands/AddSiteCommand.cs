@@ -40,6 +40,5 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.Commands
         }
 
         public SiteId SiteId { get; }
-        public int Colin { get; set; }     
     }
 }

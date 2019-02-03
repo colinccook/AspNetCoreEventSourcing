@@ -14,8 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="AggregateRoots\Operatives\Command\" />
-    <Folder Include="AggregateRoots\Operatives\CommandHandlers\" />
     <Folder Include="AggregateRoots\Works\" />
     <Folder Include="AggregateRoots\Sites\" />
   </ItemGroup>
