@@ -42,7 +42,12 @@ namespace ColinCook.Mvc
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // Add services to the collection.
-            services.AddMvc();
+            // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddRazorPagesOptions(options =>
+            {
+                options.AllowAreas = true;
+            });
 
             // Create the container builder.
             var builder = new ContainerBuilder();
