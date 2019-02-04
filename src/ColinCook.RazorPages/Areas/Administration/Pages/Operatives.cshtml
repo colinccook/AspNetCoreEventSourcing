@@ -3,3 +3,12 @@
 @model OperativesModel
 @{
 }
+
+<ul>
+    @foreach (var operative in Model.Operatives)
+    {
+        <li>
+                @operative.OperativeId: @operative.Forename @operative.Surname
+        </li>
+    }
+</ul>

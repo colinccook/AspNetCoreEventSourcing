@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Models;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,8 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
     {
         private readonly IQueryProcessor _queryProcessor;
 
+        public IReadOnlyCollection<OperativeModel> Operatives { get; set; }
+
         public OperativesModel(IQueryProcessor queryProcessor)
         {
             _queryProcessor = queryProcessor;
@@ -21,7 +24,7 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
 
         public void OnGet()
         {
-            var allOperatives = _queryProcessor.Process(
+            Operatives = _queryProcessor.Process(
                 new AllOperativesQuery(), CancellationToken.None);
         }
     }
