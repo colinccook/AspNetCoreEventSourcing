@@ -55,7 +55,7 @@ namespace ColinCook.Mvc
                 .UseAutofacContainerBuilder(builder) // Must be the first line!
                 .AddDefaults(Assembly.LoadFrom("bin/Debug/netcoreapp2.1/ColinCook.VisitWorkflow.dll"))
                 .UseInMemoryReadStoreFor<VisitReadModel>()
-                .UseInMemoryReadStoreFor<AllOperativesReadModel>()
+                .UseInMemoryReadStoreFor<OperativeReadModel>()
                 .UseConsoleLog();
 
             builder.Populate(services);

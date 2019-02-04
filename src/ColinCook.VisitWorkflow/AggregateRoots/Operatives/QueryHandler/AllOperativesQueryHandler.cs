@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Models;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
 using EventFlow.Queries;
@@ -11,19 +12,19 @@ using EventFlow.ReadStores.InMemory;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.QueryHandler
 {
-    public class AllOperativesQueryHandler : IQueryHandler<AllOperativesQuery, IReadOnlyCollection<string>>
+    public class AllOperativesQueryHandler : IQueryHandler<AllOperativesQuery, IReadOnlyCollection<OperativeModel>>
     {
-        private readonly IInMemoryReadStore<AllOperativesReadModel> _readStore;
+        private readonly IInMemoryReadStore<OperativeReadModel> _readStore;
 
-        public AllOperativesQueryHandler(IInMemoryReadStore<AllOperativesReadModel> readStore)
+        public AllOperativesQueryHandler(IInMemoryReadStore<OperativeReadModel> readStore)
         {
             _readStore = readStore;
         }
 
-        public async Task<IReadOnlyCollection<string>> ExecuteQueryAsync(AllOperativesQuery query, CancellationToken cancellationToken)
+        public async Task<IReadOnlyCollection<OperativeModel>> ExecuteQueryAsync(AllOperativesQuery query, CancellationToken cancellationToken)
         {
             var readModels = await _readStore.FindAsync(rm => true, cancellationToken).ConfigureAwait(false);
-            return readModels.Select(rm => rm.Forename).ToList();
+            return readModels.Select(rm => rm.OperativeModel).ToList();
         }
     }
 }
