@@ -2,13 +2,14 @@
 @namespace ColinCook.RazorPages.Areas.Administration.Pages
 @model OperativesModel
 @{
+    Layout = "_Layout";
 }
 
 <ul>
     @foreach (var operative in Model.Operatives)
     {
         <li>
-                @operative.OperativeId: @operative.Forename @operative.Surname
+            @operative.OperativeId: @operative.Forename @operative.Surname
         </li>
     }
 </ul>
