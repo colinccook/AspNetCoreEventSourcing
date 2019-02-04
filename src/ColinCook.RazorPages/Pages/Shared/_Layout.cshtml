@@ -26,13 +26,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-page="/Index" class="navbar-brand">ColinCook.RazorPages</a>
+                <a asp-area="" asp-page="Index" class="navbar-brand">ColinCook.RazorPages</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-page="/Index">Home</a></li>
-                    <li><a asp-page="/About">About</a></li>
-                    <li><a asp-page="/Contact">Contact</a></li>
+                    <li><a asp-area="Administration">Admin</a></li>
+                    <li><a asp-area="Response">Response</a></li>
+                    <li><a asp-area="Control">Control</a></li>
+                    <li><a asp-area="Operatives">Operatives</a></li>
                 </ul>
             </div>
         </div>

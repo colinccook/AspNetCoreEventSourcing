@@ -5,11 +5,18 @@
     Layout = "_Layout";
 }
 
-<ul>
-    @foreach (var operative in Model.Operatives)
-    {
-        <li>
-            @operative.OperativeId: @operative.Forename @operative.Surname
-        </li>
-    }
-</ul>
+<div class="jumbotron">
+    <h1 class="display-4">Operatives</h1>
+    <p class="lead">Operatives are assigned to various works to fix problems.</p>
+</div>
+
+<div class="card">
+    <ul class="list-group list-group-flush">
+        @foreach (var operative in Model.Operatives)
+        {
+            <li class="list-group-item">
+                @operative.OperativeId: @operative.Forename @operative.Surname
+            </li>
+        }
+    </ul>
+</div>

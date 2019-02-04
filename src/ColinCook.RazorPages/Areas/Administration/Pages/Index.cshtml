@@ -2,6 +2,27 @@
 @namespace ColinCook.RazorPages.Areas.Administration.Pages
 @model IndexModel
 @{
+    Layout = "_Layout";
 }
 
-<h1>Hello world</h1>
+<div class="jumbotron">
+    <h1 class="display-4">Administration</h1>
+    <p class="lead">Those with Administrative roles can edit background information, such as the employment of new Operatives or the aquisition of a new site.</p>
+</div>
+
+<div class="row">
+    <a href="Hello">
+        <div class="col-sm-6">
+            <h3 class=""><u>Operatives</u></h3>
+            <p>With supporting text below as a natural lead-in to additional content.</p>
+        </div>
+    </a>
+    <div class="col-sm-6">
+        <h3>Sites</h3>
+        <p>With supporting text below as a natural lead-in to additional content.</p>
+    </div>
+    <div class="col-sm-6">
+        <h3>System Permissions</h3>
+        <p>Create roles with features that can be applied to individuals or teams.</p>
+    </div>
+</div>
