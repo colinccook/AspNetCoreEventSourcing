@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ColinCook.RazorPages.Areas.Administration.Pages
 {
-    public class OperativesModel : PageModel
+    public class SitesModel : PageModel
     {
         private readonly IQueryProcessor _queryProcessor;
         private readonly ICommandBus _commandBus;
@@ -25,7 +25,7 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
 
         public IReadOnlyCollection<OperativeModel> Operatives { get; set; }
 
-        public OperativesModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
+        public SitesModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
         {
             _queryProcessor = queryProcessor;
             _commandBus = commandBus;

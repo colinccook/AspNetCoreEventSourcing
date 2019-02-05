@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ColinCook.VisitWorkflow.Identities;
+﻿using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.Command
+namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands
 {
     public class OperativeHiredCommand :
         Command<OperativeAggregate, OperativeId, IExecutionResult>

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Models;
@@ -10,7 +8,7 @@ using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
 using EventFlow.Queries;
 using EventFlow.ReadStores.InMemory;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.QueryHandler
+namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.QueryHandlers
 {
     public class AllOperativesQueryHandler : IQueryHandler<AllOperativesQuery, IReadOnlyCollection<OperativeModel>>
     {

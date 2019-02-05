@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
+using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Visits.ReadModels;
 using EventFlow;
 using EventFlow.AspNetCore.Middlewares;
@@ -56,9 +57,10 @@ namespace ColinCook.RazorPages
             // be sure to keep a reference to it as a property or field.
             var container = EventFlowOptions.New
                 .UseAutofacContainerBuilder(builder) // Must be the first line!
-                .AddDefaults(Assembly.LoadFrom("bin/Debug/netcoreapp2.1/ColinCook.VisitWorkflow.dll"))
+                .AddDefaults(Assembly.LoadFrom("bin/Debug/netcoreapp2.2/ColinCook.VisitWorkflow.dll"))
                 .UseInMemoryReadStoreFor<VisitReadModel>()
                 .UseInMemoryReadStoreFor<OperativeReadModel>()
+                .UseInMemoryReadStoreFor<SiteReadModel>()
                 .UseConsoleLog();
 
             builder.Populate(services);
