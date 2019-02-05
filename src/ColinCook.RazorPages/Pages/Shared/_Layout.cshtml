@@ -1,54 +1,58 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<!doctype html>
+<html lang="en" class="h-100">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@ViewData["Title"] - ColinCook.RazorPages</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
-<body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-page="Index" class="navbar-brand">ColinCook.RazorPages</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="Administration">Admin</a></li>
-                    <li><a asp-area="Response">Response</a></li>
-                    <li><a asp-area="Control">Control</a></li>
-                    <li><a asp-area="Operatives">Operatives</a></li>
+<body class="d-flex flex-column h-100 bg-light">
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#">ColinCook.RazorPages</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Administration" asp-page="Index">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Response" asp-page="Index">Response</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Control" asp-page="Index">Control</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Operatives" asp-page="Index">Operatives</a>
+                    </li>
                 </ul>
             </div>
+        </nav>
+    </header>
+
+    <!-- Begin page content -->
+    <main role="main" class="flex-shrink-0">
+        <div class="container">
+            @RenderBody()
         </div>
-    </nav>
+    </main>
 
-    <partial name="_CookieConsentPartial" />
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2019 - ColinCook.RazorPages</p>
-        </footer>
-    </div>
-
+    <footer class="footer mt-auto py-3 bg-white">
+        <div class="container">
+            <span class="text-muted">Thanks for taking a look at my prototype. Source code located at <a href="https://www.github.com/users/ccook">https://www.github.com/users/ccook</a></span>
+        </div>
+    </footer>
+    
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>

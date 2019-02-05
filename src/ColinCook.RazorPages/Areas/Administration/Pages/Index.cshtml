@@ -1,6 +1,4 @@
 ﻿@page
-@namespace ColinCook.RazorPages.Areas.Administration.Pages
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model IndexModel
 @{
     Layout = "_Layout";
@@ -11,21 +9,23 @@
     <p class="lead">Those with Administrative roles can edit background information, such as the employment of new Operatives or the acquisition of a new site.</p>
 </div>
 
-<div class="row">
+<div class="py-3">
     <a asp-area="Administration" asp-page="Operatives">
-        <div class="col-sm-6">
-            <h3 class=""><u>Operatives</u></h3>
-            <p>Manage which Operatives are available for assignment</p>
-        </div>
+        <h3>Operatives »</h3>
+        <p>Manage which Operatives are available for assignment</p>
     </a>
+</div>
+
+<div class="py-3">
     <a asp-area="Administration" asp-page="Sites">
-        <div class="col-sm-6">
-            <h3>Sites</h3>
-            <p>Manage which Sites are available for requesting work.</p>
-        </div>
+        <h3>Sites »</h3>
+        <p>Manage which Sites are available for requesting work</p>
     </a>
-    <div class="col-sm-6">
-        <h3>System Permissions</h3>
-        <p>Create roles with features that can be applied to individuals or teams.</p>
-    </div>
+</div>
+
+<div class="py-3">
+    <a asp-area="Administration" asp-page="Permissions">
+        <h3>System Permissions »</h3>
+        <p>Create roles with features that can be applied to individuals or teams</p>
+    </a>
 </div>
