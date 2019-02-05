@@ -9,42 +9,33 @@
     <p class="lead">Operatives are assigned to various works to fix problems.</p>
 </div>
 
-
-
 <div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small>3 days ago</small>
+    @foreach (var operative in Model.Operatives)
+    {
+        <div class="list-group-item list-group-item-action flex-column align-items-start">
+            <h5 class="mb-1">@operative.Forename @operative.Surname</h5>
+            <p class="mb-1">Operative</p>
+            <small>@operative.OperativeId</small>
         </div>
-        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        <small>Donec id elit non mi porta.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small class="text-muted">3 days ago</small>
-        </div>
-        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        <small class="text-muted">Donec id elit non mi porta.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small class="text-muted">3 days ago</small>
-        </div>
-        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        <small class="text-muted">Donec id elit non mi porta.</small>
-    </a>
+    }
 </div>
 
-<div class="card">
-    <ul class="list-group list-group-flush">
-        @foreach (var operative in Model.Operatives)
-        {
-            <li class="list-group-item">
-                @operative.OperativeId: @operative.Forename @operative.Surname
-            </li>
-        }
-    </ul>
-</div>
+<form style="padding-top: 50px;">
+    <h5>Hire a new Operative</h5>
+    <p class="lead">You are able to hire new operatives using this form</p>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="firstName">First name</label>
+            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+        </div>
+        <div class="col-md-6">
+            <label for="lastName">Last name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+        </div>
+        <button class="btn btn-primary btn-block" style="margin: 20px;" type="submit">Hire Operative</button>
+    </div>
+</form>
+
+
+
+
