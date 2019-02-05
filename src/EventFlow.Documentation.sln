@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColinCook.VisitWorkflow", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColinCook.Mvc", "ColinCook.Mvc\ColinCook.Mvc.csproj", "{D34BA6A0-D177-44AA-8C25-AEF4CCA5A4E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColinCook.RazorPages", "ColinCook.RazorPages\ColinCook.RazorPages.csproj", "{18F0191A-451D-4C6F-85FB-BFA641875770}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColinCook.RazorPages", "ColinCook.RazorPages\ColinCook.RazorPages.csproj", "{18F0191A-451D-4C6F-85FB-BFA641875770}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
