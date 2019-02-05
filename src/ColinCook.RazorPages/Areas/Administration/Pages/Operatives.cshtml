@@ -20,17 +20,17 @@
     }
 </div>
 
-<form style="padding-top: 50px;">
+<form method="post" style="padding-top: 50px;">
     <h5>Hire a new Operative</h5>
     <p class="lead">You are able to hire new operatives using this form</p>
     <div class="row">
         <div class="col-md-6">
             <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+            <input type="text" class="form-control" id="firstName" asp-for="Forename" placeholder="" value="" required>
         </div>
         <div class="col-md-6">
             <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+            <input type="text" class="form-control" id="lastName" asp-for="Surname" placeholder="" value="" required>
         </div>
         <button class="btn btn-primary btn-block" style="margin: 20px;" type="submit">Hire Operative</button>
     </div>
