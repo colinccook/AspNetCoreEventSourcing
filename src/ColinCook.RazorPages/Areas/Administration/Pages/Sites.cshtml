@@ -1,0 +1,50 @@
+﻿@page
+@model SitesModel
+@{
+    Layout = "_Layout";
+}
+
+<div class="jumbotron">
+    <h1 class="display-4">Sites</h1>
+    <p class="lead">Sites are the locations where work can be raised</p>
+</div>
+
+<div class="list-group">
+    @foreach (var site in Model.Sites)
+    {
+        <div class="list-group-item list-group-item-action flex-column align-items-start">
+            <h5 class="mb-1">@site.AddressLine1</h5>
+            <p class="mb-1">@site.Town, @site.PostCode</p>
+            <p class="mb1">@site.TelephoneNumber</p>
+            <small>@site.SiteId</small>
+        </div>
+    }
+</div>
+
+<form method="post" style="padding-top: 50px;">
+    <h5>Acquire a new Site</h5>
+    <p class="lead">You are able to acquire a new site using this form</p>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="firstName">Address Line 1</label>
+            <input type="text" class="form-control" id="firstName" asp-for="AddressLine1" placeholder="" value="" required>
+        </div>
+        <div class="col-md-6">
+            <label for="lastName">Town</label>
+            <input type="text" class="form-control" id="lastName" asp-for="Town" placeholder="" value="" required>
+        </div>
+        <div class="col-md-6">
+            <label for="lastName">Post Code</label>
+            <input type="text" class="form-control" id="lastName" asp-for="PostCode" placeholder="" value="" required>
+        </div>
+        <div class="col-md-6">
+            <label for="lastName">Telephone Number</label>
+            <input type="text" class="form-control" id="lastName" asp-for="TelephoneNumber" placeholder="" value="" required>
+        </div>
+        <button class="btn btn-primary btn-block" style="margin: 20px;" type="submit">Acquire Site</button>
+    </div>
+</form>
+
+
+
+

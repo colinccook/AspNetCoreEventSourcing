@@ -1,5 +1,6 @@
 ﻿using System.Threading;
-using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Command;
+using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands;
+using ColinCook.VisitWorkflow.AggregateRoots.Sites.Commands;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Extensions;

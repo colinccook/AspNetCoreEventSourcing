@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Models;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries;
+using ColinCook.VisitWorkflow.AggregateRoots.Sites.Commands;
+using ColinCook.VisitWorkflow.AggregateRoots.Sites.Models;
+using ColinCook.VisitWorkflow.AggregateRoots.Sites.Queries;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Extensions;
@@ -20,10 +23,12 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
         private readonly IQueryProcessor _queryProcessor;
         private readonly ICommandBus _commandBus;
 
-        [BindProperty] public string Forename { get; set; }
-        [BindProperty] public string Surname { get; set; }
+        [BindProperty] public string AddressLine1 { get; set; }
+        [BindProperty] public string Town { get; set; }
+        [BindProperty] public string PostCode { get; set; }
+        [BindProperty] public string TelephoneNumber { get; set; }
 
-        public IReadOnlyCollection<OperativeModel> Operatives { get; set; }
+        public IReadOnlyCollection<SiteModel> Sites { get; set; }
 
         public SitesModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
         {
@@ -33,13 +38,13 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
 
         public async Task OnGetAsync()
         {
-            Operatives = await _queryProcessor.ProcessAsync(
-                new AllOperativesQuery(), CancellationToken.None);
+            Sites = await _queryProcessor.ProcessAsync(
+                new AllSitesQuery(), CancellationToken.None);
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var result = await _commandBus.PublishAsync(new OperativeHiredCommand(OperativeId.New, Forename, Surname), CancellationToken.None);
+            var result = await _commandBus.PublishAsync(new SiteAcquiredCommand(SiteId.New, AddressLine1, Town, PostCode, TelephoneNumber), CancellationToken.None);
 
             return RedirectToPage();
         }

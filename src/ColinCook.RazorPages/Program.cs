@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands;
+using ColinCook.VisitWorkflow.AggregateRoots.Sites.Commands;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Extensions;
@@ -38,6 +39,10 @@ namespace ColinCook.RazorPages
                 commandBus.Publish(new OperativeHiredCommand(OperativeId.New, "Phillip", "Johnson"), CancellationToken.None);
                 commandBus.Publish(new OperativeHiredCommand(OperativeId.New, "Robert", "Smith"), CancellationToken.None);
                 commandBus.Publish(new OperativeHiredCommand(OperativeId.New, "James", "Law"), CancellationToken.None);
+
+                commandBus.Publish(new SiteAcquiredCommand(SiteId.New, "10 Sunny Way", "Sunnytown", "ST1 0ZF", "01662 123 313"), CancellationToken.None);
+                commandBus.Publish(new SiteAcquiredCommand(SiteId.New, "11 Sunny Way", "Sunnytown", "ST1 0ZF", "01662 123 535"), CancellationToken.None);
+                commandBus.Publish(new SiteAcquiredCommand(SiteId.New, "12 Sunny Way", "Sunnytown", "ST1 0ZF", "01662 123 878"), CancellationToken.None);
             }
         }
 
