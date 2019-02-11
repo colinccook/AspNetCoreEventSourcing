@@ -8,3 +8,39 @@
     <h1 class="display-4">Response</h1>
     <p class="lead">Those in Response handle the demand for raising Work on Sites.</p>
 </div>
+
+
+<div class="py-3 text-center">
+    <h2>Raise new Work</h2>
+    <p class="lead">To raise new work, first add the Sites that this work covers. You'll then enter a few basic details about what is required.</p>
+</div>
+
+<form>
+    <div class="list-group">
+        @foreach (var site in Model.Sites)
+        {
+            
+            <label class="list-group-item list-group-item-action flex-column align-items-start">
+                <input type="checkbox" class="form-check float-right" />
+                <h5 class="mb-1">@site.AddressLine1</h5>
+                <p class="mb-1">@site.Town, @site.PostCode</p>
+                <p class="mb-1">@site.TelephoneNumber</p>
+                <small>@site.SiteId</small>
+            </label>
+        }
+    </div>
+    <div class="form-group pt-5">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
+        <small class="form-text text-muted">Keep the title short but meaningful</small>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" aria-describedby="emailHelp" rows="3"></textarea>
+        <small class="form-text text-muted">The description can detail the symptoms of the work required</small>
+    </div>
+    <div class="form-group pb-5">
+        <input type="submit" class="btn btn-primary" />
+    </div>
+    
+</form>
