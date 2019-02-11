@@ -13,8 +13,4 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.12.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="AggregateRoots\Works\" />
-  </ItemGroup>
-
 </Project>

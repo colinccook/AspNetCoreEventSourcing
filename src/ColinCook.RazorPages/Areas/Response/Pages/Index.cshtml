@@ -15,7 +15,7 @@
     <p class="lead">To raise new work, first add the Sites that this work covers. You'll then enter a few basic details about what is required.</p>
 </div>
 
-<form>
+<form method="post">
     <div class="list-group">
         @foreach (var site in Model.Sites)
         {
@@ -31,12 +31,12 @@
     </div>
     <div class="form-group pt-5">
         <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
+        <input asp-for="Title" type="text" class="form-control" id="title" aria-describedby="emailHelp">
         <small class="form-text text-muted">Keep the title short but meaningful</small>
     </div>
     <div class="form-group">
         <label for="description">Description</label>
-        <textarea class="form-control" id="description" aria-describedby="emailHelp" rows="3"></textarea>
+        <textarea asp-for="Description" class="form-control" id="description" aria-describedby="emailHelp" rows="3"></textarea>
         <small class="form-text text-muted">The description can detail the symptoms of the work required</small>
     </div>
     <div class="form-group pb-5">
