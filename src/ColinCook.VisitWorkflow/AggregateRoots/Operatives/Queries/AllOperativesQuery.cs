@@ -8,7 +8,7 @@ using EventFlow.Queries;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries
 {
-    public class AllOperativesQuery : IQuery<IReadOnlyCollection<OperativeModel>>
+    public class AllOperativesQuery : IQuery<IReadOnlyList<OperativeModel>>
     {
     }
 }

@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using ColinCook.RazorPages.Binders;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Visits.ReadModels;
@@ -46,7 +47,10 @@ namespace ColinCook.RazorPages
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(options =>
+            {
+                options.ModelBinderProviders.Insert(0, new SiteIdModelBinderProvider());
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // Create the container builder.
             var builder = new ContainerBuilder();

@@ -17,16 +17,19 @@
 
 <form method="post">
     <div class="list-group">
-        @foreach (var site in Model.Sites)
+        @for (var i = 0; i < Model.Sites.Count(); i++)
         {
-            
-            <label class="list-group-item list-group-item-action flex-column align-items-start">
-                <input type="checkbox" class="form-check float-right" />
-                <h5 class="mb-1">@site.AddressLine1</h5>
-                <p class="mb-1">@site.Town, @site.PostCode</p>
-                <p class="mb-1">@site.TelephoneNumber</p>
-                <small>@site.SiteId</small>
-            </label>
+        <label class="list-group-item list-group-item-action flex-column align-items-start">
+            @Html.HiddenFor(x => x.Sites[@i].SiteId)
+            @*<input type="hidden" asp-for="@Model.Sites[i].SiteId" />*@
+            <input type="checkbox" asp-for="@Model.Sites[i].IsChecked" />
+            @*<input type="hidden" name="Sites[@i].SiteId" value="@site.SiteId"/>
+        <input type="checkbox" name="Sites[@i].IsChecked" class="form-check float-right"/>*@
+            @*@<h5 class="mb-1">Sites[i].AddressLine1</h5>
+        <p class="mb-1">Sites[i].Town, Sites[i].PostCode</p>
+        <p class="mb-1">Sites[i].TelephoneNumber</p>
+        <small>Sites[i].SiteId</small>*@
+        </label>
         }
     </div>
     <div class="form-group pt-5">

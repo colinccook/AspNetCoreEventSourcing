@@ -10,7 +10,7 @@ using EventFlow.ReadStores.InMemory;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.QueryHandlers
 {
-    public class AllOperativesQueryHandler : IQueryHandler<AllOperativesQuery, IReadOnlyCollection<OperativeModel>>
+    public class AllOperativesQueryHandler : IQueryHandler<AllOperativesQuery, IReadOnlyList<OperativeModel>>
     {
         private readonly IInMemoryReadStore<OperativeReadModel> _readStore;
 
@@ -19,7 +19,7 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.QueryHandlers
             _readStore = readStore;
         }
 
-        public async Task<IReadOnlyCollection<OperativeModel>> ExecuteQueryAsync(AllOperativesQuery query, CancellationToken cancellationToken)
+        public async Task<IReadOnlyList<OperativeModel>> ExecuteQueryAsync(AllOperativesQuery query, CancellationToken cancellationToken)
         {
             var readModels = await _readStore.FindAsync(rm => true, cancellationToken).ConfigureAwait(false);
             return readModels.Select(rm => rm.OperativeModel).ToList();

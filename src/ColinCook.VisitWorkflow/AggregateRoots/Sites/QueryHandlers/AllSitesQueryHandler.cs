@@ -13,7 +13,7 @@ using EventFlow.ReadStores.InMemory;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Sites.QueryHandlers
 {
-    public class AllSitesQueryHandler : IQueryHandler<AllSitesQuery, IReadOnlyCollection<SiteModel>>
+    public class AllSitesQueryHandler : IQueryHandler<AllSitesQuery, IReadOnlyList<SiteModel>>
     {
         private readonly IInMemoryReadStore<SiteReadModel> _readStore;
 
@@ -22,7 +22,7 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Sites.QueryHandlers
             _readStore = readStore;
         }
 
-        public async Task<IReadOnlyCollection<SiteModel>> ExecuteQueryAsync(AllSitesQuery query, CancellationToken cancellationToken)
+        public async Task<IReadOnlyList<SiteModel>> ExecuteQueryAsync(AllSitesQuery query, CancellationToken cancellationToken)
         {
             var readModels = await _readStore.FindAsync(rm => true, cancellationToken).ConfigureAwait(false);
             return readModels.Select(rm => rm.SiteModel).ToList();

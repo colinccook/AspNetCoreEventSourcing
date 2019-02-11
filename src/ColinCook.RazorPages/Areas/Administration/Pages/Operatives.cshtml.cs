@@ -23,7 +23,7 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
         [BindProperty] public string Forename { get; set; }
         [BindProperty] public string Surname { get; set; }
 
-        public IReadOnlyCollection<OperativeModel> Operatives { get; set; }
+        public IReadOnlyList<OperativeModel> Operatives { get; set; }
 
         public OperativesModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
         {

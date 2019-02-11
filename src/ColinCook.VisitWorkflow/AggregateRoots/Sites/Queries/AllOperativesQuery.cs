@@ -4,7 +4,7 @@ using EventFlow.Queries;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Sites.Queries
 {
-    public class AllSitesQuery : IQuery<IReadOnlyCollection<SiteModel>>
+    public class AllSitesQuery : IQuery<IReadOnlyList<SiteModel>>
     {
     }
 }

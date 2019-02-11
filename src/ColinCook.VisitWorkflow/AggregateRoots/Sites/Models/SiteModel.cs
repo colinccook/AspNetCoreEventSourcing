@@ -9,5 +9,7 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Sites.Models
         public string Town { get; set; }
         public string PostCode { get; set;  }
         public string TelephoneNumber { get; set; }
+        // IsChecked is leaking a UI concern in the domain
+        public bool IsChecked { get; set; }
     }
 }

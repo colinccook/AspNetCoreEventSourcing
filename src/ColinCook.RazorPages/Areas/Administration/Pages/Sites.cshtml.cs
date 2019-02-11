@@ -28,7 +28,7 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
         [BindProperty] public string PostCode { get; set; }
         [BindProperty] public string TelephoneNumber { get; set; }
 
-        public IReadOnlyCollection<SiteModel> Sites { get; set; }
+        public IReadOnlyList<SiteModel> Sites { get; set; }
 
         public SitesModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
         {
