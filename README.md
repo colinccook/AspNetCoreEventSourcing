@@ -1,6 +1,6 @@
 # AspNetCoreEventSourcing
 
-AspNetCoreEventSourcing is a prototype project to experiment event sourcing covering a simple business flow. It's purpose is to increase my understand of its practical application within my work business domain.
+AspNetCoreEventSourcing is a prototype project to experiment event sourcing covering a simple business flow. It's purpose is a learning exercise for myself, with an ultimate aim of determining if it's of any use at my work domain.
 
 ### Features
 
