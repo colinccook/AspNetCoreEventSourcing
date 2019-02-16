@@ -14,10 +14,10 @@ The "business" is first line support for various `Sites` around the country.
 
 Assuming that `Operatives` have been hired and `Sites` acquired:
 
-* Response will raise `Work` when they are contacted by customers within those `Sites` 
-* Control will queue that `Work` to an `Operative`
-* `Operatives` will then dispatch, arrive and deal with the Work
-  * When `Work` is completed it is marked as Completed
-  * If the `Work` has remedied itself it can be marked as Closed
-  * If the `Operative` has to leave the site, they can stop. The work is then back with Control to assign to another `Operative`.
-* Management will keep on their so called "Work Roadmap". This allows then to keep an eye on queue lengths and end-to-end times. 
+* Response will raise `Work` when they are contacted by customers within those `Sites` ([RaiseWorkCommand.cs](RaiseWorkCommand.cs))
+* Control will queue that `Work` to an `Operative` ([AssignWorkCommand.cs](AssignWorkCommand.cs))
+* `Operatives` will then dispatch, arrive and deal with the Work ([AssignWorkCommand.cs](AssignWorkCommand.cs) [AssignWorkCommand.cs](AssignWorkCommand.cs) [AssignWorkCommand.cs](AssignWorkCommand.cs))
+  * When `Work` is completed it is marked as Completed ([AssignWorkCommand.cs](AssignWorkCommand.cs))
+  * If the `Work` has remedied itself it can be marked as Closed ([AssignWorkCommand.cs](AssignWorkCommand.cs))
+  * If the `Operative` has to leave the `Site`, they can stop. The `Work` is then back with Control to assign to another `Operative` ([AssignWorkCommand.cs](AssignWorkCommand.cs))
+* Management will keep on their so called "Work Roadmap". This allows then to keep an eye on queue lengths and end-to-end times ([AssignWorkCommand.cs](AssignWorkCommand.cs))
