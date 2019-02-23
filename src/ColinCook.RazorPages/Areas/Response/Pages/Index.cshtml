@@ -21,14 +21,10 @@
         {
         <label class="list-group-item list-group-item-action flex-column align-items-start">
             @Html.HiddenFor(x => x.Sites[@i].SiteId)
-            @*<input type="hidden" asp-for="@Model.Sites[i].SiteId" />*@
-            <input type="checkbox" asp-for="@Model.Sites[i].IsChecked" />
-            @*<input type="hidden" name="Sites[@i].SiteId" value="@site.SiteId"/>
-        <input type="checkbox" name="Sites[@i].IsChecked" class="form-check float-right"/>*@
-            @*@<h5 class="mb-1">Sites[i].AddressLine1</h5>
-        <p class="mb-1">Sites[i].Town, Sites[i].PostCode</p>
-        <p class="mb-1">Sites[i].TelephoneNumber</p>
-        <small>Sites[i].SiteId</small>*@
+            <input type="checkbox" asp-for="@Model.Sites[i].IsChecked" class="float-right"/>
+            <h5 class="mb-1">@Model.Sites[i].AddressLine1</h5>
+            <p class="mb-1">@Model.Sites[i].Town, @Model.Sites[i].PostCode</p>
+            <small>@Model.Sites[i].SiteId</small>
         </label>
         }
     </div>
