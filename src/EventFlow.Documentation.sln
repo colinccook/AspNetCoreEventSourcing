@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColinCook.Documentation", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColinCook.VisitWorkflow", "ColinCook.VisitWorkflow\ColinCook.VisitWorkflow.csproj", "{6BE58AC4-0FBA-48AC-9B24-4563D01A4ECD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColinCook.Mvc", "ColinCook.Mvc\ColinCook.Mvc.csproj", "{D34BA6A0-D177-44AA-8C25-AEF4CCA5A4E6}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColinCook.RazorPages", "ColinCook.RazorPages\ColinCook.RazorPages.csproj", "{18F0191A-451D-4C6F-85FB-BFA641875770}"
 EndProject
 Global
@@ -31,10 +29,6 @@ Global
 		{6BE58AC4-0FBA-48AC-9B24-4563D01A4ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BE58AC4-0FBA-48AC-9B24-4563D01A4ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BE58AC4-0FBA-48AC-9B24-4563D01A4ECD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D34BA6A0-D177-44AA-8C25-AEF4CCA5A4E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D34BA6A0-D177-44AA-8C25-AEF4CCA5A4E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D34BA6A0-D177-44AA-8C25-AEF4CCA5A4E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D34BA6A0-D177-44AA-8C25-AEF4CCA5A4E6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{18F0191A-451D-4C6F-85FB-BFA641875770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{18F0191A-451D-4C6F-85FB-BFA641875770}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18F0191A-451D-4C6F-85FB-BFA641875770}.Release|Any CPU.ActiveCfg = Release|Any CPU
