@@ -61,6 +61,9 @@ else
                         {
                             <div class="col">
                                 @work.Title
+                                @foreach (var site in work.Sites) {
+                                    <span>@Model.AssignWorkQuery.OperativeWorkSites[site].AddressLine1, @Model.AssignWorkQuery.OperativeWorkSites[site].PostCode</span>
+                                }
                             </div>
                         }
                     }

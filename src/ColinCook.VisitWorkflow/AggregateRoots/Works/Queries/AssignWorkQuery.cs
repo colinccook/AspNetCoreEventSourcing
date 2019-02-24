@@ -20,6 +20,7 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
         public IList<SiteReadModel> Sites { get; set; }
         public IReadOnlyList<OperativeReadModel> Operatives { get; set; }
         public IDictionary<OperativeId, IList<WorkReadModel>> OperativesWork { get; set; }
+        public IDictionary<SiteId, SiteReadModel> OperativeWorkSites { get; set; }
     }
 
     public class AssignWorkQuery : IQuery<AssignWorkQueryResult>
@@ -46,7 +47,8 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
                 Work = await GetMostRecentUnassignedWork(cancellationToken),
                 Sites = new List<SiteReadModel>(),
                 Operatives = await GetAllOperatives(cancellationToken),
-                OperativesWork = new Dictionary<OperativeId, IList<WorkReadModel>>()
+                OperativesWork = new Dictionary<OperativeId, IList<WorkReadModel>>(),
+                OperativeWorkSites = new Dictionary<SiteId, SiteReadModel>()
             };
 
             if (result.Work == null)
@@ -62,6 +64,16 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
             {
                 var works = await _workReadStore.FindAsync(rm => rm.AssignedOperativeId == operative.OperativeId, cancellationToken);
                 result.OperativesWork.Add(operative.OperativeId, works.ToList());
+            }
+
+            foreach (var site in result.OperativesWork.Values.SelectMany(w => w.SelectMany(x => x.Sites)))
+            {
+                if (!result.OperativeWorkSites.ContainsKey(site))
+                {
+                    var siteReadModel = await _siteReadStore.GetAsync(site.ToString(), cancellationToken);
+                    result.OperativeWorkSites.Add(site, siteReadModel.ReadModel);
+                }
+                    
             }
 
             return result;
