@@ -1,4 +1,5 @@
 ﻿@page
+@using ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
 @model IndexModel
 @{
     Layout = "_Layout";
@@ -9,49 +10,60 @@
     <p class="lead">Those within Control ensure that Operatives are assigned Work.</p>
 </div>
 
-<div class="py-3 text-center">
-    <h2>Next up to Assign</h2>
-</div>
-
-<div class="list-group">
-    <div class="list-group-item list-group-item-action flex-column align-items-start">
-        <h3>Work headline</h3>
-        <h5 class="mb-1">10 Sunny Way, Sunnytown, ST1 0ZF</h5>
-        <small>work-site-93a2742b-9303-4ae1-8ee1-321d0ca47bd6, site-93a2742b-9303-4ae1-8ee1-321d0ca47bd6</small>
+@if (Model.AssignWorkQuery.Work == null)
+{
+    <div class="py-3 text-center">
+        <h2>There is no Work to assign</h2>
+        <p class="lead">Once Work has been raised by Response, it will appear here.</p>
     </div>
-</div>
+}
+else if (!Model.AssignWorkQuery.Operatives.Any())
+{
+    <div class="py-3 text-center">
+        <h2>No available Operatives found</h2>
+        <p class="lead">There is Work to assign, but nobody to assign it to. Hire some operatives!</p>
+    </div>
+}
+else
+{
+    <div class="py-3 text-center">
+        <h2>Next up to Assign</h2>
+    </div>
 
-<div class="list-group py-4">
-    <div class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="row">
-            <div class="col">
-                <h5>Colin Cook</h5>
-            </div>
-            @*<div class="col">
-                One
-            </div>
-            <div class="col">
-                Two
-            </div>*@
-            <div class="col-1">
-                <input type="button" class="btn btn-primary" value="Assign"/>
-            </div>
+    <div class="list-group">
+        <div class="list-group-item list-group-item-action flex-column align-items-start">
+            <h3>@Model.AssignWorkQuery.Work.Title</h3>
+            @foreach (var site in @Model.AssignWorkQuery.Sites)
+            {
+                <h5 class="mb-1">@site.SiteModel.AddressLine1, @site.SiteModel.PostCode</h5>
+            }
+            <small>@Model.AssignWorkQuery.Work.WorkId</small>
         </div>
     </div>
-    <div class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="row">
-            <div class="col">
-                <h5>Colin Cook</h5>
+
+    <div class="list-group py-4">
+        @foreach (var operative in Model.AssignWorkQuery.Operatives)
+        {
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="row">
+                    <div class="col">
+                        <h5>@operative.OperativeModel.Forename @operative.OperativeModel.Surname</h5>
+                    </div>
+                    @*<div class="col">
+                        One
+                    </div>
+                    <div class="col">
+                        Two
+                    </div>*@
+                    <div class="col-1">
+                        <form method="post">
+                            <input type="hidden" name="workId" value="@Model.AssignWorkQuery.Work.WorkId"/>
+                            <input type="hidden" name="operativeId" value="@operative.OperativeModel.OperativeId"/>
+                            <input type="submit" class="btn btn-primary" value="Assign"/>
+                        </form>
+                    </div>
+                </div>
             </div>
-            @*<div class="col">
-                One
-            </div>
-            <div class="col">
-                Two
-            </div>*@
-            <div class="col-1">
-                <input type="button" class="btn btn-primary" value="Assign"/>
-            </div>
-        </div>
+        }
     </div>
-</div>
+}

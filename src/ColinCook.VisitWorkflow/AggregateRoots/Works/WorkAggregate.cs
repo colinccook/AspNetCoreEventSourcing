@@ -9,11 +9,13 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works
 {
     public class WorkAggregate :
         AggregateRoot<WorkAggregate, WorkId>,
-        IEmit<WorkRaisedEvent>
+        IEmit<WorkRaisedEvent>,
+        IEmit<WorkAssignedEvent>
     {
         private string _title;
         private string _description;
         private IEnumerable<SiteId> _sites;
+        private OperativeId _operative;
 
         public WorkAggregate(WorkId id) : base(id)
         {
@@ -46,6 +48,23 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works
             Emit(new WorkRaisedEvent(title, description, sites));
 
             return ExecutionResult.Success();
+        }
+
+        internal IExecutionResult Assign(OperativeId operativeId)
+        {
+            if (_operative != null)
+            {
+                return ExecutionResult.Failed("An operative is already assigned to this work");
+            }
+
+            Emit(new WorkAssignedEvent(operativeId));
+
+            return ExecutionResult.Success();
+        }
+
+        public void Apply(WorkAssignedEvent aggregateEvent)
+        {
+            _operative = aggregateEvent.OperativeId;
         }
     }
 }

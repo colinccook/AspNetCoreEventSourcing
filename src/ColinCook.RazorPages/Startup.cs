@@ -9,6 +9,7 @@ using ColinCook.RazorPages.Binders;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Visits.ReadModels;
+using ColinCook.VisitWorkflow.AggregateRoots.Works.ReadModels;
 using EventFlow;
 using EventFlow.AspNetCore.Middlewares;
 using EventFlow.Autofac.Extensions;
@@ -50,6 +51,8 @@ namespace ColinCook.RazorPages
             services.AddMvc(options =>
             {
                 options.ModelBinderProviders.Insert(0, new SiteIdModelBinderProvider());
+                options.ModelBinderProviders.Insert(1, new OperativeIdModelBinderProvider());
+                options.ModelBinderProviders.Insert(2, new WorkIdModelBinderProvider());
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // Create the container builder.
@@ -65,6 +68,7 @@ namespace ColinCook.RazorPages
                 .UseInMemoryReadStoreFor<VisitReadModel>()
                 .UseInMemoryReadStoreFor<OperativeReadModel>()
                 .UseInMemoryReadStoreFor<SiteReadModel>()
+                .UseInMemoryReadStoreFor<WorkReadModel>()
                 .UseConsoleLog();
 
             builder.Populate(services);

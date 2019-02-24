@@ -13,4 +13,8 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AggregateRoots\Works\QueryHandlers\" />
+  </ItemGroup>
+
 </Project>
