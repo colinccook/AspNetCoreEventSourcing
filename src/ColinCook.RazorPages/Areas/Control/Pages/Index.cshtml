@@ -49,12 +49,22 @@ else
                     <div class="col">
                         <h5>@operative.Forename @operative.Surname</h5>
                     </div>
-                    @*<div class="col">
-                        One
-                    </div>
-                    <div class="col">
-                        Two
-                    </div>*@
+                    @if (!Model.AssignWorkQuery.OperativesWork[operative.OperativeId].Any())
+                    {
+                        <div class="col">
+                            No work assigned
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var work in Model.AssignWorkQuery.OperativesWork[operative.OperativeId])
+                        {
+                            <div class="col">
+                                @work.Title
+                            </div>
+                        }
+                    }
+                   
                     <div class="col-1">
                         <form method="post">
                             <input type="hidden" name="workId" value="@Model.AssignWorkQuery.Work.WorkId"/>

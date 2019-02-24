@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Works.ReadModels;
+using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Queries;
 using EventFlow.ReadStores.InMemory;
 
@@ -18,6 +19,7 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
         public WorkReadModel Work { get; set; }
         public IList<SiteReadModel> Sites { get; set; }
         public IReadOnlyList<OperativeReadModel> Operatives { get; set; }
+        public IDictionary<OperativeId, IList<WorkReadModel>> OperativesWork { get; set; }
     }
 
     public class AssignWorkQuery : IQuery<AssignWorkQueryResult>
@@ -43,7 +45,8 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
             {
                 Work = await GetMostRecentUnassignedWork(cancellationToken),
                 Sites = new List<SiteReadModel>(),
-                Operatives = await GetAllOperatives(cancellationToken)
+                Operatives = await GetAllOperatives(cancellationToken),
+                OperativesWork = new Dictionary<OperativeId, IList<WorkReadModel>>()
             };
 
             if (result.Work == null)
@@ -53,6 +56,12 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
             {
                 var envelope = await _siteReadStore.GetAsync(site.ToString(), cancellationToken);
                 result.Sites.Add(envelope.ReadModel);
+            }
+
+            foreach (var operative in result.Operatives)
+            {
+                var works = await _workReadStore.FindAsync(rm => rm.AssignedOperativeId == operative.OperativeId, cancellationToken);
+                result.OperativesWork.Add(operative.OperativeId, works.ToList());
             }
 
             return result;
