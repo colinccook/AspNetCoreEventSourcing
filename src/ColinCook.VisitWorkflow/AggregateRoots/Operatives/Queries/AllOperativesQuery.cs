@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Models;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates;

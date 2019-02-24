@@ -35,7 +35,7 @@ else
             <h3>@Model.AssignWorkQuery.Work.Title</h3>
             @foreach (var site in @Model.AssignWorkQuery.Sites)
             {
-                <h5 class="mb-1">@site.SiteModel.AddressLine1, @site.SiteModel.PostCode</h5>
+                <h5 class="mb-1">@site.AddressLine1, @site.PostCode</h5>
             }
             <small>@Model.AssignWorkQuery.Work.WorkId</small>
         </div>

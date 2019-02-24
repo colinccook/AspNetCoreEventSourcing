@@ -1,4 +1,3 @@
-using ColinCook.VisitWorkflow.AggregateRoots.Sites.Models;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.Queries;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
@@ -8,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Works.Commands;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,7 +20,7 @@ namespace ColinCook.RazorPages.Areas.Response.Pages
 
         [BindProperty] public string Title { get; set; }
         [BindProperty] public string Description { get; set; }
-        [BindProperty] public IReadOnlyList<SiteModel> Sites { get; set; }
+        public IReadOnlyList<SiteReadModel> Sites { get; set; }
 
         public IndexModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
         {
@@ -35,9 +35,15 @@ namespace ColinCook.RazorPages.Areas.Response.Pages
            
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public class SitePostModel
         {
-            var selectedSites = Sites.Where(s => s.IsChecked).Select(s => s.SiteId);
+            public SiteId SiteId { get; set; }
+            public bool IsChecked { get; set; }
+        }
+
+        public async Task<IActionResult> OnPostAsync(List<SitePostModel> sites)
+        {
+            var selectedSites = sites.Where(s => s.IsChecked).Select(s => s.SiteId);
 
             var result = await _commandBus.PublishAsync(new WorkRaisedCommand(WorkId.New, selectedSites, Title, Description), CancellationToken.None);
 

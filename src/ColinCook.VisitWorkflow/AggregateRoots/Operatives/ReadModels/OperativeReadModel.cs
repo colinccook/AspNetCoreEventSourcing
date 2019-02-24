@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Events;
-using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Models;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.ReadStores;

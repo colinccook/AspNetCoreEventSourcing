@@ -4,11 +4,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands;
-using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Models;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.Commands;
-using ColinCook.VisitWorkflow.AggregateRoots.Sites.Models;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.Queries;
+using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Extensions;
@@ -28,7 +27,7 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
         [BindProperty] public string PostCode { get; set; }
         [BindProperty] public string TelephoneNumber { get; set; }
 
-        public IReadOnlyList<SiteModel> Sites { get; set; }
+        public IReadOnlyList<SiteReadModel> Sites { get; set; }
 
         public SitesModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
         {
