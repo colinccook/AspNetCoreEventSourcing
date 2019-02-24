@@ -45,10 +45,13 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
                 Sites = new List<SiteReadModel>(),
                 Operatives = await GetAllOperatives(cancellationToken)
             };
+
+            if (result.Work == null)
+                return null;
             
-            foreach (var site in result.Sites)
+            foreach (var site in result.Work.Sites)
             {
-                var envelope = await _siteReadStore.GetAsync(site.SiteModel.SiteId.ToString(), cancellationToken);
+                var envelope = await _siteReadStore.GetAsync(site.ToString(), cancellationToken);
                 result.Sites.Add(envelope.ReadModel);
             }
 
