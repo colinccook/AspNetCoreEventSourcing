@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Models;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries;
+using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Extensions;
@@ -23,7 +24,7 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
         [BindProperty] public string Forename { get; set; }
         [BindProperty] public string Surname { get; set; }
 
-        public IReadOnlyList<OperativeModel> Operatives { get; set; }
+        public IReadOnlyList<OperativeReadModel> Operatives { get; set; }
 
         public OperativesModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
         {

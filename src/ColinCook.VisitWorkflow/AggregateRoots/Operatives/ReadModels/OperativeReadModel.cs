@@ -12,16 +12,15 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels
     public class OperativeReadModel : IReadModel,
         IAmReadModelFor<OperativeAggregate, OperativeId, OperativeHiredEvent>
     {
-        public OperativeModel OperativeModel { get; private set; }
+        public OperativeId OperativeId { get; set; }
+        public string Forename { get; set; }
+        public string Surname { get; set; }
 
         public void Apply(IReadModelContext context, IDomainEvent<OperativeAggregate, OperativeId, OperativeHiredEvent> domainEvent)
         {
-            OperativeModel = new OperativeModel
-            {
-                OperativeId = domainEvent.AggregateIdentity,
-                Forename = domainEvent.AggregateEvent.Forename,
-                Surname = domainEvent.AggregateEvent.Surname
-            };
+            OperativeId = domainEvent.AggregateIdentity;
+            Forename = domainEvent.AggregateEvent.Forename;
+            Surname = domainEvent.AggregateEvent.Surname;
         }
     }
 }
