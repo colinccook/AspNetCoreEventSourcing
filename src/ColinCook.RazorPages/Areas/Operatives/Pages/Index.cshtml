@@ -6,5 +6,16 @@
 
 <div class="jumbotron">
     <h1 class="display-4">Operatives</h1>
-    <p class="lead">Operatives are dispatched to complete Work at Sites</p>
+    <p class="lead">Operatives perform the work they are assigned and record its outcome</p>
+</div>
+
+<div class="list-group">
+    @foreach (var operative in Model.Operatives)
+    {
+        <div class="list-group-item list-group-item-action flex-column align-items-start">
+            <h5 class="mb-1">@operative.Forename @operative.Surname</h5>
+            <p class="mb-1">Operative</p>
+            <small>@operative.OperativeId</small>
+        </div>
+    }
 </div>

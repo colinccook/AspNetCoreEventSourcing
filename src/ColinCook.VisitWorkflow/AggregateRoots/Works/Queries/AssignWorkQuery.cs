@@ -73,7 +73,6 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
                     var siteReadModel = await _siteReadStore.GetAsync(site.ToString(), cancellationToken);
                     result.OperativeWorkSites.Add(site, siteReadModel.ReadModel);
                 }
-                    
             }
 
             return result;

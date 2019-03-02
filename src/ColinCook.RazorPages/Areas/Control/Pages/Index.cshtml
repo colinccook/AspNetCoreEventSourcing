@@ -30,7 +30,7 @@ else
         <h2>Next up to Assign</h2>
     </div>
 
-    <div class="list-group">
+    <div class="list-group pb-4">
         <div class="list-group-item list-group-item-action flex-column align-items-start">
             <h3>@Model.AssignWorkQuery.Work.Title</h3>
             @foreach (var site in @Model.AssignWorkQuery.Sites)
@@ -41,42 +41,46 @@ else
         </div>
     </div>
 
-    <div class="list-group py-4">
-        @foreach (var operative in Model.AssignWorkQuery.Operatives)
-        {
-            <div class="list-group-item list-group-item-action flex-column align-items-start">
+    foreach (var operative in Model.AssignWorkQuery.Operatives)
+    {
+        <div class="row">
+            <div class="col-md-3 col-sm-4">
+                <h5>@operative.Forename @operative.Surname</h5>
+            </div>
+            <div class="col-md-9 col-sm-8">
                 <div class="row">
-                    <div class="col">
-                        <h5>@operative.Forename @operative.Surname</h5>
-                    </div>
                     @if (!Model.AssignWorkQuery.OperativesWork[operative.OperativeId].Any())
                     {
-                        <div class="col">
-                            No work assigned
+                        <div class="col-sm-12">
+                            <h5>No Work currently assigned to @operative.Forename</h5>
                         </div>
                     }
                     else
                     {
                         foreach (var work in Model.AssignWorkQuery.OperativesWork[operative.OperativeId])
                         {
-                            <div class="col">
-                                @work.Title
-                                @foreach (var site in work.Sites) {
-                                    <span>@Model.AssignWorkQuery.OperativeWorkSites[site].AddressLine1, @Model.AssignWorkQuery.OperativeWorkSites[site].PostCode</span>
-                                }
+                            <div class="card col-sm-12 m-1">
+                                <div class="card-body">
+                                    <h5 class="card-title float-right text-muted">#@(Model.AssignWorkQuery.OperativesWork[operative.OperativeId].IndexOf(work)+1)</h5>
+                                    <h5 class="card-title">@work.Title</h5>
+                                    @foreach (var site in work.Sites)
+                                    {
+                                        <div>@Model.AssignWorkQuery.OperativeWorkSites[site].AddressLine1, @Model.AssignWorkQuery.OperativeWorkSites[site].PostCode</div>
+                                    }
+                                </div>
                             </div>
                         }
                     }
-                   
-                    <div class="col-1">
+                    <div class="col-sm-12 m-1">
                         <form method="post">
                             <input type="hidden" name="workId" value="@Model.AssignWorkQuery.Work.WorkId"/>
                             <input type="hidden" name="operativeId" value="@operative.OperativeId"/>
-                            <input type="submit" class="btn btn-primary" value="Assign"/>
+                            <input type="submit" class="btn btn-secondary" value="Assign to @operative.Forename"/>
                         </form>
                     </div>
                 </div>
             </div>
-        }
-    </div>
+        </div>
+        <hr/>
+    }
 }
