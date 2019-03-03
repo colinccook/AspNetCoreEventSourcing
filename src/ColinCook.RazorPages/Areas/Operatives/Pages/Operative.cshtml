@@ -40,14 +40,17 @@ else
         }
     </div>
 
-    <div class="row py-5">
-        <div class="col-md-6">
-            <button class="btn btn-primary btn-block btn-danger" type="submit">Work Abandoned</button>
-            <p class="text-center">This Work item will be returned to Control for reassignment.</p>
+    <form method="post">
+        <input type="hidden" asp-route-workid="@Model.Query.Work.WorkId"/>
+        <div class="row py-5">
+            <div class="col-md-6">
+                <button asp-page-handler="Abandon" class="btn btn-primary btn-block btn-danger" type="submit">Abandon Work</button>
+                <p class="text-center">This Work item will be returned to Control for reassignment.</p>
+            </div>
+            <div class="col-md-6">
+                <button asp-page-handler="Complete" class="btn btn-primary btn-block btn-success" type="submit">Work Complete</button>
+                <p class="text-center">Work will be marked as Completed.</p>
+            </div>
         </div>
-        <div class="col-md-6">
-            <button class="btn btn-primary btn-block btn-success" type="submit">Work Completed</button>
-            <p class="text-center">Work will be marked as Completed.</p>
-        </div>
-    </div>
+    </form>
 }

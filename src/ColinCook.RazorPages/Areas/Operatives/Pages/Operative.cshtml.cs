@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries;
+using ColinCook.VisitWorkflow.AggregateRoots.Works.Commands;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Queries;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ColinCook.RazorPages.Areas.Operatives.Pages
@@ -29,6 +31,20 @@ namespace ColinCook.RazorPages.Areas.Operatives.Pages
             Query = await _queryProcessor.ProcessAsync(
                 new GetOperativeAndWorkQuery {OperativeId = operativeId},
                 CancellationToken.None);
+        }
+
+        public async Task<IActionResult> OnPostAbandonAsync(WorkId workId)
+        {
+            var result = await _commandBus.PublishAsync(new WorkAbandonedCommand(workId), CancellationToken.None);
+
+            return RedirectToPage(Query.Operative.OperativeId);
+        }
+
+        public async Task<IActionResult> OnPostCompleteAsync(WorkId workId)
+        {
+            var result = await _commandBus.PublishAsync(new WorkCompletedCommand(workId), CancellationToken.None);
+
+            return RedirectToPage(Query.Operative.OperativeId);
         }
     }
 }
