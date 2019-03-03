@@ -18,8 +18,7 @@ Assuming that `Operatives` have been hired and `Sites` acquired:
 * Control will queue that `Work` to an `Operative` ([AssignWorkCommand.cs](AssignWorkCommand.cs))
 * `Operatives` will then dispatch, arrive and deal with the Work ([AssignWorkCommand.cs](AssignWorkCommand.cs), [AssignWorkCommand.cs](AssignWorkCommand.cs), [AssignWorkCommand.cs](AssignWorkCommand.cs))
   * When `Work` is completed it is marked as Completed ([AssignWorkCommand.cs](AssignWorkCommand.cs))
-  * If the `Work` has remedied itself it can be marked as Closed ([AssignWorkCommand.cs](AssignWorkCommand.cs))
-  * If the `Operative` has to leave the `Site`, they can stop. The `Work` is then back with Control to assign to another `Operative` ([AssignWorkCommand.cs](AssignWorkCommand.cs))
+  * If the `Operative` cannot complete work they abandon it. The `Work` is then back with Control to assign to another `Operative` ([AssignWorkCommand.cs](AssignWorkCommand.cs))
 * Management will keep on their so called "Work Roadmap". This allows then to keep an eye on queue lengths and end-to-end times ([AssignWorkCommand.cs](AssignWorkCommand.cs))
 
 ### How it Works
