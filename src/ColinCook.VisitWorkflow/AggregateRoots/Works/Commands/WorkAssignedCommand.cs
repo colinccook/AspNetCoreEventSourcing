@@ -14,11 +14,9 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Commands
     {
         public WorkAssignedCommand(WorkId workId, OperativeId operativeId) : base(workId)
         {
-            WorkId = workId;
             OperativeId = operativeId;
         }
 
-        public WorkId WorkId { get; }
         public OperativeId OperativeId { get; }
     }
 

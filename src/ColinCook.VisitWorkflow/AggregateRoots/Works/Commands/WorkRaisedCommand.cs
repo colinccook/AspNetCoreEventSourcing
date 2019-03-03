@@ -14,13 +14,11 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Commands
     {
         public WorkRaisedCommand(WorkId workId, IEnumerable<SiteId> sites, string title, string description ) : base(workId)
         {
-            WorkId = workId;
             Sites = sites;
             Title = title;
             Description = description;
         }
 
-        public WorkId WorkId { get; }
         public IEnumerable<SiteId> Sites { get; }
         public string Title { get; }
         public string Description { get; }
