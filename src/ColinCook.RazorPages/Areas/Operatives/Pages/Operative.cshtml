@@ -3,3 +3,40 @@
 @{
     Layout = "_Layout";
 }
+
+
+<div class="jumbotron">
+    <h1 class="display-4">@Model.Query.Operative.Forename @Model.Query.Operative.Surname</h1>
+    <p class="lead">Operative</p>
+</div>
+
+@if (Model.Query.Work == null)
+{
+    <div class="py-3 text-center">
+        <h2>@Model.Query.Operative.Forename has no work assigned</h2>
+        <p class="lead">Contact Control to arrange more Work.</p>
+    </div>
+}
+else
+{
+    <div class="py-3 text-center">
+        <h1>Current Work</h1>
+    </div>
+
+    <div class="py-2">
+        <h2>@Model.Query.Work.Title</h2>
+        <p class="lead">@Model.Query.Work.Description</p>
+    </div>
+
+    <div class="list-group">
+        @foreach (var site in Model.Query.Sites)
+        {
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <h5 class="mb-1">@site.AddressLine1</h5>
+                <p class="mb-1">@site.Town, @site.PostCode</p>
+                <p class="mb-1">@site.TelephoneNumber</p>
+                <small>@site.SiteId</small>
+            </div>
+        }
+    </div>
+}

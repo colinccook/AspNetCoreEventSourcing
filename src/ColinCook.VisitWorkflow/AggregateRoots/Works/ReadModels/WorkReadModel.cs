@@ -18,6 +18,7 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.ReadModels
         public string Title { get; set; }
         public OperativeId AssignedOperativeId { get; set; }
         public WorkId WorkId { get; set; }
+        public bool IsComplete { get; set; }
 
         public void Apply(IReadModelContext context, 
             IDomainEvent<WorkAggregate, WorkId, WorkRaisedEvent> domainEvent)
