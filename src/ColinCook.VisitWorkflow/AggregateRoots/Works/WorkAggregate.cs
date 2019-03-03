@@ -4,18 +4,22 @@ using EventFlow.Aggregates;
 using EventFlow.Aggregates.ExecutionResults;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Works
 {
     public class WorkAggregate :
         AggregateRoot<WorkAggregate, WorkId>,
         IEmit<WorkRaisedEvent>,
-        IEmit<WorkAssignedEvent>
+        IEmit<WorkAssignedEvent>,
+        IEmit<WorkAbandonedEvent>,
+        IEmit<WorkCompletedEvent>
     {
         private string _title;
         private string _description;
         private IEnumerable<SiteId> _sites;
         private OperativeId _operative;
+        private bool _isComplete;
 
         public WorkAggregate(WorkId id) : base(id)
         {
@@ -52,6 +56,11 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works
 
         internal IExecutionResult Assign(OperativeId operativeId)
         {
+            if (_isComplete)
+            {
+                return ExecutionResult.Failed("You cannot assign work if it's already completed");
+            }
+
             if (_operative != null)
             {
                 return ExecutionResult.Failed("An operative is already assigned to this work");
@@ -65,6 +74,51 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works
         public void Apply(WorkAssignedEvent aggregateEvent)
         {
             _operative = aggregateEvent.OperativeId;
+        }
+
+        public IExecutionResult Abandon()
+        {
+            if (_isComplete)
+            {
+                return ExecutionResult.Failed("An operative cannot abandon work when it's already been completed");
+            }
+
+            if (_operative == null)
+            {
+                return ExecutionResult.Failed("There is no operative assigned to this work to abandon it");
+            }
+
+            Emit(new WorkAbandonedEvent());
+
+            return ExecutionResult.Success();
+        }
+
+        public void Apply(WorkAbandonedEvent aggregateEvent)
+        {
+            _operative = null;
+        }
+
+        public IExecutionResult Complete()
+        {
+            if (_isComplete)
+            {
+                return ExecutionResult.Failed("You cannot complete work that's already completed");
+            }
+
+            if (_operative == null)
+            {
+                return ExecutionResult.Failed("There must be an operative assigned to complete the work");
+            }
+
+            Emit(new WorkCompletedEvent());
+
+            return ExecutionResult.Success();
+        }
+
+        public void Apply(WorkCompletedEvent aggregateEvent)
+        {
+            _operative = null;
+            _isComplete = true;
         }
     }
 }
