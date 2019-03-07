@@ -1,5 +1,4 @@
 ﻿@page
-@using ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
 @model IndexModel
 @{
     Layout = "_Layout";
@@ -33,7 +32,7 @@ else
     <div class="list-group pb-4">
         <div class="list-group-item list-group-item-action flex-column align-items-start">
             <h3>@Model.AssignWorkQuery.Work.Title</h3>
-            @foreach (var site in @Model.AssignWorkQuery.Sites)
+            @foreach (var site in Model.AssignWorkQuery.Sites)
             {
                 <h5 class="mb-1">@site.AddressLine1, @site.PostCode</h5>
             }
@@ -61,7 +60,7 @@ else
                         {
                             <div class="card col-sm-12 m-1">
                                 <div class="card-body">
-                                    <h5 class="card-title float-right text-muted">#@(Model.AssignWorkQuery.OperativesWork[operative.OperativeId].IndexOf(work)+1)</h5>
+                                    <h5 class="card-title float-right text-muted">#@(Model.AssignWorkQuery.OperativesWork[operative.OperativeId].IndexOf(work) + 1)</h5>
                                     <h5 class="card-title">@work.Title</h5>
                                     @foreach (var site in work.Sites)
                                     {

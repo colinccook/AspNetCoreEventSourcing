@@ -1,27 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Threading.Tasks;
 using ColinCook.VisitWorkflow.Identities;
-using EventFlow.Core;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace ColinCook.RazorPages.Binders 
+namespace ColinCook.RazorPages.Binders
 {
     public class SiteIdModelBinderProvider : IModelBinderProvider
     {
         public IModelBinder GetBinder(ModelBinderProviderContext context)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            if (context == null) throw new ArgumentNullException(nameof(context));
 
-            if (context.Metadata.ModelType == typeof(SiteId))
-            {
-                return new SiteIdModelBinder();
-            }
+            if (context.Metadata.ModelType == typeof(SiteId)) return new SiteIdModelBinder();
 
             return null;
         }

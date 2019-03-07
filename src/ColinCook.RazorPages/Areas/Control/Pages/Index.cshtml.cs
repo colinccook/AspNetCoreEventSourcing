@@ -12,8 +12,8 @@ namespace ColinCook.RazorPages.Areas.Control.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly IQueryProcessor _queryProcessor;
         private readonly ICommandBus _commandBus;
+        private readonly IQueryProcessor _queryProcessor;
 
         public IndexModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
         {
@@ -21,17 +21,18 @@ namespace ColinCook.RazorPages.Areas.Control.Pages
             _commandBus = commandBus;
         }
 
+        public AssignWorkQueryResult AssignWorkQuery { get; set; }
+
         public async Task OnGetAsync()
         {
             AssignWorkQuery = await _queryProcessor.ProcessAsync(
                 new AssignWorkQuery(), CancellationToken.None);
         }
 
-        public AssignWorkQueryResult AssignWorkQuery { get; set; }
-
         public async Task<IActionResult> OnPostAsync(WorkId workId, OperativeId operativeId)
         {
-            var result = await _commandBus.PublishAsync(new WorkAssignedCommand(workId, operativeId), CancellationToken.None);
+            var result =
+                await _commandBus.PublishAsync(new WorkAssignedCommand(workId, operativeId), CancellationToken.None);
 
             return RedirectToPage();
         }

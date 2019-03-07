@@ -19,13 +19,13 @@
     <div class="list-group">
         @for (var i = 0; i < Model.Sites.Count(); i++)
         {
-        <label class="list-group-item list-group-item-action flex-column align-items-start">
-            @Html.HiddenFor(x => x.Sites[@i].SiteId)
-            <input type="checkbox" asp-for="@Model.Sites[i].IsChecked" class="float-right"/>
-            <h5 class="mb-1">@Model.Sites[i].AddressLine1</h5>
-            <p class="mb-1">@Model.Sites[i].Town, @Model.Sites[i].PostCode</p>
-            <small>@Model.Sites[i].SiteId</small>
-        </label>
+            <label class="list-group-item list-group-item-action flex-column align-items-start">
+                @Html.HiddenFor(x => x.Sites[i].SiteId)
+                <input type="checkbox" asp-for="@Model.Sites[i].IsChecked" class="float-right"/>
+                <h5 class="mb-1">@Model.Sites[i].AddressLine1</h5>
+                <p class="mb-1">@Model.Sites[i].Town, @Model.Sites[i].PostCode</p>
+                <small>@Model.Sites[i].SiteId</small>
+            </label>
         }
     </div>
     <div class="form-group pt-5">
@@ -39,7 +39,7 @@
         <small class="form-text text-muted">The description can detail the symptoms of the work required</small>
     </div>
     <div class="form-group pb-5">
-        <input type="submit" class="btn btn-primary" value="Raise Work" />
+        <input type="submit" class="btn btn-primary" value="Raise Work"/>
     </div>
-    
+
 </form>

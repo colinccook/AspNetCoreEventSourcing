@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
@@ -29,18 +26,20 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
 
     public class AssignWorkQueryHandler : IQueryHandler<AssignWorkQuery, AssignWorkQueryResult>
     {
-        private readonly IInMemoryReadStore<WorkReadModel> _workReadStore;
-        private readonly IInMemoryReadStore<SiteReadModel> _siteReadStore;
         private readonly IInMemoryReadStore<OperativeReadModel> _operativeReadStore;
+        private readonly IInMemoryReadStore<SiteReadModel> _siteReadStore;
+        private readonly IInMemoryReadStore<WorkReadModel> _workReadStore;
 
-        public AssignWorkQueryHandler(IInMemoryReadStore<WorkReadModel> workReadStore, IInMemoryReadStore<SiteReadModel> siteReadStore, IInMemoryReadStore<OperativeReadModel> operativeReadStore)
+        public AssignWorkQueryHandler(IInMemoryReadStore<WorkReadModel> workReadStore,
+            IInMemoryReadStore<SiteReadModel> siteReadStore, IInMemoryReadStore<OperativeReadModel> operativeReadStore)
         {
             _workReadStore = workReadStore;
             _siteReadStore = siteReadStore;
             _operativeReadStore = operativeReadStore;
         }
 
-        public async Task<AssignWorkQueryResult> ExecuteQueryAsync(AssignWorkQuery query, CancellationToken cancellationToken)
+        public async Task<AssignWorkQueryResult> ExecuteQueryAsync(AssignWorkQuery query,
+            CancellationToken cancellationToken)
         {
             var result = new AssignWorkQueryResult
             {
@@ -53,7 +52,7 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
 
             if (result.Work == null)
                 return null;
-            
+
             foreach (var site in result.Work.Sites)
             {
                 var envelope = await _siteReadStore.GetAsync(site.ToString(), cancellationToken);
@@ -70,16 +69,15 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
         private async Task GetUpcomingWorkSites(CancellationToken cancellationToken, AssignWorkQueryResult result)
         {
             foreach (var site in result.OperativesWork.Values.SelectMany(w => w.SelectMany(x => x.Sites)))
-            {
                 if (!result.OperativeWorkSites.ContainsKey(site))
                 {
                     var siteReadModel = await _siteReadStore.GetAsync(site.ToString(), cancellationToken);
                     result.OperativeWorkSites.Add(site, siteReadModel.ReadModel);
                 }
-            }
         }
 
-        private async Task GetUpcomingWorkForOperatives(CancellationToken cancellationToken, AssignWorkQueryResult result)
+        private async Task GetUpcomingWorkForOperatives(CancellationToken cancellationToken,
+            AssignWorkQueryResult result)
         {
             foreach (var operative in result.Operatives)
             {

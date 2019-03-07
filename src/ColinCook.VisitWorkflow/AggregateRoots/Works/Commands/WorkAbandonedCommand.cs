@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates.ExecutionResults;
@@ -20,7 +17,8 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Commands
     public class WorkAbandonedCommandHandler :
         CommandHandler<WorkAggregate, WorkId, IExecutionResult, WorkAbandonedCommand>
     {
-        public override Task<IExecutionResult> ExecuteCommandAsync(WorkAggregate aggregate, WorkAbandonedCommand command, CancellationToken cancellationToken)
+        public override Task<IExecutionResult> ExecuteCommandAsync(WorkAggregate aggregate,
+            WorkAbandonedCommand command, CancellationToken cancellationToken)
         {
             var executionResult = aggregate.Abandon();
             return Task.FromResult(executionResult);

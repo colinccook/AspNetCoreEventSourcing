@@ -9,7 +9,8 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Sites.Commands
     public class SiteAcquiredCommand :
         Command<SiteAggregate, SiteId, IExecutionResult>
     {
-        public SiteAcquiredCommand(SiteId siteId, string addressLine1, string town, string postCode, string telephoneNumber) : base(siteId)
+        public SiteAcquiredCommand(SiteId siteId, string addressLine1, string town, string postCode,
+            string telephoneNumber) : base(siteId)
         {
             AddressLine1 = addressLine1;
             Town = town;
@@ -29,7 +30,8 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Sites.Commands
         public override Task<IExecutionResult> ExecuteCommandAsync(SiteAggregate aggregate, SiteAcquiredCommand command,
             CancellationToken cancellationToken)
         {
-            var executionResult = aggregate.Acquire(command.AddressLine1, command.Town, command.PostCode, command.TelephoneNumber);
+            var executionResult = aggregate.Acquire(command.AddressLine1, command.Town, command.PostCode,
+                command.TelephoneNumber);
             return Task.FromResult(executionResult);
         }
     }

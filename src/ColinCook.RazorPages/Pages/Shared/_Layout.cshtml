@@ -6,74 +6,74 @@
     <title>@ViewData["Title"] - ColinCook.RazorPages</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap.css"/>
+        <link rel="stylesheet" href="~/css/site.css"/>
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
     </environment>
 </head>
 <body class="d-flex flex-column h-100 bg-light">
-    <header>
-        <!-- Fixed navbar -->
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a asp-area="" asp-page="Index" class="navbar-brand">ColinCook.RazorPages</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="Administration" asp-page="Index">Admin</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="Response" asp-page="Index">Response</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="Control" asp-page="Index">Control</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="Operatives" asp-page="Index">Operatives</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Begin page content -->
-    <main role="main" class="flex-shrink-0">
-        <div class="container">
-            @RenderBody()
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a asp-area="" asp-page="Index" class="navbar-brand">ColinCook.RazorPages</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Administration" asp-page="Index">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Response" asp-page="Index">Response</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Control" asp-page="Index">Control</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Operatives" asp-page="Index">Operatives</a>
+                </li>
+            </ul>
         </div>
-    </main>
+    </nav>
+</header>
 
-    <footer class="footer mt-auto py-3 bg-white">
-        <div class="container">
-            <span class="text-muted">Thanks for taking a look at my prototype. Source code located at <a href="https://www.github.com/users/ccook">https://www.github.com/users/ccook</a></span>
-        </div>
-    </footer>
-    
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+<!-- Begin page content -->
+<main role="main" class="flex-shrink-0">
+    <div class="container">
+        @RenderBody()
+    </div>
+</main>
 
-    @RenderSection("Scripts", required: false)
+<footer class="footer mt-auto py-3 bg-white">
+    <div class="container">
+        <span class="text-muted">Thanks for taking a look at my prototype. Source code located at <a href="https://www.github.com/users/ccook">https://www.github.com/users/ccook</a></span>
+    </div>
+</footer>
+
+<environment include="Development">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</environment>
+<environment exclude="Development">
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+    </script>
+    <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+            crossorigin="anonymous"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+    </script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+</environment>
+
+@RenderSection("Scripts", false)
 </body>
 </html>

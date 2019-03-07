@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands;
@@ -8,7 +6,6 @@ using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
-using EventFlow.Extensions;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -17,19 +14,19 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
 {
     public class OperativesModel : PageModel
     {
-        private readonly IQueryProcessor _queryProcessor;
         private readonly ICommandBus _commandBus;
-
-        [BindProperty] public string Forename { get; set; }
-        [BindProperty] public string Surname { get; set; }
-
-        public IReadOnlyList<OperativeReadModel> Operatives { get; set; }
+        private readonly IQueryProcessor _queryProcessor;
 
         public OperativesModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
         {
             _queryProcessor = queryProcessor;
             _commandBus = commandBus;
         }
+
+        [BindProperty] public string Forename { get; set; }
+        [BindProperty] public string Surname { get; set; }
+
+        public IReadOnlyList<OperativeReadModel> Operatives { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -39,7 +36,8 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var result = await _commandBus.PublishAsync(new OperativeHiredCommand(OperativeId.New, Forename, Surname), CancellationToken.None);
+            var result = await _commandBus.PublishAsync(new OperativeHiredCommand(OperativeId.New, Forename, Surname),
+                CancellationToken.None);
 
             return RedirectToPage();
         }

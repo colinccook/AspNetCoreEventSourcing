@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries;
@@ -15,18 +12,18 @@ namespace ColinCook.RazorPages.Areas.Operatives.Pages
 {
     public class OperativeModel : PageModel
     {
-        private readonly IQueryProcessor _queryProcessor;
         private readonly ICommandBus _commandBus;
-
-        [BindProperty] public WorkId WorkId { get; set; }
-        [BindProperty] public OperativeId OperativeId { get; set; }
-        public GetOperativeAndWorkQueryResult QueryResult { get; set; }
+        private readonly IQueryProcessor _queryProcessor;
 
         public OperativeModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
         {
             _queryProcessor = queryProcessor;
             _commandBus = commandBus;
         }
+
+        [BindProperty] public WorkId WorkId { get; set; }
+        [BindProperty] public OperativeId OperativeId { get; set; }
+        public GetOperativeAndWorkQueryResult QueryResult { get; set; }
 
         public async Task OnGetAsync(OperativeId operativeId)
         {
@@ -45,14 +42,14 @@ namespace ColinCook.RazorPages.Areas.Operatives.Pages
         {
             var result = await _commandBus.PublishAsync(new WorkAbandonedCommand(WorkId), CancellationToken.None);
 
-            return RedirectToPage(new { OperativeId = OperativeId});
+            return RedirectToPage(new {OperativeId});
         }
 
         public async Task<IActionResult> OnPostCompleteAsync()
         {
             var result = await _commandBus.PublishAsync(new WorkCompletedCommand(WorkId), CancellationToken.None);
 
-            return RedirectToPage(new { OperativeId = OperativeId});
+            return RedirectToPage(new {OperativeId});
         }
     }
 }

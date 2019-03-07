@@ -11,16 +11,16 @@ namespace ColinCook.RazorPages.Areas.Operatives.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly IQueryProcessor _queryProcessor;
         private readonly ICommandBus _commandBus;
-
-        public IReadOnlyList<OperativeReadModel> Operatives { get; set; }
+        private readonly IQueryProcessor _queryProcessor;
 
         public IndexModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
         {
             _queryProcessor = queryProcessor;
             _commandBus = commandBus;
         }
+
+        public IReadOnlyList<OperativeReadModel> Operatives { get; set; }
 
         public async Task OnGetAsync()
         {

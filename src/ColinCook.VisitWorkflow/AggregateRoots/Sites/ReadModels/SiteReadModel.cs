@@ -1,6 +1,4 @@
-﻿using ColinCook.VisitWorkflow.AggregateRoots.Operatives;
-using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Events;
-using ColinCook.VisitWorkflow.AggregateRoots.Sites.Events;
+﻿using ColinCook.VisitWorkflow.AggregateRoots.Sites.Events;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.ReadStores;

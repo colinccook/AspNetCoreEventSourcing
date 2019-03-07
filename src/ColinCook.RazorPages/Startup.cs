@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using ColinCook.RazorPages.Binders;
@@ -16,7 +13,6 @@ using EventFlow.Autofac.Extensions;
 using EventFlow.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -72,23 +68,24 @@ namespace ColinCook.RazorPages
                 .UseConsoleLog();
 
             builder.Populate(services);
-            this.ApplicationContainer = builder.Build();
+            ApplicationContainer = builder.Build();
 
             // Create the IServiceProvider based on the container.
-            return new AutofacServiceProvider(this.ApplicationContainer);
+            return new AutofacServiceProvider(ApplicationContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,
+            IApplicationLifetime appLifetime)
         {
-            loggerFactory.AddConsole(this.Configuration.GetSection("Logging"));
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
             app.UseMiddleware<CommandPublishMiddleware>();
 
             if (env.IsDevelopment())
             {
-                loggerFactory.AddConsole(this.Configuration.GetSection("Logging"));
+                loggerFactory.AddConsole(Configuration.GetSection("Logging"));
                 loggerFactory.AddDebug();
 
                 app.UseDeveloperExceptionPage();
@@ -105,7 +102,7 @@ namespace ColinCook.RazorPages
 
             // If you want to dispose of resources that have been resolved in the
             // application container, register for the "ApplicationStopped" event.
-            appLifetime.ApplicationStopped.Register(() => this.ApplicationContainer.Dispose());
+            appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
         }
     }
 }

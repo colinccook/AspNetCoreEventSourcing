@@ -21,7 +21,8 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Sites.Queries
             _readStore = readStore;
         }
 
-        public async Task<IReadOnlyList<SiteReadModel>> ExecuteQueryAsync(AllSitesQuery query, CancellationToken cancellationToken)
+        public async Task<IReadOnlyList<SiteReadModel>> ExecuteQueryAsync(AllSitesQuery query,
+            CancellationToken cancellationToken)
         {
             var readModels = await _readStore.FindAsync(rm => true, cancellationToken).ConfigureAwait(false);
             return readModels.ToList();

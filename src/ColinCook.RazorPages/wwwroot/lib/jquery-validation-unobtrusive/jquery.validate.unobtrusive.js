@@ -6,12 +6,12 @@
 /*global document: false, jQuery: false */
 
 (function (factory) {
-    if (typeof define === 'function' && define.amd) {
+    if (typeof define === "function" && define.amd) {
         // AMD. Register as an anonymous module.
-        define("jquery.validate.unobtrusive", ['jquery.validation'], factory);
-    } else if (typeof module === 'object' && module.exports) {
+        define("jquery.validate.unobtrusive", ["jquery.validation"], factory);
+    } else if (typeof module === "object" && module.exports) {
         // CommonJS-like environments that support module.exports     
-        module.exports = factory(require('jquery-validation'));
+        module.exports = factory(require("jquery-validation"));
     } else {
         // Browser global
         jQuery.validator.unobtrusive = factory(jQuery);
@@ -97,7 +97,7 @@
 
     function onReset(event) {  // 'this' is the form element
         var $form = $(this),
-            key = '__jquery_unobtrusive_validation_form_reset';
+            key = "__jquery_unobtrusive_validation_form_reset";
         if ($form.data(key)) {
             return;
         }
@@ -397,10 +397,10 @@
                 var field = $(options.form).find(":input").filter("[name='" + escapeAttributeValue(paramName) + "']");
                 // For checkboxes and radio buttons, only pick up values from checked fields.
                 if (field.is(":checkbox")) {
-                    return field.filter(":checked").val() || field.filter(":hidden").val() || '';
+                    return field.filter(":checked").val() || field.filter(":hidden").val() || "";
                 }
                 else if (field.is(":radio")) {
-                    return field.filter(":checked").val() || '';
+                    return field.filter(":checked").val() || "";
                 }
                 return field.val();
             };

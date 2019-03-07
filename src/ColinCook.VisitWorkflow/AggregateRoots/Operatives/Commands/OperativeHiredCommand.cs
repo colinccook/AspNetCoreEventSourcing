@@ -22,7 +22,8 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands
     public class OperativeHiredCommandHandler :
         CommandHandler<OperativeAggregate, OperativeId, IExecutionResult, OperativeHiredCommand>
     {
-        public override Task<IExecutionResult> ExecuteCommandAsync(OperativeAggregate aggregate, OperativeHiredCommand command,
+        public override Task<IExecutionResult> ExecuteCommandAsync(OperativeAggregate aggregate,
+            OperativeHiredCommand command,
             CancellationToken cancellationToken)
         {
             var executionResult = aggregate.Hire(command.Forename, command.Surname);
