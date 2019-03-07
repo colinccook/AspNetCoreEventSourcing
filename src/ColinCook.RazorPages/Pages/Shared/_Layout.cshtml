@@ -1,4 +1,5 @@
-﻿<!doctype html>
+﻿@using ColinCook.RazorPages.Extensions
+<!doctype html>
 <html lang="en" class="h-100">
 <head>
     <meta charset="utf-8">
@@ -38,6 +39,25 @@
             </ul>
         </div>
     </nav>
+
+    @if (TempData.Get<string>("SuccessMessage") is string successMessage)
+    {
+        <div class="alert-success p-3">
+            <div class="container">
+                <span class="lead">@successMessage</span>
+            </div>
+        </div>
+    }
+
+    @if (TempData.Get<string>("FailMessage") is string failMessage)
+    {
+        <div class="alert-danger p-3">
+            <div class="container">
+                <span class="lead">@failMessage</span>
+            </div>
+        </div>
+    }
+
 </header>
 
 <!-- Begin page content -->

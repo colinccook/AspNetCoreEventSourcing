@@ -7,13 +7,16 @@ using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Works.Commands;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
+using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ColinCook.RazorPages.Extensions;
+using ColinCook.RazorPages.Helpers;
 
 namespace ColinCook.RazorPages.Areas.Response.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePageModel
     {
         private readonly ICommandBus _commandBus;
         private readonly IQueryProcessor _queryProcessor;
@@ -41,7 +44,7 @@ namespace ColinCook.RazorPages.Areas.Response.Pages
             var result = await _commandBus.PublishAsync(
                 new WorkRaisedCommand(WorkId.New, selectedSites, Title, Description), CancellationToken.None);
 
-            return RedirectToPage();
+            return RedirectToPage(result, $"{Title} has been raised");
         }
 
         public class SitePostModel
