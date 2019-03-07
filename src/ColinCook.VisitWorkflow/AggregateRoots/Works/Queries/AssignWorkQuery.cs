@@ -60,12 +60,15 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
                 result.Sites.Add(envelope.ReadModel);
             }
 
-            foreach (var operative in result.Operatives)
-            {
-                var works = await _workReadStore.FindAsync(rm => rm.AssignedOperativeId == operative.OperativeId, cancellationToken);
-                result.OperativesWork.Add(operative.OperativeId, works.ToList());
-            }
+            await GetUpcomingWorkForOperatives(cancellationToken, result);
 
+            await GetUpcomingWorkSites(cancellationToken, result);
+
+            return result;
+        }
+
+        private async Task GetUpcomingWorkSites(CancellationToken cancellationToken, AssignWorkQueryResult result)
+        {
             foreach (var site in result.OperativesWork.Values.SelectMany(w => w.SelectMany(x => x.Sites)))
             {
                 if (!result.OperativeWorkSites.ContainsKey(site))
@@ -74,8 +77,16 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
                     result.OperativeWorkSites.Add(site, siteReadModel.ReadModel);
                 }
             }
+        }
 
-            return result;
+        private async Task GetUpcomingWorkForOperatives(CancellationToken cancellationToken, AssignWorkQueryResult result)
+        {
+            foreach (var operative in result.Operatives)
+            {
+                var works = await _workReadStore.FindAsync(
+                    rm => rm.AssignedOperativeId == operative.OperativeId && !rm.IsComplete, cancellationToken);
+                result.OperativesWork.Add(operative.OperativeId, works.ToList());
+            }
         }
 
         private async Task<WorkReadModel> GetMostRecentUnassignedWork(CancellationToken cancellationToken)

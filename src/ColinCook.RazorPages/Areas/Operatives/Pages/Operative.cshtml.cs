@@ -18,7 +18,9 @@ namespace ColinCook.RazorPages.Areas.Operatives.Pages
         private readonly IQueryProcessor _queryProcessor;
         private readonly ICommandBus _commandBus;
 
-        public GetOperativeAndWorkQueryResult Query { get; set; }
+        [BindProperty] public WorkId WorkId { get; set; }
+        [BindProperty] public OperativeId OperativeId { get; set; }
+        public GetOperativeAndWorkQueryResult QueryResult { get; set; }
 
         public OperativeModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
         {
@@ -28,23 +30,29 @@ namespace ColinCook.RazorPages.Areas.Operatives.Pages
 
         public async Task OnGetAsync(OperativeId operativeId)
         {
-            Query = await _queryProcessor.ProcessAsync(
+            QueryResult = await _queryProcessor.ProcessAsync(
                 new GetOperativeAndWorkQuery {OperativeId = operativeId},
                 CancellationToken.None);
+
+            if (QueryResult.Work != null)
+            {
+                WorkId = QueryResult.Work.WorkId;
+                OperativeId = QueryResult.Operative.OperativeId;
+            }
         }
 
-        public async Task<IActionResult> OnPostAbandonAsync(WorkId workId)
+        public async Task<IActionResult> OnPostAbandonAsync()
         {
-            var result = await _commandBus.PublishAsync(new WorkAbandonedCommand(workId), CancellationToken.None);
+            var result = await _commandBus.PublishAsync(new WorkAbandonedCommand(WorkId), CancellationToken.None);
 
-            return RedirectToPage(Query.Operative.OperativeId);
+            return RedirectToPage(new { OperativeId = OperativeId});
         }
 
-        public async Task<IActionResult> OnPostCompleteAsync(WorkId workId)
+        public async Task<IActionResult> OnPostCompleteAsync()
         {
-            var result = await _commandBus.PublishAsync(new WorkCompletedCommand(workId), CancellationToken.None);
+            var result = await _commandBus.PublishAsync(new WorkCompletedCommand(WorkId), CancellationToken.None);
 
-            return RedirectToPage(Query.Operative.OperativeId);
+            return RedirectToPage(new { OperativeId = OperativeId});
         }
     }
 }

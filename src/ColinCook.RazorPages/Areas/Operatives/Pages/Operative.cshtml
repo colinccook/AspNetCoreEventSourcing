@@ -6,14 +6,14 @@
 
 
 <div class="jumbotron">
-    <h1 class="display-4">@Model.Query.Operative.Forename @Model.Query.Operative.Surname</h1>
+    <h1 class="display-4">@Model.QueryResult.Operative.Forename @Model.QueryResult.Operative.Surname</h1>
     <p class="lead">Operative</p>
 </div>
 
-@if (Model.Query.Work == null)
+@if (Model.QueryResult.Work == null)
 {
     <div class="py-3 text-center">
-        <h2>@Model.Query.Operative.Forename has no work assigned</h2>
+        <h2>@Model.QueryResult.Operative.Forename has no work assigned</h2>
         <p class="lead">Contact Control to arrange more Work.</p>
     </div>
 }
@@ -24,12 +24,12 @@ else
     </div>
 
     <div class="py-2">
-        <h2>@Model.Query.Work.Title</h2>
-        <p class="lead">@Model.Query.Work.Description</p>
+        <h2>@Model.QueryResult.Work.Title</h2>
+        <p class="lead">@Model.QueryResult.Work.Description</p>
     </div>
 
     <div class="list-group">
-        @foreach (var site in Model.Query.Sites)
+        @foreach (var site in Model.QueryResult.Sites)
         {
             <div class="list-group-item list-group-item-action flex-column align-items-start">
                 <h5 class="mb-1">@site.AddressLine1</h5>
@@ -41,7 +41,8 @@ else
     </div>
 
     <form method="post">
-        <input type="hidden" asp-route-workid="@Model.Query.Work.WorkId"/>
+        <input type="hidden" asp-for="WorkId" />
+        <input type="hidden" asp-for="OperativeId" />
         <div class="row py-5">
             <div class="col-md-6">
                 <button asp-page-handler="Abandon" class="btn btn-primary btn-block btn-danger" type="submit">Abandon Work</button>

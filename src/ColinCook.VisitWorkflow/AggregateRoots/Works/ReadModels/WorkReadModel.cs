@@ -11,7 +11,9 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.ReadModels
     public class WorkReadModel :
         IReadModel,
         IAmReadModelFor<WorkAggregate, WorkId, WorkRaisedEvent>,
-        IAmReadModelFor<WorkAggregate, WorkId, WorkAssignedEvent>
+        IAmReadModelFor<WorkAggregate, WorkId, WorkAssignedEvent>,
+        IAmReadModelFor<WorkAggregate, WorkId, WorkCompletedEvent>,
+        IAmReadModelFor<WorkAggregate, WorkId, WorkAbandonedEvent>
     {
         public IEnumerable<SiteId> Sites { get; set; }
         public string Description { get; set; }
@@ -32,6 +34,16 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.ReadModels
         public void Apply(IReadModelContext context, IDomainEvent<WorkAggregate, WorkId, WorkAssignedEvent> domainEvent)
         {
             AssignedOperativeId = domainEvent.AggregateEvent.OperativeId;
+        }
+
+        public void Apply(IReadModelContext context, IDomainEvent<WorkAggregate, WorkId, WorkCompletedEvent> domainEvent)
+        {
+            IsComplete = true;
+        }
+
+        public void Apply(IReadModelContext context, IDomainEvent<WorkAggregate, WorkId, WorkAbandonedEvent> domainEvent)
+        {
+            AssignedOperativeId = null;
         }
     }
 }
