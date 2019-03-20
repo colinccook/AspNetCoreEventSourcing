@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using ColinCook.RazorPages.Helpers;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries;
 using ColinCook.VisitWorkflow.AggregateRoots.Works.Commands;
 using ColinCook.VisitWorkflow.Identities;
@@ -10,24 +11,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ColinCook.RazorPages.Areas.Operatives.Pages
 {
-    public class OperativeModel : PageModel
+    public class OperativeModel : BasePageModel
     {
-        private readonly ICommandBus _commandBus;
-        private readonly IQueryProcessor _queryProcessor;
-
-        public OperativeModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
-        {
-            _queryProcessor = queryProcessor;
-            _commandBus = commandBus;
-        }
-
         [BindProperty] public WorkId WorkId { get; set; }
         [BindProperty] public OperativeId OperativeId { get; set; }
         public GetOperativeAndWorkQueryResult QueryResult { get; set; }
 
         public async Task OnGetAsync(OperativeId operativeId)
         {
-            QueryResult = await _queryProcessor.ProcessAsync(
+            QueryResult = await QueryProcessor.ProcessAsync(
                 new GetOperativeAndWorkQuery {OperativeId = operativeId},
                 CancellationToken.None);
 
@@ -40,16 +32,20 @@ namespace ColinCook.RazorPages.Areas.Operatives.Pages
 
         public async Task<IActionResult> OnPostAbandonAsync()
         {
-            var result = await _commandBus.PublishAsync(new WorkAbandonedCommand(WorkId), CancellationToken.None);
+            var result = await CommandBus.PublishAsync(new WorkAbandonedCommand(WorkId), CancellationToken.None);
 
-            return RedirectToPage(new {OperativeId});
+            return RedirectToPage(new {OperativeId}, result, "abandoning work");
         }
 
         public async Task<IActionResult> OnPostCompleteAsync()
         {
-            var result = await _commandBus.PublishAsync(new WorkCompletedCommand(WorkId), CancellationToken.None);
+            var result = await CommandBus.PublishAsync(new WorkCompletedCommand(WorkId), CancellationToken.None);
 
-            return RedirectToPage(new {OperativeId});
+            return RedirectToPage(new {OperativeId}, result, "completing work");
+        }
+
+        public OperativeModel(IQueryProcessor queryProcessor, ICommandBus commandBus) : base(queryProcessor, commandBus)
+        {
         }
     }
 }

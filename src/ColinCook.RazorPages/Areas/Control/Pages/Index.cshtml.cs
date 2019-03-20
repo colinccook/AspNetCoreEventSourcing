@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using ColinCook.RazorPages.Helpers;
 using ColinCook.VisitWorkflow.AggregateRoots.Works.Commands;
 using ColinCook.VisitWorkflow.AggregateRoots.Works.Queries;
 using ColinCook.VisitWorkflow.Identities;
@@ -10,31 +11,26 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ColinCook.RazorPages.Areas.Control.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePageModel
     {
-        private readonly ICommandBus _commandBus;
-        private readonly IQueryProcessor _queryProcessor;
-
-        public IndexModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
-        {
-            _queryProcessor = queryProcessor;
-            _commandBus = commandBus;
-        }
-
         public AssignWorkQueryResult AssignWorkQuery { get; set; }
 
         public async Task OnGetAsync()
         {
-            AssignWorkQuery = await _queryProcessor.ProcessAsync(
+            AssignWorkQuery = await QueryProcessor.ProcessAsync(
                 new AssignWorkQuery(), CancellationToken.None);
         }
 
         public async Task<IActionResult> OnPostAsync(WorkId workId, OperativeId operativeId)
         {
             var result =
-                await _commandBus.PublishAsync(new WorkAssignedCommand(workId, operativeId), CancellationToken.None);
+                await CommandBus.PublishAsync(new WorkAssignedCommand(workId, operativeId), CancellationToken.None);
 
-            return RedirectToPage();
+            return RedirectToPage(result, "assigning work");
+        }
+
+        public IndexModel(IQueryProcessor queryProcessor, ICommandBus commandBus) : base(queryProcessor, commandBus)
+        {
         }
     }
 }

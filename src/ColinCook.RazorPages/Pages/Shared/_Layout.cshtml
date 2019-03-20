@@ -16,44 +16,55 @@
 </head>
 <body class="d-flex flex-column h-100 bg-light">
 <header>
-    <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a asp-area="" asp-page="Index" class="navbar-brand">ColinCook.RazorPages</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="Administration" asp-page="Index">Admin</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="Response" asp-page="Index">Response</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="Control" asp-page="Index">Control</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="Operatives" asp-page="Index">Operatives</a>
-                </li>
-            </ul>
+        <div class="container">
+            <a asp-area="" asp-page="Index" class="navbar-brand">ColinCook.RazorPages</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Administration" asp-page="Index">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Response" asp-page="Index">Response</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Control" asp-page="Index">Control</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Operatives" asp-page="Index">Operatives</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
     @if (TempData.Get<string>("SuccessMessage") is string successMessage)
     {
-        <div class="alert-success p-3">
-            <div class="container">
-                <span class="lead">@successMessage</span>
+        <div class="alert-success p-4">
+            <div class="container lead">
+                ✔
+                <span>@successMessage</span>
             </div>
         </div>
     }
 
     @if (TempData.Get<string>("FailMessage") is string failMessage)
     {
-        <div class="alert-danger p-3">
-            <div class="container">
-                <span class="lead">@failMessage</span>
+        <div class="alert-danger p-4">
+            <div class="container lead">
+                <div>
+                    ❌
+                    <strong>@failMessage</strong>
+                </div>
+
+                @if (TempData.Get<string>("FailReason") is string failReason)
+                {
+                    <span>@failReason</span>
+                }
+
             </div>
         </div>
     }

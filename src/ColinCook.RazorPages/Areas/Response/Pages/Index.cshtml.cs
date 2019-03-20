@@ -7,33 +7,25 @@ using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Works.Commands;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
-using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using ColinCook.RazorPages.Extensions;
 using ColinCook.RazorPages.Helpers;
 
 namespace ColinCook.RazorPages.Areas.Response.Pages
 {
     public class IndexModel : BasePageModel
     {
-        private readonly ICommandBus _commandBus;
-        private readonly IQueryProcessor _queryProcessor;
-
-        public IndexModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
-        {
-            _queryProcessor = queryProcessor;
-            _commandBus = commandBus;
-        }
-
         [BindProperty] public string Title { get; set; }
         [BindProperty] public string Description { get; set; }
         public IReadOnlyList<SiteReadModel> Sites { get; set; }
 
+        public IndexModel(IQueryProcessor queryProcessor, ICommandBus commandBus) : base(queryProcessor, commandBus)
+        {
+        }
+
         public async Task OnGetAsync()
         {
-            Sites = await _queryProcessor.ProcessAsync(
+            Sites = await QueryProcessor.ProcessAsync(
                 new AllSitesQuery(), CancellationToken.None);
         }
 
@@ -41,10 +33,10 @@ namespace ColinCook.RazorPages.Areas.Response.Pages
         {
             var selectedSites = sites.Where(s => s.IsChecked).Select(s => s.SiteId);
 
-            var result = await _commandBus.PublishAsync(
+            var result = await CommandBus.PublishAsync(
                 new WorkRaisedCommand(WorkId.New, selectedSites, Title, Description), CancellationToken.None);
 
-            return RedirectToPage(result, $"{Title} has been raised");
+            return RedirectToPage(result, "raising work");
         }
 
         public class SitePostModel
@@ -52,5 +44,7 @@ namespace ColinCook.RazorPages.Areas.Response.Pages
             public SiteId SiteId { get; set; }
             public bool IsChecked { get; set; }
         }
+
+
     }
 }
