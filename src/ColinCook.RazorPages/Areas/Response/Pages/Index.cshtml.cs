@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+using ColinCook.RazorPages.Helpers;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.Queries;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Works.Commands;
@@ -9,7 +6,10 @@ using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
-using ColinCook.RazorPages.Helpers;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ColinCook.RazorPages.Areas.Response.Pages
 {
@@ -31,9 +31,9 @@ namespace ColinCook.RazorPages.Areas.Response.Pages
 
         public async Task<IActionResult> OnPostAsync(List<SitePostModel> sites)
         {
-            var selectedSites = sites.Where(s => s.IsChecked).Select(s => s.SiteId);
+            IEnumerable<SiteId> selectedSites = sites.Where(s => s.IsChecked).Select(s => s.SiteId);
 
-            var result = await CommandBus.PublishAsync(
+            EventFlow.Aggregates.ExecutionResults.IExecutionResult result = await CommandBus.PublishAsync(
                 new WorkRaisedCommand(WorkId.New, selectedSites, Title, Description), CancellationToken.None);
 
             return RedirectToPage(result, "raising work");
@@ -44,7 +44,5 @@ namespace ColinCook.RazorPages.Areas.Response.Pages
             public SiteId SiteId { get; set; }
             public bool IsChecked { get; set; }
         }
-
-
     }
 }

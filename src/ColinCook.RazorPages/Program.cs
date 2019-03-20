@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands;
+﻿using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.Commands;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
@@ -7,6 +6,7 @@ using EventFlow.Extensions;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using System.Threading;
 
 namespace ColinCook.RazorPages
 {
@@ -14,7 +14,7 @@ namespace ColinCook.RazorPages
     {
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args).Build();
+            IWebHost host = CreateWebHostBuilder(args).Build();
 
             SeedDatabase(host);
 
@@ -23,11 +23,11 @@ namespace ColinCook.RazorPages
 
         private static void SeedDatabase(IWebHost host)
         {
-            using (var scope = host.Services.CreateScope())
+            using (IServiceScope scope = host.Services.CreateScope())
             {
-                var services = scope.ServiceProvider;
+                System.IServiceProvider services = scope.ServiceProvider;
 
-                var commandBus = services.GetService<ICommandBus>();
+                ICommandBus commandBus = services.GetService<ICommandBus>();
 
                 commandBus.Publish(new OperativeHiredCommand(OperativeId.New, "Phillip", "Johnson"),
                     CancellationToken.None);

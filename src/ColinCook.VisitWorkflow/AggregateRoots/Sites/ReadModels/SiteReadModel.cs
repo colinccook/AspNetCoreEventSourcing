@@ -14,7 +14,7 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels
         public string PostCode { get; private set; }
         public string TelephoneNumber { get; private set; }
 
-        // IsChecked is an example where a UI concern has leaked into an inner layer. However, I'm trying to keep 
+        // IsChecked is an example where a UI concern has leaked into an inner layer. However, I'm trying to keep
         // this sample as simple as possible and I can live with this.
         public bool IsChecked { get; set; }
 

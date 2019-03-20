@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ColinCook.RazorPages.Extensions;
+﻿using ColinCook.RazorPages.Extensions;
 using EventFlow;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Queries;
@@ -30,7 +26,8 @@ namespace ColinCook.RazorPages.Helpers
         /// <returns></returns>
         public IActionResult RedirectToPage(IExecutionResult executionResult, string attemptedAction = "")
         {
-            if (executionResult is FailedExecutionResult failedExecutionResult) {
+            if (executionResult is FailedExecutionResult failedExecutionResult)
+            {
                 TempData.Set("FailMessage", $"Could not complete action: {attemptedAction}");
                 TempData.Set("FailReason", failedExecutionResult.ToString());
             }
@@ -44,7 +41,8 @@ namespace ColinCook.RazorPages.Helpers
 
         public IActionResult RedirectToPage(object routeValues, IExecutionResult executionResult, string attemptedAction = "")
         {
-            if (executionResult is FailedExecutionResult failedExecutionResult) {
+            if (executionResult is FailedExecutionResult failedExecutionResult)
+            {
                 TempData.Set("FailMessage", $"Could not complete action: {attemptedAction}");
                 TempData.Set("FailReason", failedExecutionResult.ToString());
             }

@@ -1,5 +1,3 @@
-using System.Threading;
-using System.Threading.Tasks;
 using ColinCook.RazorPages.Helpers;
 using ColinCook.VisitWorkflow.AggregateRoots.Works.Commands;
 using ColinCook.VisitWorkflow.AggregateRoots.Works.Queries;
@@ -7,7 +5,8 @@ using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ColinCook.RazorPages.Areas.Control.Pages
 {
@@ -23,7 +22,7 @@ namespace ColinCook.RazorPages.Areas.Control.Pages
 
         public async Task<IActionResult> OnPostAsync(WorkId workId, OperativeId operativeId)
         {
-            var result =
+            EventFlow.Aggregates.ExecutionResults.IExecutionResult result =
                 await CommandBus.PublishAsync(new WorkAssignedCommand(workId, operativeId), CancellationToken.None);
 
             return RedirectToPage(result, "assigning work");

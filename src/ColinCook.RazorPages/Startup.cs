@@ -1,5 +1,3 @@
-using System;
-using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using ColinCook.RazorPages.Binders;
@@ -17,6 +15,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Reflection;
 
 namespace ColinCook.RazorPages
 {
@@ -52,13 +52,13 @@ namespace ColinCook.RazorPages
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // Create the container builder.
-            var builder = new ContainerBuilder();
+            ContainerBuilder builder = new ContainerBuilder();
 
             // Register dependencies, populate the services from
             // the collection, and build the container. If you want
             // to dispose of the container at the end of the app,
             // be sure to keep a reference to it as a property or field.
-            var container = EventFlowOptions.New
+            IEventFlowOptions container = EventFlowOptions.New
                 .UseAutofacContainerBuilder(builder) // Must be the first line!
                 .AddDefaults(Assembly.LoadFrom("bin/Debug/netcoreapp2.2/ColinCook.VisitWorkflow.dll"))
                 .UseInMemoryReadStoreFor<VisitReadModel>()

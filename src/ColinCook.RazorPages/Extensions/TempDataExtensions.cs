@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Newtonsoft.Json;
 
 namespace ColinCook.RazorPages.Extensions
@@ -17,7 +13,7 @@ namespace ColinCook.RazorPages.Extensions
         public static T Get<T>(this ITempDataDictionary tempData, string key) where T : class
         {
             tempData.TryGetValue(key, out object o);
-            return o == null ? null : JsonConvert.DeserializeObject<T>((string) o);
+            return o == null ? null : JsonConvert.DeserializeObject<T>((string)o);
         }
     }
 }

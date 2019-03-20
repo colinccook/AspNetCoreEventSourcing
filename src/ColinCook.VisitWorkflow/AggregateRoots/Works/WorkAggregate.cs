@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using ColinCook.VisitWorkflow.AggregateRoots.Works.Events;
+﻿using ColinCook.VisitWorkflow.AggregateRoots.Works.Events;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.Aggregates.ExecutionResults;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Works
 {
@@ -49,11 +49,20 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works
 
         internal IExecutionResult Raise(string title, string description, IEnumerable<SiteId> sites)
         {
-            if (string.IsNullOrWhiteSpace(title)) return ExecutionResult.Failed("Work must have a title");
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                return ExecutionResult.Failed("Work must have a title");
+            }
 
-            if (string.IsNullOrWhiteSpace(description)) return ExecutionResult.Failed("Work must have a description");
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                return ExecutionResult.Failed("Work must have a description");
+            }
 
-            if (!sites.Any()) return ExecutionResult.Failed("Work must have at least one Site added");
+            if (!sites.Any())
+            {
+                return ExecutionResult.Failed("Work must have at least one Site added");
+            }
 
             Emit(new WorkRaisedEvent(title, description, sites));
 
@@ -62,9 +71,15 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works
 
         internal IExecutionResult Assign(OperativeId operativeId)
         {
-            if (_isComplete) return ExecutionResult.Failed("You cannot assign work if it's already completed");
+            if (_isComplete)
+            {
+                return ExecutionResult.Failed("You cannot assign work if it's already completed");
+            }
 
-            if (_operative != null) return ExecutionResult.Failed("An operative is already assigned to this work");
+            if (_operative != null)
+            {
+                return ExecutionResult.Failed("An operative is already assigned to this work");
+            }
 
             Emit(new WorkAssignedEvent(operativeId));
 
@@ -74,10 +89,14 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works
         public IExecutionResult Abandon()
         {
             if (_isComplete)
+            {
                 return ExecutionResult.Failed("An operative cannot abandon work when it's already been completed");
+            }
 
             if (_operative == null)
+            {
                 return ExecutionResult.Failed("There is no operative assigned to this work to abandon it");
+            }
 
             Emit(new WorkAbandonedEvent());
 
@@ -86,10 +105,15 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works
 
         public IExecutionResult Complete()
         {
-            if (_isComplete) return ExecutionResult.Failed("You cannot complete work that's already completed");
+            if (_isComplete)
+            {
+                return ExecutionResult.Failed("You cannot complete work that's already completed");
+            }
 
             if (_operative == null)
+            {
                 return ExecutionResult.Failed("There must be an operative assigned to complete the work");
+            }
 
             Emit(new WorkCompletedEvent());
 

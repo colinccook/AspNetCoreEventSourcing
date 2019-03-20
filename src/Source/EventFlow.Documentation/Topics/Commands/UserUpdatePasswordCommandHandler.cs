@@ -1,7 +1,7 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using EventFlow.Aggregates.ExecutionResults;
+﻿using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace EventFlow.Documentation.Topics.Commands
 {
@@ -13,7 +13,7 @@ namespace EventFlow.Documentation.Topics.Commands
             UserUpdatePasswordCommand command,
             CancellationToken cancellationToken)
         {
-            var executionResult = aggregate.UpdatePassword(
+            IExecutionResult executionResult = aggregate.UpdatePassword(
                 command.OldPassword,
                 command.NewPassword);
 

@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using ColinCook.RazorPages.Helpers;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.Commands;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.Queries;
@@ -9,6 +6,9 @@ using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ColinCook.RazorPages.Areas.Administration.Pages
 {
@@ -29,7 +29,7 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var result = await CommandBus.PublishAsync(
+            EventFlow.Aggregates.ExecutionResults.IExecutionResult result = await CommandBus.PublishAsync(
                 new SiteAcquiredCommand(SiteId.New, AddressLine1, Town, PostCode, TelephoneNumber),
                 CancellationToken.None);
 

@@ -1,11 +1,11 @@
-﻿using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
-using EventFlow;
+﻿using EventFlow;
 using EventFlow.Extensions;
 using EventFlow.Queries;
 using FluentAssertions;
 using NUnit.Framework;
+using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ColinCook.Documentation.GettingStarted
 {
@@ -17,7 +17,7 @@ namespace ColinCook.Documentation.GettingStarted
             // We wire up EventFlow with all of our classes. Instead of adding events,
             // commands, etc. explicitly, we could have used the the simpler
             // AddDefaults(Assembly) instead.
-            using (var resolver = EventFlowOptions.New
+            using (EventFlow.Configuration.IRootResolver resolver = EventFlowOptions.New
                 .AddEvents(typeof(ExampleEvent))
                 .AddCommands(typeof(ExampleCommand))
                 .AddCommandHandlers(typeof(ExampleCommandHandler))
@@ -25,14 +25,14 @@ namespace ColinCook.Documentation.GettingStarted
                 .CreateResolver())
             {
                 // Create a new identity for our aggregate root
-                var exampleId = ExampleId.New;
+                ExampleId exampleId = ExampleId.New;
 
                 // Define some important value
                 const int magicNumber = 42;
 
                 // Resolve the command bus and use it to publish a command
-                var commandBus = resolver.Resolve<ICommandBus>();
-                var executionResult = await commandBus.PublishAsync(
+                ICommandBus commandBus = resolver.Resolve<ICommandBus>();
+                EventFlow.Aggregates.ExecutionResults.IExecutionResult executionResult = await commandBus.PublishAsync(
                         new ExampleCommand(exampleId, magicNumber),
                         CancellationToken.None)
                     .ConfigureAwait(false);
@@ -43,8 +43,8 @@ namespace ColinCook.Documentation.GettingStarted
                 // Resolve the query handler and use the built-in query for fetching
                 // read models by identity to get our read model representing the
                 // state of our aggregate root
-                var queryProcessor = resolver.Resolve<IQueryProcessor>();
-                var exampleReadModel = await queryProcessor.ProcessAsync(
+                IQueryProcessor queryProcessor = resolver.Resolve<IQueryProcessor>();
+                ExampleReadModel exampleReadModel = await queryProcessor.ProcessAsync(
                         new ReadModelByIdQuery<ExampleReadModel>(exampleId),
                         CancellationToken.None)
                     .ConfigureAwait(false);
@@ -60,20 +60,20 @@ namespace ColinCook.Documentation.GettingStarted
             // We wire up EventFlow with all of our classes. Instead of adding events,
             // commands, etc. explicitly, we could have used the the simpler
             // AddDefaults(Assembly) instead.
-            using (var resolver = EventFlowOptions.New
+            using (EventFlow.Configuration.IRootResolver resolver = EventFlowOptions.New
                 .AddDefaults(Assembly.GetExecutingAssembly())
                 .UseInMemoryReadStoreFor<ExampleReadModel>()
                 .CreateResolver())
             {
                 // Create a new identity for our aggregate root
-                var exampleId = ExampleId.New;
+                ExampleId exampleId = ExampleId.New;
 
                 // Define some important value
                 const int magicNumber = 42;
 
                 // Resolve the command bus and use it to publish a command
-                var commandBus = resolver.Resolve<ICommandBus>();
-                var executionResult = await commandBus.PublishAsync(
+                ICommandBus commandBus = resolver.Resolve<ICommandBus>();
+                EventFlow.Aggregates.ExecutionResults.IExecutionResult executionResult = await commandBus.PublishAsync(
                         new ExampleCommand(exampleId, magicNumber),
                         CancellationToken.None)
                     .ConfigureAwait(false);
@@ -84,8 +84,8 @@ namespace ColinCook.Documentation.GettingStarted
                 // Resolve the query handler and use the built-in query for fetching
                 // read models by identity to get our read model representing the
                 // state of our aggregate root
-                var queryProcessor = resolver.Resolve<IQueryProcessor>();
-                var exampleReadModel = await queryProcessor.ProcessAsync(
+                IQueryProcessor queryProcessor = resolver.Resolve<IQueryProcessor>();
+                ExampleReadModel exampleReadModel = await queryProcessor.ProcessAsync(
                         new ReadModelByIdQuery<ExampleReadModel>(exampleId),
                         CancellationToken.None)
                     .ConfigureAwait(false);
@@ -101,20 +101,20 @@ namespace ColinCook.Documentation.GettingStarted
             // We wire up EventFlow with all of our classes. Instead of adding events,
             // commands, etc. explicitly, we could have used the the simpler
             // AddDefaults(Assembly) instead.
-            using (var resolver = EventFlowOptions.New
+            using (EventFlow.Configuration.IRootResolver resolver = EventFlowOptions.New
                 .AddDefaults(Assembly.GetExecutingAssembly())
                 .UseInMemoryReadStoreFor<ExampleReadModel>()
                 .CreateResolver())
             {
                 // Create a new identity for our aggregate root
-                var exampleId = ExampleId.New;
+                ExampleId exampleId = ExampleId.New;
 
                 // Define some important value
                 const int magicNumber = 42;
 
                 // Resolve the command bus and use it to publish a command
-                var commandBus = resolver.Resolve<ICommandBus>();
-                var executionResult = await commandBus.PublishAsync(
+                ICommandBus commandBus = resolver.Resolve<ICommandBus>();
+                EventFlow.Aggregates.ExecutionResults.IExecutionResult executionResult = await commandBus.PublishAsync(
                         new ExampleCommand(exampleId, magicNumber),
                         CancellationToken.None)
                     .ConfigureAwait(false);
@@ -122,7 +122,7 @@ namespace ColinCook.Documentation.GettingStarted
                 // Verify that we didn't trigger our domain validation
                 executionResult.IsSuccess.Should().BeTrue();
 
-                var executionResult2 = await commandBus.PublishAsync(
+                EventFlow.Aggregates.ExecutionResults.IExecutionResult executionResult2 = await commandBus.PublishAsync(
                         new ExampleCommand(exampleId, magicNumber),
                         CancellationToken.None)
                     .ConfigureAwait(false);

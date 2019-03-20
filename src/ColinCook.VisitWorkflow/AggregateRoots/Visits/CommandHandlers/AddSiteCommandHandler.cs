@@ -1,9 +1,9 @@
-using System.Threading;
-using System.Threading.Tasks;
 using ColinCook.VisitWorkflow.AggregateRoots.Visits.Commands;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.CommandHandlers
 {
@@ -16,7 +16,7 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.CommandHandlers
             AddSiteCommand command,
             CancellationToken cancellationToken)
         {
-            var executionResult = aggregate.AddSite(command.SiteId);
+            IExecutionResult executionResult = aggregate.AddSite(command.SiteId);
             return Task.FromResult(executionResult);
         }
     }

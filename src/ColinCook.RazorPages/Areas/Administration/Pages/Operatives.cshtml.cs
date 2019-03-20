@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using ColinCook.RazorPages.Helpers;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries;
@@ -9,13 +6,14 @@ using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ColinCook.RazorPages.Areas.Administration.Pages
 {
     public class OperativesModel : BasePageModel
     {
-
         [BindProperty] public string Forename { get; set; }
         [BindProperty] public string Surname { get; set; }
 
@@ -29,7 +27,7 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var result = await CommandBus.PublishAsync(new OperativeHiredCommand(OperativeId.New, Forename, Surname),
+            EventFlow.Aggregates.ExecutionResults.IExecutionResult result = await CommandBus.PublishAsync(new OperativeHiredCommand(OperativeId.New, Forename, Surname),
                 CancellationToken.None);
 
             return RedirectToPage(result, "hiring an Operative");

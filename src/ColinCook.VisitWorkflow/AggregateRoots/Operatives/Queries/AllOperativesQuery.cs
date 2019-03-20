@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
+using EventFlow.Queries;
+using EventFlow.ReadStores.InMemory;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
-using EventFlow.Queries;
-using EventFlow.ReadStores.InMemory;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries
 {
@@ -24,7 +24,7 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries
         public async Task<IReadOnlyList<OperativeReadModel>> ExecuteQueryAsync(AllOperativesQuery query,
             CancellationToken cancellationToken)
         {
-            var readModels = await _readStore.FindAsync(rm => true, cancellationToken).ConfigureAwait(false);
+            IReadOnlyCollection<OperativeReadModel> readModels = await _readStore.FindAsync(rm => true, cancellationToken).ConfigureAwait(false);
             return readModels.ToList();
         }
     }

@@ -26,10 +26,14 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives
         public IExecutionResult Hire(string forename, string surname)
         {
             if (string.IsNullOrWhiteSpace(forename))
+            {
                 return ExecutionResult.Failed("Operative must have a forename");
+            }
 
             if (string.IsNullOrWhiteSpace(surname))
+            {
                 return ExecutionResult.Failed("Operative must have a surname");
+            }
 
             Emit(new OperativeHiredEvent(forename, surname));
 

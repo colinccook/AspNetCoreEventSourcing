@@ -1,8 +1,8 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using ColinCook.VisitWorkflow.Identities;
+﻿using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Sites.Commands
 {
@@ -30,7 +30,7 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Sites.Commands
         public override Task<IExecutionResult> ExecuteCommandAsync(SiteAggregate aggregate, SiteAcquiredCommand command,
             CancellationToken cancellationToken)
         {
-            var executionResult = aggregate.Acquire(command.AddressLine1, command.Town, command.PostCode,
+            IExecutionResult executionResult = aggregate.Acquire(command.AddressLine1, command.Town, command.PostCode,
                 command.TelephoneNumber);
             return Task.FromResult(executionResult);
         }

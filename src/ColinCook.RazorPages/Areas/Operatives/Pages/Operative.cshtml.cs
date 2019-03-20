@@ -1,5 +1,3 @@
-using System.Threading;
-using System.Threading.Tasks;
 using ColinCook.RazorPages.Helpers;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries;
 using ColinCook.VisitWorkflow.AggregateRoots.Works.Commands;
@@ -7,7 +5,8 @@ using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ColinCook.RazorPages.Areas.Operatives.Pages
 {
@@ -20,7 +19,7 @@ namespace ColinCook.RazorPages.Areas.Operatives.Pages
         public async Task OnGetAsync(OperativeId operativeId)
         {
             QueryResult = await QueryProcessor.ProcessAsync(
-                new GetOperativeAndWorkQuery {OperativeId = operativeId},
+                new GetOperativeAndWorkQuery { OperativeId = operativeId },
                 CancellationToken.None);
 
             if (QueryResult.Work != null)
@@ -32,16 +31,16 @@ namespace ColinCook.RazorPages.Areas.Operatives.Pages
 
         public async Task<IActionResult> OnPostAbandonAsync()
         {
-            var result = await CommandBus.PublishAsync(new WorkAbandonedCommand(WorkId), CancellationToken.None);
+            EventFlow.Aggregates.ExecutionResults.IExecutionResult result = await CommandBus.PublishAsync(new WorkAbandonedCommand(WorkId), CancellationToken.None);
 
-            return RedirectToPage(new {OperativeId}, result, "abandoning work");
+            return RedirectToPage(new { OperativeId }, result, "abandoning work");
         }
 
         public async Task<IActionResult> OnPostCompleteAsync()
         {
-            var result = await CommandBus.PublishAsync(new WorkCompletedCommand(WorkId), CancellationToken.None);
+            EventFlow.Aggregates.ExecutionResults.IExecutionResult result = await CommandBus.PublishAsync(new WorkCompletedCommand(WorkId), CancellationToken.None);
 
-            return RedirectToPage(new {OperativeId}, result, "completing work");
+            return RedirectToPage(new { OperativeId }, result, "completing work");
         }
 
         public OperativeModel(IQueryProcessor queryProcessor, ICommandBus commandBus) : base(queryProcessor, commandBus)
