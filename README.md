@@ -6,7 +6,7 @@ AspNetCoreEventSourcing is a prototype project to experiment event sourcing cove
 
 * **EventFlow** This is the magical framework used for CQRS and storing the entire state of the app as events
 * **Everything in-memory** As everything is stored in-memory, it's quick to clone and run on your local environment
-* **ASP.NET Core 2.2 RazorPages** An uncomplicated, JavaScript free UI layer, as the focus is on EventFlow.
+* **ASP.NET Core 2.2 RazorPages** An uncomplicated, WASM/JavaScript free UI layer, as the focus is on EventFlow.
 
 ### Business Scenario
 
