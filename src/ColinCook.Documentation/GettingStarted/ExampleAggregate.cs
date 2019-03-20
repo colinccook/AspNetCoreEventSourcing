@@ -26,7 +26,9 @@ namespace ColinCook.Documentation.GettingStarted
         public IExecutionResult SetMagicNumer(int magicNumber)
         {
             if (_magicNumber.HasValue)
+            {
                 return ExecutionResult.Failed("Magic number already set");
+            }
 
             Emit(new ExampleEvent(magicNumber));
 

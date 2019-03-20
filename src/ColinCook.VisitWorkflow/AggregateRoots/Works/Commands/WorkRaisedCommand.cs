@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using ColinCook.VisitWorkflow.Identities;
+﻿using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Commands
 {
@@ -29,7 +29,7 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Commands
         public override Task<IExecutionResult> ExecuteCommandAsync(WorkAggregate aggregate, WorkRaisedCommand command,
             CancellationToken cancellationToken)
         {
-            var executionResult = aggregate.Raise(command.Title, command.Description, command.Sites);
+            IExecutionResult executionResult = aggregate.Raise(command.Title, command.Description, command.Sites);
             return Task.FromResult(executionResult);
         }
     }

@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using ColinCook.RazorPages.Helpers;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
@@ -8,21 +6,14 @@ using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ColinCook.RazorPages.Areas.Administration.Pages
 {
-    public class OperativesModel : PageModel
+    public class OperativesModel : BasePageModel
     {
-        private readonly ICommandBus _commandBus;
-        private readonly IQueryProcessor _queryProcessor;
-
-        public OperativesModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
-        {
-            _queryProcessor = queryProcessor;
-            _commandBus = commandBus;
-        }
-
         [BindProperty] public string Forename { get; set; }
         [BindProperty] public string Surname { get; set; }
 
@@ -30,16 +21,20 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
 
         public async Task OnGetAsync()
         {
-            Operatives = await _queryProcessor.ProcessAsync(
+            Operatives = await QueryProcessor.ProcessAsync(
                 new AllOperativesQuery(), CancellationToken.None);
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var result = await _commandBus.PublishAsync(new OperativeHiredCommand(OperativeId.New, Forename, Surname),
+            EventFlow.Aggregates.ExecutionResults.IExecutionResult result = await CommandBus.PublishAsync(new OperativeHiredCommand(OperativeId.New, Forename, Surname),
                 CancellationToken.None);
 
-            return RedirectToPage();
+            return RedirectToPage(result, "hiring an Operative");
+        }
+
+        public OperativesModel(IQueryProcessor queryProcessor, ICommandBus commandBus) : base(queryProcessor, commandBus)
+        {
         }
     }
 }

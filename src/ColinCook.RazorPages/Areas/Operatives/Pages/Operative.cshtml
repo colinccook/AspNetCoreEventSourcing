@@ -4,7 +4,6 @@
     Layout = "_Layout";
 }
 
-
 <div class="jumbotron">
     <h1 class="display-4">@Model.QueryResult.Operative.Forename @Model.QueryResult.Operative.Surname</h1>
     <p class="lead">Operative</p>
@@ -41,8 +40,8 @@ else
     </div>
 
     <form method="post">
-        <input type="hidden" asp-for="WorkId"/>
-        <input type="hidden" asp-for="OperativeId"/>
+        <input type="hidden" asp-for="WorkId" />
+        <input type="hidden" asp-for="OperativeId" />
         <div class="row py-5">
             <div class="col-md-6">
                 <button asp-page-handler="Abandon" class="btn btn-primary btn-block btn-danger" type="submit">Abandon Work</button>

@@ -9,7 +9,6 @@
     <p class="lead">Those in Response handle the demand for raising Work on Sites.</p>
 </div>
 
-
 <div class="py-3 text-center">
     <h2>Raise new Work</h2>
     <p class="lead">To raise new work, first add the Sites that this work covers. You'll then enter a few basic details about what is required.</p>
@@ -21,7 +20,7 @@
         {
             <label class="list-group-item list-group-item-action flex-column align-items-start">
                 @Html.HiddenFor(x => x.Sites[i].SiteId)
-                <input type="checkbox" asp-for="@Model.Sites[i].IsChecked" class="float-right"/>
+                <input type="checkbox" asp-for="@Model.Sites[i].IsChecked" class="float-right" />
                 <h5 class="mb-1">@Model.Sites[i].AddressLine1</h5>
                 <p class="mb-1">@Model.Sites[i].Town, @Model.Sites[i].PostCode</p>
                 <small>@Model.Sites[i].SiteId</small>
@@ -39,7 +38,6 @@
         <small class="form-text text-muted">The description can detail the symptoms of the work required</small>
     </div>
     <div class="form-group pb-5">
-        <input type="submit" class="btn btn-primary" value="Raise Work"/>
+        <input type="submit" class="btn btn-primary" value="Raise Work" />
     </div>
-
 </form>

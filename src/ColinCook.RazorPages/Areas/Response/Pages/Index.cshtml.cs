@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+using ColinCook.RazorPages.Helpers;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.Queries;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Works.Commands;
@@ -9,39 +6,37 @@ using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ColinCook.RazorPages.Areas.Response.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePageModel
     {
-        private readonly ICommandBus _commandBus;
-        private readonly IQueryProcessor _queryProcessor;
-
-        public IndexModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
-        {
-            _queryProcessor = queryProcessor;
-            _commandBus = commandBus;
-        }
-
         [BindProperty] public string Title { get; set; }
         [BindProperty] public string Description { get; set; }
         public IReadOnlyList<SiteReadModel> Sites { get; set; }
 
+        public IndexModel(IQueryProcessor queryProcessor, ICommandBus commandBus) : base(queryProcessor, commandBus)
+        {
+        }
+
         public async Task OnGetAsync()
         {
-            Sites = await _queryProcessor.ProcessAsync(
+            Sites = await QueryProcessor.ProcessAsync(
                 new AllSitesQuery(), CancellationToken.None);
         }
 
         public async Task<IActionResult> OnPostAsync(List<SitePostModel> sites)
         {
-            var selectedSites = sites.Where(s => s.IsChecked).Select(s => s.SiteId);
+            IEnumerable<SiteId> selectedSites = sites.Where(s => s.IsChecked).Select(s => s.SiteId);
 
-            var result = await _commandBus.PublishAsync(
+            EventFlow.Aggregates.ExecutionResults.IExecutionResult result = await CommandBus.PublishAsync(
                 new WorkRaisedCommand(WorkId.New, selectedSites, Title, Description), CancellationToken.None);
 
-            return RedirectToPage();
+            return RedirectToPage(result, "raising work");
         }
 
         public class SitePostModel

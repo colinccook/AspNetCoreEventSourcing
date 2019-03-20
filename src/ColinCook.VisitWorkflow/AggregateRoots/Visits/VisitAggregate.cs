@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using ColinCook.VisitWorkflow.AggregateRoots.Visits.Events;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.Aggregates.ExecutionResults;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Visits
 {
@@ -41,12 +41,12 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Visits
 
         public void Apply(AssignOperativeEvent aggregateEvent)
         {
-            _operatives.Add(new OperativeWorkflow {Operative = aggregateEvent.OperativeId});
+            _operatives.Add(new OperativeWorkflow { Operative = aggregateEvent.OperativeId });
         }
 
         public void Apply(DispatchOperativeEvent aggregateEvent)
         {
-            var operativeWorkflow = _operatives.Single(o => o.Operative == aggregateEvent.OperativeId);
+            OperativeWorkflow operativeWorkflow = _operatives.Single(o => o.Operative == aggregateEvent.OperativeId);
             operativeWorkflow.Dispatched = DateTime.Now;
             operativeWorkflow.EstimatedArrival = aggregateEvent.EstimatedArrival;
         }
@@ -55,7 +55,9 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Visits
         public IExecutionResult AddSite(SiteId siteId)
         {
             if (_sites.Contains(siteId))
+            {
                 return ExecutionResult.Failed("Site already added to this visit");
+            }
 
             Emit(new AddSiteEvent(siteId));
 
@@ -65,7 +67,9 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Visits
         public IExecutionResult AssignOperative(OperativeId operativeId)
         {
             if (_operatives.Any(o => o.Operative == operativeId))
+            {
                 return ExecutionResult.Failed("Operative already assigned to this visit");
+            }
 
             Emit(new AssignOperativeEvent(operativeId));
 
@@ -75,13 +79,19 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Visits
         public IExecutionResult DispatchOperative(OperativeId operativeId, DateTime estimatedArrival)
         {
             if (_operatives.All(o => o.Operative != operativeId))
+            {
                 return ExecutionResult.Failed("Operative has not been assigned to the visit to dispatch");
+            }
 
             if (!_sites.Any())
+            {
                 return ExecutionResult.Failed("At least one site must be added to dispatch an operative");
+            }
 
             if (estimatedArrival <= DateTime.Now)
+            {
                 return ExecutionResult.Failed("Estimated arrival date must be in the future");
+            }
 
             Emit(new DispatchOperativeEvent(operativeId, estimatedArrival));
 

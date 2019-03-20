@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using ColinCook.RazorPages.Helpers;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.Commands;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.Queries;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
@@ -8,21 +6,14 @@ using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ColinCook.RazorPages.Areas.Administration.Pages
 {
-    public class SitesModel : PageModel
+    public class SitesModel : BasePageModel
     {
-        private readonly ICommandBus _commandBus;
-        private readonly IQueryProcessor _queryProcessor;
-
-        public SitesModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
-        {
-            _queryProcessor = queryProcessor;
-            _commandBus = commandBus;
-        }
-
         [BindProperty] public string AddressLine1 { get; set; }
         [BindProperty] public string Town { get; set; }
         [BindProperty] public string PostCode { get; set; }
@@ -32,17 +23,21 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
 
         public async Task OnGetAsync()
         {
-            Sites = await _queryProcessor.ProcessAsync(
+            Sites = await QueryProcessor.ProcessAsync(
                 new AllSitesQuery(), CancellationToken.None);
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var result = await _commandBus.PublishAsync(
+            EventFlow.Aggregates.ExecutionResults.IExecutionResult result = await CommandBus.PublishAsync(
                 new SiteAcquiredCommand(SiteId.New, AddressLine1, Town, PostCode, TelephoneNumber),
                 CancellationToken.None);
 
-            return RedirectToPage();
+            return RedirectToPage(result, "acquiring Site");
+        }
+
+        public SitesModel(IQueryProcessor queryProcessor, ICommandBus commandBus) : base(queryProcessor, commandBus)
+        {
         }
     }
 }
