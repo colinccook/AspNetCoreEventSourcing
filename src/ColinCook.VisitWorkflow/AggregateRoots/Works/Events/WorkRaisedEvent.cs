@@ -1,7 +1,7 @@
-﻿using ColinCook.VisitWorkflow.Identities;
+﻿using System.Collections.Generic;
+using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.EventStores;
-using System.Collections.Generic;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Events
 {

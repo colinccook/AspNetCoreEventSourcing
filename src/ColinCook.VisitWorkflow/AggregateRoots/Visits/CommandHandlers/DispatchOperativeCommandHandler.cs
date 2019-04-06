@@ -1,9 +1,9 @@
+using System.Threading;
+using System.Threading.Tasks;
 using ColinCook.VisitWorkflow.AggregateRoots.Visits.Commands;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.CommandHandlers
 {
@@ -16,7 +16,7 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.CommandHandlers
             DispatchOperativeCommand command,
             CancellationToken cancellationToken)
         {
-            IExecutionResult executionResult = aggregate.DispatchOperative(command.OperativeId, command.EstimatedArrival);
+            var executionResult = aggregate.DispatchOperative(command.OperativeId, command.EstimatedArrival);
             return Task.FromResult(executionResult);
         }
     }

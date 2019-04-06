@@ -1,7 +1,7 @@
+using System;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.EventStores;
-using System;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.Events
 {

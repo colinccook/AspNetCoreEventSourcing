@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using ColinCook.RazorPages.Helpers;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries;
@@ -6,14 +9,15 @@ using ColinCook.VisitWorkflow.Identities;
 using EventFlow;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace ColinCook.RazorPages.Areas.Administration.Pages
 {
     public class OperativesModel : BasePageModel
     {
+        public OperativesModel(IQueryProcessor queryProcessor, ICommandBus commandBus) : base(queryProcessor, commandBus)
+        {
+        }
+
         [BindProperty] public string Forename { get; set; }
         [BindProperty] public string Surname { get; set; }
 
@@ -27,14 +31,10 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            EventFlow.Aggregates.ExecutionResults.IExecutionResult result = await CommandBus.PublishAsync(new OperativeHiredCommand(OperativeId.New, Forename, Surname),
+            var result = await CommandBus.PublishAsync(new OperativeHiredCommand(OperativeId.New, Forename, Surname),
                 CancellationToken.None);
 
             return RedirectToPage(result, "hiring an Operative");
-        }
-
-        public OperativesModel(IQueryProcessor queryProcessor, ICommandBus commandBus) : base(queryProcessor, commandBus)
-        {
         }
     }
 }

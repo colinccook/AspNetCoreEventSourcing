@@ -1,13 +1,13 @@
-﻿using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Works.ReadModels;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Queries;
 using EventFlow.ReadStores.InMemory;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
 {
@@ -41,7 +41,7 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
         public async Task<AssignWorkQueryResult> ExecuteQueryAsync(AssignWorkQuery query,
             CancellationToken cancellationToken)
         {
-            AssignWorkQueryResult result = new AssignWorkQueryResult
+            var result = new AssignWorkQueryResult
             {
                 Work = await GetMostRecentUnassignedWork(cancellationToken),
                 Sites = new List<SiteReadModel>(),
@@ -50,14 +50,11 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
                 OperativeWorkSites = new Dictionary<SiteId, SiteReadModel>()
             };
 
-            if (result.Work == null)
-            {
-                return null;
-            }
+            if (result.Work == null) return null;
 
-            foreach (SiteId site in result.Work.Sites)
+            foreach (var site in result.Work.Sites)
             {
-                EventFlow.ReadStores.ReadModelEnvelope<SiteReadModel> envelope = await _siteReadStore.GetAsync(site.ToString(), cancellationToken);
+                var envelope = await _siteReadStore.GetAsync(site.ToString(), cancellationToken);
                 result.Sites.Add(envelope.ReadModel);
             }
 
@@ -70,22 +67,20 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
 
         private async Task GetUpcomingWorkSites(CancellationToken cancellationToken, AssignWorkQueryResult result)
         {
-            foreach (SiteId site in result.OperativesWork.Values.SelectMany(w => w.SelectMany(x => x.Sites)))
-            {
+            foreach (var site in result.OperativesWork.Values.SelectMany(w => w.SelectMany(x => x.Sites)))
                 if (!result.OperativeWorkSites.ContainsKey(site))
                 {
-                    EventFlow.ReadStores.ReadModelEnvelope<SiteReadModel> siteReadModel = await _siteReadStore.GetAsync(site.ToString(), cancellationToken);
+                    var siteReadModel = await _siteReadStore.GetAsync(site.ToString(), cancellationToken);
                     result.OperativeWorkSites.Add(site, siteReadModel.ReadModel);
                 }
-            }
         }
 
         private async Task GetUpcomingWorkForOperatives(CancellationToken cancellationToken,
             AssignWorkQueryResult result)
         {
-            foreach (OperativeReadModel operative in result.Operatives)
+            foreach (var operative in result.Operatives)
             {
-                IReadOnlyCollection<WorkReadModel> works = await _workReadStore.FindAsync(
+                var works = await _workReadStore.FindAsync(
                     rm => rm.AssignedOperativeId == operative.OperativeId && !rm.IsComplete, cancellationToken);
                 result.OperativesWork.Add(operative.OperativeId, works.ToList());
             }
@@ -93,14 +88,14 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
 
         private async Task<WorkReadModel> GetMostRecentUnassignedWork(CancellationToken cancellationToken)
         {
-            IReadOnlyCollection<WorkReadModel> works = await _workReadStore.FindAsync(rm => true, cancellationToken).ConfigureAwait(false);
+            var works = await _workReadStore.FindAsync(rm => true, cancellationToken).ConfigureAwait(false);
 
             return works.FirstOrDefault(w => w.AssignedOperativeId == null);
         }
 
         private async Task<IReadOnlyList<OperativeReadModel>> GetAllOperatives(CancellationToken cancellationToken)
         {
-            IReadOnlyCollection<OperativeReadModel> operatives = await _operativeReadStore.FindAsync(rm => true, cancellationToken).ConfigureAwait(false);
+            var operatives = await _operativeReadStore.FindAsync(rm => true, cancellationToken).ConfigureAwait(false);
 
             return operatives.ToList();
         }

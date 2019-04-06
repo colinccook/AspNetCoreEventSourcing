@@ -1,8 +1,8 @@
-﻿using ColinCook.VisitWorkflow.Identities;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands
 {
@@ -26,7 +26,7 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands
             OperativeHiredCommand command,
             CancellationToken cancellationToken)
         {
-            IExecutionResult executionResult = aggregate.Hire(command.Forename, command.Surname);
+            var executionResult = aggregate.Hire(command.Forename, command.Surname);
             return Task.FromResult(executionResult);
         }
     }

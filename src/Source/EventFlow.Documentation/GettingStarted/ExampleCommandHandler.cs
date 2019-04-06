@@ -1,7 +1,7 @@
-using EventFlow.Aggregates.ExecutionResults;
-using EventFlow.Commands;
 using System.Threading;
 using System.Threading.Tasks;
+using EventFlow.Aggregates.ExecutionResults;
+using EventFlow.Commands;
 
 namespace EventFlow.Documentation.GettingStarted
 {
@@ -14,7 +14,7 @@ namespace EventFlow.Documentation.GettingStarted
             ExampleCommand command,
             CancellationToken cancellationToken)
         {
-            IExecutionResult executionResult = aggregate.SetMagicNumer(command.MagicNumber);
+            var executionResult = aggregate.SetMagicNumer(command.MagicNumber);
             return Task.FromResult(executionResult);
         }
     }

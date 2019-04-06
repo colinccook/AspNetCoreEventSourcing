@@ -25,10 +25,7 @@ namespace EventFlow.Documentation.GettingStarted
         // Method invoked by our command
         public IExecutionResult SetMagicNumer(int magicNumber)
         {
-            if (_magicNumber.HasValue)
-            {
-                return ExecutionResult.Failed("Magic number already set");
-            }
+            if (_magicNumber.HasValue) return ExecutionResult.Failed("Magic number already set");
 
             Emit(new ExampleEvent(magicNumber));
 

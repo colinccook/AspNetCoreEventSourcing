@@ -29,25 +29,13 @@ namespace ColinCook.VisitWorkflow.AggregateRoots.Sites
 
         internal IExecutionResult Acquire(string addressLine1, string town, string postCode, string telephoneNumber)
         {
-            if (string.IsNullOrWhiteSpace(addressLine1))
-            {
-                return ExecutionResult.Failed("Site must have an address line 1");
-            }
+            if (string.IsNullOrWhiteSpace(addressLine1)) return ExecutionResult.Failed("Site must have an address line 1");
 
-            if (string.IsNullOrWhiteSpace(town))
-            {
-                return ExecutionResult.Failed("Site must have a town");
-            }
+            if (string.IsNullOrWhiteSpace(town)) return ExecutionResult.Failed("Site must have a town");
 
-            if (string.IsNullOrWhiteSpace(postCode))
-            {
-                return ExecutionResult.Failed("Site must have a post code");
-            }
+            if (string.IsNullOrWhiteSpace(postCode)) return ExecutionResult.Failed("Site must have a post code");
 
-            if (string.IsNullOrWhiteSpace(telephoneNumber))
-            {
-                return ExecutionResult.Failed("Site must have a telephone number");
-            }
+            if (string.IsNullOrWhiteSpace(telephoneNumber)) return ExecutionResult.Failed("Site must have a telephone number");
 
             Emit(new SiteAcquiredEvent(addressLine1, town, postCode, telephoneNumber));
 

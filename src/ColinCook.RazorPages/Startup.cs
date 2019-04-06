@@ -1,3 +1,5 @@
+using System;
+using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using ColinCook.RazorPages.Binders;
@@ -6,7 +8,6 @@ using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Visits.ReadModels;
 using ColinCook.VisitWorkflow.AggregateRoots.Works.ReadModels;
 using EventFlow;
-using EventFlow.AspNetCore.Middlewares;
 using EventFlow.Autofac.Extensions;
 using EventFlow.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -14,9 +15,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Reflection;
 
 namespace ColinCook.RazorPages
 {
@@ -42,13 +40,13 @@ namespace ColinCook.RazorPages
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // Create the container builder.
-            ContainerBuilder builder = new ContainerBuilder();
+            var builder = new ContainerBuilder();
 
             // Register dependencies, populate the services from
             // the collection, and build the container. If you want
             // to dispose of the container at the end of the app,
             // be sure to keep a reference to it as a property or field.
-            IEventFlowOptions container = EventFlowOptions.New
+            var container = EventFlowOptions.New
                 .UseAutofacContainerBuilder(builder) // Must be the first line!
                 .AddDefaults(Assembly.LoadFrom("bin/Debug/netcoreapp2.2/ColinCook.VisitWorkflow.dll"))
                 .UseInMemoryReadStoreFor<VisitReadModel>()
@@ -66,17 +64,13 @@ namespace ColinCook.RazorPages
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime appLifetime)
-        { 
+        {
             // app.UseMiddleware<CommandPublishMiddleware>();
 
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
             else
-            {
                 app.UseExceptionHandler("/Error");
-            }
 
             app.UseStaticFiles();
             app.UseCookiePolicy();

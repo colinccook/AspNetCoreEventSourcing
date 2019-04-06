@@ -6,11 +6,11 @@ namespace ColinCook.RazorPages.Areas.Administration.Pages
 {
     public class IndexModel : BasePageModel
     {
-        public void OnGet()
+        public IndexModel(IQueryProcessor queryProcessor, ICommandBus commandBus) : base(queryProcessor, commandBus)
         {
         }
 
-        public IndexModel(IQueryProcessor queryProcessor, ICommandBus commandBus) : base(queryProcessor, commandBus)
+        public void OnGet()
         {
         }
     }

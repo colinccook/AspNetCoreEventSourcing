@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 using ColinCook.VisitWorkflow.AggregateRoots.Visits.Events;
 using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.ReadStores;
-using System.Collections.Generic;
 
 namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.ReadModels
 {

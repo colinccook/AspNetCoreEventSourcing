@@ -9,17 +9,17 @@ namespace ColinCook.RazorPages.Helpers
 {
     public abstract class BasePageModel : PageModel
     {
-        protected ICommandBus CommandBus { get; }
-        protected IQueryProcessor QueryProcessor { get; }
-
         protected BasePageModel(IQueryProcessor queryProcessor, ICommandBus commandBus)
         {
             QueryProcessor = queryProcessor;
             CommandBus = commandBus;
         }
 
+        protected ICommandBus CommandBus { get; }
+        protected IQueryProcessor QueryProcessor { get; }
+
         /// <summary>
-        /// Redirects with an execution result
+        ///     Redirects with an execution result
         /// </summary>
         /// <param name="executionResult"></param>
         /// <param name="attemptedAction">Should be worded like 'hiring an operative'. It is prefixed with Succeeded or Failed</param>
