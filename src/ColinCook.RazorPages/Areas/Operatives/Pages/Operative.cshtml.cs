@@ -18,18 +18,18 @@ namespace ColinCCook.AspNetCoreEventSourcing.RazorPages.Areas.Operatives.Pages
 
         [BindProperty] public WorkId WorkId { get; set; }
         [BindProperty] public OperativeId OperativeId { get; set; }
-        public GetOperativeAndWorkQueryResult QueryResult { get; set; }
+        public GetOperativesCurrentWorkResult Result { get; set; }
 
         public async Task OnGetAsync(OperativeId operativeId)
         {
-            QueryResult = await QueryProcessor.ProcessAsync(
-                new GetOperativeAndWorkQuery { OperativeId = operativeId },
+            Result = await QueryProcessor.ProcessAsync(
+                new GetOperativesCurrentWorkQuery { OperativeId = operativeId },
                 CancellationToken.None);
 
-            if (QueryResult.Work != null)
+            if (Result.Work != null)
             {
-                WorkId = QueryResult.Work.WorkId;
-                OperativeId = QueryResult.Operative.OperativeId;
+                WorkId = Result.Work.WorkId;
+                OperativeId = Result.Operative.OperativeId;
             }
         }
 

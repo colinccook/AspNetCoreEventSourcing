@@ -9,14 +9,14 @@
     <p class="lead">Those within Control ensure that Operatives are assigned Work.</p>
 </div>
 
-@if (Model.AssignWorkQuery == null)
+@if (Model.GetLatestWorkToAssign == null)
 {
     <div class="py-3 text-center">
         <h2>There is no Work to assign</h2>
         <p class="lead">Once Work has been raised by Response, it will appear here.</p>
     </div>
 }
-else if (!Model.AssignWorkQuery.Operatives.Any())
+else if (!Model.GetLatestWorkToAssign.Operatives.Any())
 {
     <div class="py-3 text-center">
         <h2>No available Operatives found</h2>
@@ -31,16 +31,16 @@ else
 
     <div class="list-group pb-4">
         <div class="list-group-item list-group-item-action flex-column align-items-start">
-            <h3>@Model.AssignWorkQuery.Work.Title</h3>
-            @foreach (var site in Model.AssignWorkQuery.Sites)
+            <h3>@Model.GetLatestWorkToAssign.Work.Title</h3>
+            @foreach (var site in Model.GetLatestWorkToAssign.Sites)
             {
                 <h5 class="mb-1">@site.AddressLine1, @site.PostCode</h5>
             }
-            <small>@Model.AssignWorkQuery.Work.WorkId</small>
+            <small>@Model.GetLatestWorkToAssign.Work.WorkId</small>
         </div>
     </div>
 
-    foreach (var operative in Model.AssignWorkQuery.Operatives)
+    foreach (var operative in Model.GetLatestWorkToAssign.Operatives)
     {
         <div class="row">
             <div class="col-md-3 col-sm-4">
@@ -48,7 +48,7 @@ else
             </div>
             <div class="col-md-9 col-sm-8">
                 <div class="row">
-                    @if (!Model.AssignWorkQuery.OperativesWork[operative.OperativeId].Any())
+                    @if (!Model.GetLatestWorkToAssign.OperativesWork[operative.OperativeId].Any())
                     {
                         <div class="col-sm-12">
                             <h5>No Work currently assigned to @operative.Forename</h5>
@@ -56,15 +56,15 @@ else
                     }
                     else
                     {
-                        foreach (var work in Model.AssignWorkQuery.OperativesWork[operative.OperativeId])
+                        foreach (var work in Model.GetLatestWorkToAssign.OperativesWork[operative.OperativeId])
                         {
                             <div class="card col-sm-12 m-1">
                                 <div class="card-body">
-                                    <h5 class="card-title float-right text-muted">#@(Model.AssignWorkQuery.OperativesWork[operative.OperativeId].IndexOf(work) + 1)</h5>
+                                    <h5 class="card-title float-right text-muted">#@(Model.GetLatestWorkToAssign.OperativesWork[operative.OperativeId].IndexOf(work) + 1)</h5>
                                     <h5 class="card-title">@work.Title</h5>
                                     @foreach (var site in work.Sites)
                                     {
-                                        <div>@Model.AssignWorkQuery.OperativeWorkSites[site].AddressLine1, @Model.AssignWorkQuery.OperativeWorkSites[site].PostCode</div>
+                                        <div>@Model.GetLatestWorkToAssign.OperativeWorkSites[site].AddressLine1, @Model.GetLatestWorkToAssign.OperativeWorkSites[site].PostCode</div>
                                     }
                                 </div>
                             </div>
@@ -72,7 +72,7 @@ else
                     }
                     <div class="col-sm-12 m-1">
                         <form method="post">
-                            <input type="hidden" name="workId" value="@Model.AssignWorkQuery.Work.WorkId"/>
+                            <input type="hidden" name="workId" value="@Model.GetLatestWorkToAssign.Work.WorkId"/>
                             <input type="hidden" name="operativeId" value="@operative.OperativeId"/>
                             <input type="submit" class="btn btn-secondary" value="Assign to @operative.Forename"/>
                         </form>

@@ -28,7 +28,7 @@ namespace ColinCCook.AspNetCoreEventSourcing.RazorPages.Areas.Administration.Pag
         public async Task OnGetAsync()
         {
             Sites = await QueryProcessor.ProcessAsync(
-                new AllSitesQuery(), CancellationToken.None);
+                new GetAllSitesQuery(), CancellationToken.None);
         }
 
         public async Task<IActionResult> OnPostAsync()

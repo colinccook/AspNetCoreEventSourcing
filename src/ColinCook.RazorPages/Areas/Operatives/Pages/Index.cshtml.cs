@@ -20,7 +20,7 @@ namespace ColinCCook.AspNetCoreEventSourcing.RazorPages.Areas.Operatives.Pages
         public async Task OnGetAsync()
         {
             Operatives = await QueryProcessor.ProcessAsync(
-                new AllOperativesQuery(), CancellationToken.None);
+                new GetAllOperativesQuery(), CancellationToken.None);
         }
     }
 }

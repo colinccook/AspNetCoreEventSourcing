@@ -1,0 +1,22 @@
+﻿@page
+@model ColinCCook.AspNetCoreEventSourcing.RazorPages.Pages.DomainEvents
+@{
+    Layout = "_Layout";
+}
+
+<div class="jumbotron">
+    <h1 class="display-4">Events</h1>
+    <p class="lead">As you interact with this application, the events stored will build up.</p>
+    <p class="lead">The list of events below builds the state of the entire application.</p>
+</div>
+
+<div class="list-group">
+    @foreach (var domainEvent in Model.DomainEventsPage.CommittedDomainEvents)
+    {
+        <div class="list-group-item list-group-item-action flex-column align-items-start">
+            <p class="mb-1">@domainEvent.AggregateSequenceNumber - @domainEvent.AggregateId</p>
+            <p class="mb-1 small">@domainEvent.Metadata</p>
+            <p class="mb-1">@domainEvent.Data</p>
+        </div>
+    }
+</div>

@@ -8,20 +8,20 @@ using EventFlow.ReadStores.InMemory;
 
 namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.Queries
 {
-    public class AllSitesQuery : IQuery<IReadOnlyList<SiteReadModel>>
+    public class GetAllSitesQuery : IQuery<IReadOnlyList<SiteReadModel>>
     {
     }
 
-    public class AllSitesQueryHandler : IQueryHandler<AllSitesQuery, IReadOnlyList<SiteReadModel>>
+    public class GetAllSitesQueryHandler : IQueryHandler<GetAllSitesQuery, IReadOnlyList<SiteReadModel>>
     {
         private readonly IInMemoryReadStore<SiteReadModel> _readStore;
 
-        public AllSitesQueryHandler(IInMemoryReadStore<SiteReadModel> readStore)
+        public GetAllSitesQueryHandler(IInMemoryReadStore<SiteReadModel> readStore)
         {
             _readStore = readStore;
         }
 
-        public async Task<IReadOnlyList<SiteReadModel>> ExecuteQueryAsync(AllSitesQuery query,
+        public async Task<IReadOnlyList<SiteReadModel>> ExecuteQueryAsync(GetAllSitesQuery query,
             CancellationToken cancellationToken)
         {
             var readModels = await _readStore.FindAsync(rm => true, cancellationToken).ConfigureAwait(false);

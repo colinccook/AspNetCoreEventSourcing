@@ -4,8 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@ViewData["Title"] - ColinCCook.AspNetCoreEventSourcing</title>
-
+    @if (ViewData.ContainsKey("Title"))
+    {
+        <title>@ViewData["Title"] - ColinCCook.AspNetCoreEventSourcing</title>
+    }
+    else
+    {
+        <title>ColinCCook.AspNetCoreEventSourcing</title>
+    }
     <environment include="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap.css"/>
         <link rel="stylesheet" href="~/css/site.css"/>
@@ -37,6 +43,9 @@
                         <a class="nav-link" asp-area="Operatives" asp-page="Index">Operatives</a>
                     </li>
                 </ul>
+                <div class="navbar-nav">
+                    <a class="nav-link" asp-page="DomainEvents">Domain Events</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -78,7 +87,7 @@
 
 <footer class="footer mt-auto py-3 bg-white">
     <div class="container">
-        <span class="text-muted">Thanks for taking a look at my prototype. Source code located at <a href="https://www.github.com/users/ccook">https://www.github.com/users/ccook</a></span>
+        <span class="text-muted">Thanks for taking a look at my prototype! Source code located at <a href="https://github.com/colinccook/AspNetCoreEventSourcing">https://github.com/colinccook/AspNetCoreEventSourcing</a></span>
     </div>
 </footer>
 

@@ -8,20 +8,20 @@ using EventFlow.ReadStores.InMemory;
 
 namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.Queries
 {
-    public class AllOperativesQuery : IQuery<IReadOnlyList<OperativeReadModel>>
+    public class GetAllOperativesQuery : IQuery<IReadOnlyList<OperativeReadModel>>
     {
     }
 
-    public class AllOperativesQueryHandler : IQueryHandler<AllOperativesQuery, IReadOnlyList<OperativeReadModel>>
+    public class GetAllOperativesQueryHandler : IQueryHandler<GetAllOperativesQuery, IReadOnlyList<OperativeReadModel>>
     {
         private readonly IInMemoryReadStore<OperativeReadModel> _readStore;
 
-        public AllOperativesQueryHandler(IInMemoryReadStore<OperativeReadModel> readStore)
+        public GetAllOperativesQueryHandler(IInMemoryReadStore<OperativeReadModel> readStore)
         {
             _readStore = readStore;
         }
 
-        public async Task<IReadOnlyList<OperativeReadModel>> ExecuteQueryAsync(AllOperativesQuery query,
+        public async Task<IReadOnlyList<OperativeReadModel>> ExecuteQueryAsync(GetAllOperativesQuery query,
             CancellationToken cancellationToken)
         {
             var readModels = await _readStore.FindAsync(rm => true, cancellationToken).ConfigureAwait(false);

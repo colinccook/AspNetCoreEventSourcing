@@ -16,12 +16,12 @@ namespace ColinCCook.AspNetCoreEventSourcing.RazorPages.Areas.Control.Pages
         {
         }
 
-        public AssignWorkQueryResult AssignWorkQuery { get; set; }
+        public GetLatestWorkToAssignResult GetLatestWorkToAssign { get; set; }
 
         public async Task OnGetAsync()
         {
-            AssignWorkQuery = await QueryProcessor.ProcessAsync(
-                new AssignWorkQuery(), CancellationToken.None);
+            GetLatestWorkToAssign = await QueryProcessor.ProcessAsync(
+                new GetLatestWorkToAssignQuery(), CancellationToken.None);
         }
 
         public async Task<IActionResult> OnPostAsync(WorkId workId, OperativeId operativeId)

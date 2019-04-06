@@ -11,7 +11,7 @@ using EventFlow.ReadStores.InMemory;
 
 namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.Queries
 {
-    public class AssignWorkQueryResult
+    public class GetLatestWorkToAssignResult
     {
         public WorkReadModel Work { get; set; }
         public IList<SiteReadModel> Sites { get; set; }
@@ -20,17 +20,17 @@ namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.Queries
         public IDictionary<SiteId, SiteReadModel> OperativeWorkSites { get; set; }
     }
 
-    public class AssignWorkQuery : IQuery<AssignWorkQueryResult>
+    public class GetLatestWorkToAssignQuery : IQuery<GetLatestWorkToAssignResult>
     {
     }
 
-    public class AssignWorkQueryHandler : IQueryHandler<AssignWorkQuery, AssignWorkQueryResult>
+    public class GetLatestWorkAssignQueryHandler : IQueryHandler<GetLatestWorkToAssignQuery, GetLatestWorkToAssignResult>
     {
         private readonly IInMemoryReadStore<OperativeReadModel> _operativeReadStore;
         private readonly IInMemoryReadStore<SiteReadModel> _siteReadStore;
         private readonly IInMemoryReadStore<WorkReadModel> _workReadStore;
 
-        public AssignWorkQueryHandler(IInMemoryReadStore<WorkReadModel> workReadStore,
+        public GetLatestWorkAssignQueryHandler(IInMemoryReadStore<WorkReadModel> workReadStore,
             IInMemoryReadStore<SiteReadModel> siteReadStore, IInMemoryReadStore<OperativeReadModel> operativeReadStore)
         {
             _workReadStore = workReadStore;
@@ -38,10 +38,10 @@ namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.Queries
             _operativeReadStore = operativeReadStore;
         }
 
-        public async Task<AssignWorkQueryResult> ExecuteQueryAsync(AssignWorkQuery query,
+        public async Task<GetLatestWorkToAssignResult> ExecuteQueryAsync(GetLatestWorkToAssignQuery query,
             CancellationToken cancellationToken)
         {
-            var result = new AssignWorkQueryResult
+            var result = new GetLatestWorkToAssignResult
             {
                 Work = await GetMostRecentUnassignedWork(cancellationToken),
                 Sites = new List<SiteReadModel>(),
@@ -65,7 +65,7 @@ namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.Queries
             return result;
         }
 
-        private async Task GetUpcomingWorkSites(CancellationToken cancellationToken, AssignWorkQueryResult result)
+        private async Task GetUpcomingWorkSites(CancellationToken cancellationToken, GetLatestWorkToAssignResult result)
         {
             foreach (var site in result.OperativesWork.Values.SelectMany(w => w.SelectMany(x => x.Sites)))
                 if (!result.OperativeWorkSites.ContainsKey(site))
@@ -76,7 +76,7 @@ namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.Queries
         }
 
         private async Task GetUpcomingWorkForOperatives(CancellationToken cancellationToken,
-            AssignWorkQueryResult result)
+            GetLatestWorkToAssignResult result)
         {
             foreach (var operative in result.Operatives)
             {

@@ -5,14 +5,14 @@
 }
 
 <div class="jumbotron">
-    <h1 class="display-4">@Model.QueryResult.Operative.Forename @Model.QueryResult.Operative.Surname</h1>
+    <h1 class="display-4">@Model.Result.Operative.Forename @Model.Result.Operative.Surname</h1>
     <p class="lead">Operative</p>
 </div>
 
-@if (Model.QueryResult.Work == null)
+@if (Model.Result.Work == null)
 {
     <div class="py-3 text-center">
-        <h2>@Model.QueryResult.Operative.Forename has no work assigned</h2>
+        <h2>@Model.Result.Operative.Forename has no work assigned</h2>
         <p class="lead">Contact Control to arrange more Work.</p>
     </div>
 }
@@ -23,12 +23,12 @@ else
     </div>
 
     <div class="py-2">
-        <h2>@Model.QueryResult.Work.Title</h2>
-        <p class="lead">@Model.QueryResult.Work.Description</p>
+        <h2>@Model.Result.Work.Title</h2>
+        <p class="lead">@Model.Result.Work.Description</p>
     </div>
 
     <div class="list-group">
-        @foreach (var site in Model.QueryResult.Sites)
+        @foreach (var site in Model.Result.Sites)
         {
             <div class="list-group-item list-group-item-action flex-column align-items-start">
                 <h5 class="mb-1">@site.AddressLine1</h5>

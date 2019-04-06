@@ -11,26 +11,26 @@ using EventFlow.ReadStores.InMemory;
 
 namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.Queries
 {
-    public class GetOperativeAndWorkQueryResult
+    public class GetOperativesCurrentWorkResult
     {
         public OperativeReadModel Operative { get; set; }
         public WorkReadModel Work { get; set; }
         public IReadOnlyList<SiteReadModel> Sites { get; set; }
     }
 
-    public class GetOperativeAndWorkQuery : IQuery<GetOperativeAndWorkQueryResult>
+    public class GetOperativesCurrentWorkQuery : IQuery<GetOperativesCurrentWorkResult>
     {
         public OperativeId OperativeId { get; set; }
     }
 
     public class
-        GetOperativeAndWorkQueryHandler : IQueryHandler<GetOperativeAndWorkQuery, GetOperativeAndWorkQueryResult>
+        GetOperativesCurrentWorkQueryHandler : IQueryHandler<GetOperativesCurrentWorkQuery, GetOperativesCurrentWorkResult>
     {
         private readonly IInMemoryReadStore<OperativeReadModel> _operativeReadStore;
         private readonly IInMemoryReadStore<SiteReadModel> _siteReadStore;
         private readonly IInMemoryReadStore<WorkReadModel> _workReadStore;
 
-        public GetOperativeAndWorkQueryHandler(IInMemoryReadStore<WorkReadModel> workReadStore,
+        public GetOperativesCurrentWorkQueryHandler(IInMemoryReadStore<WorkReadModel> workReadStore,
             IInMemoryReadStore<SiteReadModel> siteReadStore, IInMemoryReadStore<OperativeReadModel> operativeReadStore)
         {
             _workReadStore = workReadStore;
@@ -38,12 +38,12 @@ namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.Queries
             _operativeReadStore = operativeReadStore;
         }
 
-        public async Task<GetOperativeAndWorkQueryResult> ExecuteQueryAsync(GetOperativeAndWorkQuery query,
+        public async Task<GetOperativesCurrentWorkResult> ExecuteQueryAsync(GetOperativesCurrentWorkQuery query,
             CancellationToken cancellationToken)
         {
             var operative = await _operativeReadStore.GetAsync(query.OperativeId.ToString(), cancellationToken);
 
-            var result = new GetOperativeAndWorkQueryResult
+            var result = new GetOperativesCurrentWorkResult
             {
                 Operative = operative.ReadModel,
                 Work = await GetOperativesMostRecentUnassignedWork(query.OperativeId, cancellationToken)
