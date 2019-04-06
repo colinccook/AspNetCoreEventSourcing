@@ -1,6 +1,6 @@
 # AspNetCoreEventSourcing
 
-AspNetCoreEventSourcing is a prototype project to experiment event sourcing covering a simple business flow. It's purpose is a learning exercise for myself, with an ultimate aim of determining if it's of any use within my work domain.
+AspNetCoreEventSourcing is a prototype project to experiment event sourcing covering a simple business flow. Its purpose is a learning exercise for myself, with an aim of determining if it's of any use within my work domain.
 
 ![RazorPages End to End](docs/aspnet2.gif)
 
@@ -26,7 +26,7 @@ Assuming that `Operatives` have been hired and `Sites` acquired:
 
 The state of this prototype is not stored in a series of relational database tables. It is stored as a series of events in an event store. 
 
-As you interact with the prototype, the aggregate roots will emit events. If a business rule fales (such as not providing a forename when hiring a new operative, the event is not emitted. All events are persisted in an in-memory event store.
+As you interact with the prototype, the aggregate roots will emit events. If a business rule fails, such as not providing a forename when hiring a new operative, the event is not emitted. All events are persisted in an in-memory event store.
 
 Meanwhile, read models are listening for domain events and persisting important information in a read model store. Queries can then refer to these read model stores. (rather than requerying the entire event store)
 
