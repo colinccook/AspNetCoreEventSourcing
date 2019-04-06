@@ -26,3 +26,8 @@ Assuming that `Operatives` have been hired and `Sites` acquired:
 The state of this prototype is not stored in a series of database tables. It is stored in a singular location as a series of transactions.
 
 As you interact with the prototype, you're actually interacting with aggregate roots. They will emit events which EventFlow will store. 
+
+FAQs
+
+Q - I'm getting a "WARNING: The target process exited without raising a CoreCLR started event" message
+A - Ensure you have .NET Core 2.2 SDK installed on your machine
