@@ -4,7 +4,6 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Operatives.ReadModels;
 using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Sites.ReadModels;
-using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Visits.ReadModels;
 using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Works.ReadModels;
 using ColinCCook.AspNetCoreEventSourcing.RazorPages.Binders;
 using EventFlow;
@@ -49,7 +48,6 @@ namespace ColinCCook.AspNetCoreEventSourcing.RazorPages
             var container = EventFlowOptions.New
                 .UseAutofacContainerBuilder(builder) // Must be the first line!
                 .AddDefaults(Assembly.LoadFrom("bin/Debug/netcoreapp2.2/ColinCCook.AspNetCoreEventSourcing.EventFlow.dll"))
-                .UseInMemoryReadStoreFor<VisitReadModel>()
                 .UseInMemoryReadStoreFor<OperativeReadModel>()
                 .UseInMemoryReadStoreFor<SiteReadModel>()
                 .UseInMemoryReadStoreFor<WorkReadModel>()
