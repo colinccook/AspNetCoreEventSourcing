@@ -19,12 +19,11 @@ The "business" is first line support for various `Sites` around the country.
 
 Assuming that `Operatives` have been hired and `Sites` acquired:
 
-* Response will raise `Work` when they are contacted by customers within those `Sites` ([RaiseWorkCommand.cs](RaiseWorkCommand.cs))
+* Response will raise `Work` when they are contacted by customers within those `Sites` ([WorkRaisedCommand.cs](WorkRaisedCommand.cs))
 * Control will queue that `Work` to an `Operative` ([AssignWorkCommand.cs](AssignWorkCommand.cs))
 * `Operatives` will then dispatch, arrive and deal with the Work ([AssignWorkCommand.cs](AssignWorkCommand.cs), [AssignWorkCommand.cs](AssignWorkCommand.cs), [AssignWorkCommand.cs](AssignWorkCommand.cs))
   * When `Work` is completed it is marked as Completed ([AssignWorkCommand.cs](AssignWorkCommand.cs))
   * If the `Operative` cannot complete work they abandon it. The `Work` is then back with Control to assign to another `Operative` ([AssignWorkCommand.cs](AssignWorkCommand.cs))
-* Management will keep on their so called "Work Roadmap". This allows then to keep an eye on queue lengths and end-to-end times ([AssignWorkCommand.cs](AssignWorkCommand.cs))
 
 ### How it Works
 
