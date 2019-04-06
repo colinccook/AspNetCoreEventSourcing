@@ -2,10 +2,7 @@
 
 AspNetCoreEventSourcing is a prototype project to experiment event sourcing covering a simple business flow. It's purpose is a learning exercise for myself, with an ultimate aim of determining if it's of any use within my work domain.
 
-
-
 ![RazorPages End to End](docs/aspnet2.gif)
-
 
 ### Features
 
@@ -23,7 +20,7 @@ Assuming that `Operatives` have been hired and `Sites` acquired:
 * Control will [assign the Work](src/EventFlow/AggregateRoots/Works/Commands/WorkAssignedCommand.cs) to an `Operative` 
 * `Operatives` will then pick up this work and will result in one of two outcomes
   * When `Work` is completed it is [marked as completed](src/EventFlow/AggregateRoots/Works/Commands/WorkCompletedCommand.cs)
-  * If the `Operative` cannot complete work they [abandon it](src/EventFlow/AggregateRoots/Works/Commands/WorkAbandonedCommand.cs)abandon it. The `Work` is then back with Control to assign to another `Operative`
+  * If the `Operative` cannot complete work they [abandon it](src/EventFlow/AggregateRoots/Works/Commands/WorkAbandonedCommand.cs). The `Work` is then back with Control to assign to another `Operative`
 
 ### How it Works
 
