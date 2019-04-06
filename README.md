@@ -2,6 +2,11 @@
 
 AspNetCoreEventSourcing is a prototype project to experiment event sourcing covering a simple business flow. It's purpose is a learning exercise for myself, with an ultimate aim of determining if it's of any use within my work domain.
 
+
+
+![RazorPages End to End](docs/aspnet2.gif)
+
+
 ### Features
 
 * **EventFlow** This is the magical framework used for CQRS and storing the entire state of the app as events
@@ -23,11 +28,17 @@ Assuming that `Operatives` have been hired and `Sites` acquired:
 
 ### How it Works
 
-The state of this prototype is not stored in a series of database tables. It is stored in a singular location as a series of transactions.
+The state of this prototype is not stored in a series of relational database tables. It is stored as a series of events in an event store. 
 
-As you interact with the prototype, you're actually interacting with aggregate roots. They will emit events which EventFlow will store. 
+As you interact with the prototype, the aggregate roots will emit events. If a business rule fales (such as not providing a forename when hiring a new operative, the event is not emitted. All events are persisted in an in-memory event store.
 
-FAQs
+Meanwhile, read models are listening for domain events and persisting important information in a read model store. Queries can then refer to these read model stores. (rather than requerying the entire event store)
 
-Q - I'm getting a "WARNING: The target process exited without raising a CoreCLR started event" message
-A - Ensure you have .NET Core 2.2 SDK installed on your machine
+### FAQs
+
+#### I'm getting a "WARNING: The target process exited without raising a CoreCLR started event" message
+Ensure you have .NET Core 2.2 SDK installed on your machine
+
+### Disclaimer
+
+This prototype should not be used as an architectural reference, a good example of using EventFlow or DDD. I may refine it and grow it as I continue to learn about DDD.
