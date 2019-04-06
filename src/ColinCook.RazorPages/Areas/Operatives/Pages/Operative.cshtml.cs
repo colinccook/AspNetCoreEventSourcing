@@ -1,14 +1,14 @@
 using System.Threading;
 using System.Threading.Tasks;
-using ColinCook.RazorPages.Helpers;
-using ColinCook.VisitWorkflow.AggregateRoots.Works.Commands;
-using ColinCook.VisitWorkflow.Identities;
-using ColinCook.VisitWorkflow.Queries;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Works.Commands;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Queries;
+using ColinCCook.AspNetCoreEventSourcing.RazorPages.Helpers;
 using EventFlow;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ColinCook.RazorPages.Areas.Operatives.Pages
+namespace ColinCCook.AspNetCoreEventSourcing.RazorPages.Areas.Operatives.Pages
 {
     public class OperativeModel : BasePageModel
     {

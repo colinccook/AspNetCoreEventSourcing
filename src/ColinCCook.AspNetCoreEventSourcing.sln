@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.136
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventFlow.Documentation", "Source\EventFlow.Documentation\EventFlow.Documentation.csproj", "{C32BA32F-CC4E-4E2B-9575-EA68D23B4301}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColinCook.Documentation", "ColinCook.Documentation\ColinCook.Documentation.csproj", "{1901AE7D-7422-4289-A338-8A0C8EAD44A8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColinCook.VisitWorkflow", "ColinCook.VisitWorkflow\ColinCook.VisitWorkflow.csproj", "{6BE58AC4-0FBA-48AC-9B24-4563D01A4ECD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventFlow", "ColinCook.VisitWorkflow\EventFlow.csproj", "{6BE58AC4-0FBA-48AC-9B24-4563D01A4ECD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColinCook.RazorPages", "ColinCook.RazorPages\ColinCook.RazorPages.csproj", "{18F0191A-451D-4C6F-85FB-BFA641875770}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorPages", "ColinCook.RazorPages\RazorPages.csproj", "{18F0191A-451D-4C6F-85FB-BFA641875770}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

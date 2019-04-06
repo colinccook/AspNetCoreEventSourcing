@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>ColinCCook.AspNetCoreEventSourcing.RazorPages</RootNamespace>
+    <AssemblyName>ColinCCook.AspNetCoreEventSourcing.RazorPages</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ColinCook.VisitWorkflow\ColinCook.VisitWorkflow.csproj" />
+    <ProjectReference Include="..\ColinCook.VisitWorkflow\EventFlow.csproj" />
   </ItemGroup>
 
 </Project>

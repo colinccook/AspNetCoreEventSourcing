@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
-using ColinCook.VisitWorkflow.AggregateRoots.Visits.Commands;
-using ColinCook.VisitWorkflow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Visits.Commands;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.CommandHandlers
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Visits.CommandHandlers
 {
     /// Command handler for our command
     public class DispatchOperativeCommandHandler :

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using ColinCook.VisitWorkflow.AggregateRoots.Works.Events;
-using ColinCook.VisitWorkflow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Works.Events;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.ReadStores;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Works.ReadModels
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Works.ReadModels
 {
     public class WorkReadModel :
         IReadModel,

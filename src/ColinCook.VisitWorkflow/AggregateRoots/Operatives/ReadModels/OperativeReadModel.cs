@@ -1,9 +1,9 @@
-﻿using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Events;
-using ColinCook.VisitWorkflow.Identities;
+﻿using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Operatives.Events;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.ReadStores;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Operatives.ReadModels
 {
     public class OperativeReadModel : IReadModel,
         IAmReadModelFor<OperativeAggregate, OperativeId, OperativeHiredEvent>

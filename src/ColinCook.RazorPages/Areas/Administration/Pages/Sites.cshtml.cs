@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using ColinCook.RazorPages.Helpers;
-using ColinCook.VisitWorkflow.AggregateRoots.Sites.Commands;
-using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
-using ColinCook.VisitWorkflow.Identities;
-using ColinCook.VisitWorkflow.Queries;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Sites.Commands;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Sites.ReadModels;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Queries;
+using ColinCCook.AspNetCoreEventSourcing.RazorPages.Helpers;
 using EventFlow;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ColinCook.RazorPages.Areas.Administration.Pages
+namespace ColinCCook.AspNetCoreEventSourcing.RazorPages.Areas.Administration.Pages
 {
     public class SitesModel : BasePageModel
     {

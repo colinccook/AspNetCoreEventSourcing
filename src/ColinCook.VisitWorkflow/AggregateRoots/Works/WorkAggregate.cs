@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ColinCook.VisitWorkflow.AggregateRoots.Works.Events;
-using ColinCook.VisitWorkflow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Works.Events;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.Aggregates.ExecutionResults;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Works
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Works
 {
     public class WorkAggregate :
         AggregateRoot<WorkAggregate, WorkId>,

@@ -1,8 +1,8 @@
-﻿using ColinCook.VisitWorkflow.Identities;
+﻿using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.EventStores;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Events
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Works.Events
 {
     [EventVersion(nameof(WorkCompletedEvent), 1)]
     public class WorkCompletedEvent :

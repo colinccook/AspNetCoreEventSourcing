@@ -2,14 +2,14 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
-using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
-using ColinCook.VisitWorkflow.AggregateRoots.Works.ReadModels;
-using ColinCook.VisitWorkflow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Operatives.ReadModels;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Sites.ReadModels;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Works.ReadModels;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow.Queries;
 using EventFlow.ReadStores.InMemory;
 
-namespace ColinCook.VisitWorkflow.Queries
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.Queries
 {
     public class GetOperativeAndWorkQueryResult
     {

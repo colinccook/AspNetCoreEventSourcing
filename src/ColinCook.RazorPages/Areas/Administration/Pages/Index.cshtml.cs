@@ -1,8 +1,8 @@
-using ColinCook.RazorPages.Helpers;
+using ColinCCook.AspNetCoreEventSourcing.RazorPages.Helpers;
 using EventFlow;
 using EventFlow.Queries;
 
-namespace ColinCook.RazorPages.Areas.Administration.Pages
+namespace ColinCCook.AspNetCoreEventSourcing.RazorPages.Areas.Administration.Pages
 {
     public class IndexModel : BasePageModel
     {

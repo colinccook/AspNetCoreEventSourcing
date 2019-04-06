@@ -2,11 +2,11 @@ using System;
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using ColinCook.RazorPages.Binders;
-using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
-using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
-using ColinCook.VisitWorkflow.AggregateRoots.Visits.ReadModels;
-using ColinCook.VisitWorkflow.AggregateRoots.Works.ReadModels;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Operatives.ReadModels;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Sites.ReadModels;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Visits.ReadModels;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Works.ReadModels;
+using ColinCCook.AspNetCoreEventSourcing.RazorPages.Binders;
 using EventFlow;
 using EventFlow.Autofac.Extensions;
 using EventFlow.Extensions;
@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ColinCook.RazorPages
+namespace ColinCCook.AspNetCoreEventSourcing.RazorPages
 {
     public class Startup
     {
@@ -48,7 +48,7 @@ namespace ColinCook.RazorPages
             // be sure to keep a reference to it as a property or field.
             var container = EventFlowOptions.New
                 .UseAutofacContainerBuilder(builder) // Must be the first line!
-                .AddDefaults(Assembly.LoadFrom("bin/Debug/netcoreapp2.2/ColinCook.VisitWorkflow.dll"))
+                .AddDefaults(Assembly.LoadFrom("bin/Debug/netcoreapp2.2/ColinCCook.AspNetCoreEventSourcing.EventFlow.dll"))
                 .UseInMemoryReadStoreFor<VisitReadModel>()
                 .UseInMemoryReadStoreFor<OperativeReadModel>()
                 .UseInMemoryReadStoreFor<SiteReadModel>()

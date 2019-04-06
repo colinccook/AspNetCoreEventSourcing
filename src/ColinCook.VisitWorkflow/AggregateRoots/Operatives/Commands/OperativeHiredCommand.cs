@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using ColinCook.VisitWorkflow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Operatives.Commands
 {
     public class OperativeHiredCommand :
         Command<OperativeAggregate, OperativeId, IExecutionResult>

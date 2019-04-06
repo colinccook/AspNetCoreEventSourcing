@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using ColinCook.VisitWorkflow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Commands
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Works.Commands
 {
     public class WorkAbandonedCommand :
         Command<WorkAggregate, WorkId, IExecutionResult>

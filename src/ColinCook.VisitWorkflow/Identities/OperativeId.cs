@@ -2,7 +2,7 @@ using EventFlow.Core;
 using EventFlow.ValueObjects;
 using Newtonsoft.Json;
 
-namespace ColinCook.VisitWorkflow.Identities
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities
 {
     /// Represents the aggregate identity (ID)
     [JsonConverter(typeof(SingleValueObjectConverter))]

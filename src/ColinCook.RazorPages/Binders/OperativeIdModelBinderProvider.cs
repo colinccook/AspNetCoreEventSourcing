@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ColinCook.VisitWorkflow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace ColinCook.RazorPages.Binders
+namespace ColinCCook.AspNetCoreEventSourcing.RazorPages.Binders
 {
     public class OperativeIdModelBinderProvider : IModelBinderProvider
     {

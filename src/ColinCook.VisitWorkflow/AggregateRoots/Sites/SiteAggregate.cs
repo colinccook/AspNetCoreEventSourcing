@@ -1,9 +1,9 @@
-using ColinCook.VisitWorkflow.AggregateRoots.Sites.Events;
-using ColinCook.VisitWorkflow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Sites.Events;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.Aggregates.ExecutionResults;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Sites
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Sites
 {
     /// The aggregate root
     public class SiteAggregate :

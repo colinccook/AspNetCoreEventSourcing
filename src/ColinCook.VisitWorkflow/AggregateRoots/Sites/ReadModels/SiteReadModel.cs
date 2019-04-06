@@ -1,9 +1,9 @@
-﻿using ColinCook.VisitWorkflow.AggregateRoots.Sites.Events;
-using ColinCook.VisitWorkflow.Identities;
+﻿using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Sites.Events;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.ReadStores;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Sites.ReadModels
 {
     public class SiteReadModel : IReadModel,
         IAmReadModelFor<SiteAggregate, SiteId, SiteAcquiredEvent>

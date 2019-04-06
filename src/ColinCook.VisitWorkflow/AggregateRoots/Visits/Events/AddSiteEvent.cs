@@ -1,8 +1,8 @@
-using ColinCook.VisitWorkflow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.EventStores;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.Events
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Visits.Events
 {
     /// A basic event containing some information
     [EventVersion(nameof(AddSiteEvent), 1)]

@@ -1,8 +1,8 @@
-﻿using ColinCook.VisitWorkflow.Identities;
+﻿using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.EventStores;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives.Events
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Operatives.Events
 {
     [EventVersion(nameof(OperativeHiredEvent), 1)]
     public class OperativeHiredEvent : AggregateEvent<OperativeAggregate, OperativeId>

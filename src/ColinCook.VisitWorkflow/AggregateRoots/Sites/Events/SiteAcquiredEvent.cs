@@ -1,8 +1,8 @@
-﻿using ColinCook.VisitWorkflow.Identities;
+﻿using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.EventStores;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Sites.Events
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Sites.Events
 {
     [EventVersion(nameof(SiteAcquiredEvent), 1)]
     public class SiteAcquiredEvent : AggregateEvent<SiteAggregate, SiteId>

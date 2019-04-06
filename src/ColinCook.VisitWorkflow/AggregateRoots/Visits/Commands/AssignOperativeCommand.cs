@@ -1,8 +1,8 @@
-using ColinCook.VisitWorkflow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Visits.Commands
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Visits.Commands
 {
     /// Command for update magic number
     public class AssignOperativeCommand :

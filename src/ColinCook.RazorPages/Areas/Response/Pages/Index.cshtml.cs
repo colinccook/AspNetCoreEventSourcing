@@ -2,16 +2,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ColinCook.RazorPages.Helpers;
-using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
-using ColinCook.VisitWorkflow.AggregateRoots.Works.Commands;
-using ColinCook.VisitWorkflow.Identities;
-using ColinCook.VisitWorkflow.Queries;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Sites.ReadModels;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Works.Commands;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Queries;
+using ColinCCook.AspNetCoreEventSourcing.RazorPages.Helpers;
 using EventFlow;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ColinCook.RazorPages.Areas.Response.Pages
+namespace ColinCCook.AspNetCoreEventSourcing.RazorPages.Areas.Response.Pages
 {
     public class IndexModel : BasePageModel
     {

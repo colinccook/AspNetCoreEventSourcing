@@ -1,11 +1,11 @@
-﻿using ColinCook.RazorPages.Extensions;
+﻿using ColinCCook.AspNetCoreEventSourcing.RazorPages.Extensions;
 using EventFlow;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ColinCook.RazorPages.Helpers
+namespace ColinCCook.AspNetCoreEventSourcing.RazorPages.Helpers
 {
     public abstract class BasePageModel : PageModel
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Newtonsoft.Json;
 
-namespace ColinCook.RazorPages.Extensions
+namespace ColinCCook.AspNetCoreEventSourcing.RazorPages.Extensions
 {
     public static class TempDataExtensions
     {

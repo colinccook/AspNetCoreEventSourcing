@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ColinCook.RazorPages.Pages
+namespace ColinCCook.AspNetCoreEventSourcing.RazorPages.Pages
 {
     public class ContactModel : PageModel
     {

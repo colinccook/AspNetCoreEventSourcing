@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Operatives.ReadModels;
 using EventFlow.Queries;
 using EventFlow.ReadStores.InMemory;
 
-namespace ColinCook.VisitWorkflow.Queries
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.Queries
 {
     public class AllOperativesQuery : IQuery<IReadOnlyList<OperativeReadModel>>
     {

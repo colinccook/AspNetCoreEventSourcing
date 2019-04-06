@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ColinCook.VisitWorkflow.AggregateRoots.Visits.Events;
-using ColinCook.VisitWorkflow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Visits.Events;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.Aggregates.ExecutionResults;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Visits
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Visits
 {
     internal class OperativeWorkflow
     {

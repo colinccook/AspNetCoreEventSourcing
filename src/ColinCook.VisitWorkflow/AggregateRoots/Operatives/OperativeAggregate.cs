@@ -1,9 +1,9 @@
-using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Events;
-using ColinCook.VisitWorkflow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Operatives.Events;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow.Aggregates;
 using EventFlow.Aggregates.ExecutionResults;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Operatives
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Operatives
 {
     /// The aggregate root
     public class OperativeAggregate :

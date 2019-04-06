@@ -1,7 +1,7 @@
 ﻿using System.Threading;
-using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Commands;
-using ColinCook.VisitWorkflow.AggregateRoots.Sites.Commands;
-using ColinCook.VisitWorkflow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Operatives.Commands;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Sites.Commands;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow;
 using EventFlow.Extensions;
 using Microsoft.AspNetCore;
@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace ColinCook.RazorPages
+namespace ColinCCook.AspNetCoreEventSourcing.RazorPages
 {
     public class Program
     {

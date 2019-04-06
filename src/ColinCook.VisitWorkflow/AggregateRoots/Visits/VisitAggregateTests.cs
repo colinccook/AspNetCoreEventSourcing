@@ -2,9 +2,9 @@
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using ColinCook.VisitWorkflow.AggregateRoots.Visits.Commands;
-using ColinCook.VisitWorkflow.AggregateRoots.Visits.ReadModels;
-using ColinCook.VisitWorkflow.Identities;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Visits.Commands;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Visits.ReadModels;
+using ColinCCook.AspNetCoreEventSourcing.EventFlow.Identities;
 using EventFlow;
 using EventFlow.Aggregates.ExecutionResults;
 using EventFlow.Commands;
@@ -13,7 +13,7 @@ using EventFlow.Queries;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Visits
+namespace ColinCCook.AspNetCoreEventSourcing.EventFlow.AggregateRoots.Visits
 {
     public class VisitAggregateTests
     {
