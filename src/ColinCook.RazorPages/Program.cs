@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading;
+using Microsoft.Extensions.Logging;
 
 namespace ColinCook.RazorPages
 {
@@ -49,7 +50,13 @@ namespace ColinCook.RazorPages
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
-            return WebHost.CreateDefaultBuilder(args)
+            return WebHost
+                .CreateDefaultBuilder(args)
+                .ConfigureLogging(logging => {
+                        logging.AddConsole();
+                        logging.AddDebug();
+                    }
+                )
                 .UseStartup<Startup>();
         }
     }

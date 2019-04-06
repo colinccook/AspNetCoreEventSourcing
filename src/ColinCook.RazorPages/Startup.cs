@@ -22,16 +22,6 @@ namespace ColinCook.RazorPages
 {
     public class Startup
     {
-        //public Startup(IHostingEnvironment env)
-        //{
-        //    var builder = new ConfigurationBuilder()
-        //        .SetBasePath(env.ContentRootPath)
-        //        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-        //        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-        //        .AddEnvironmentVariables();
-        //    Configuration = builder.Build();
-        //}
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -75,19 +65,12 @@ namespace ColinCook.RazorPages
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,
-            IApplicationLifetime appLifetime)
-        {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
-            app.UseMiddleware<CommandPublishMiddleware>();
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime appLifetime)
+        { 
+            // app.UseMiddleware<CommandPublishMiddleware>();
 
             if (env.IsDevelopment())
             {
-                loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-                loggerFactory.AddDebug();
-
                 app.UseDeveloperExceptionPage();
             }
             else
