@@ -6,7 +6,7 @@ using ColinCook.VisitWorkflow.AggregateRoots.Sites.ReadModels;
 using EventFlow.Queries;
 using EventFlow.ReadStores.InMemory;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Sites.Queries
+namespace ColinCook.VisitWorkflow.Queries
 {
     public class AllSitesQuery : IQuery<IReadOnlyList<SiteReadModel>>
     {

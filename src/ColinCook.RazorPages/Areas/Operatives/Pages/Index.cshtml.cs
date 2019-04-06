@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using ColinCook.RazorPages.Helpers;
-using ColinCook.VisitWorkflow.AggregateRoots.Operatives.Queries;
 using ColinCook.VisitWorkflow.AggregateRoots.Operatives.ReadModels;
+using ColinCook.VisitWorkflow.Queries;
 using EventFlow;
 using EventFlow.Queries;
 

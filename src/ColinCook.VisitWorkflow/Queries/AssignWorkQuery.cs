@@ -9,7 +9,7 @@ using ColinCook.VisitWorkflow.Identities;
 using EventFlow.Queries;
 using EventFlow.ReadStores.InMemory;
 
-namespace ColinCook.VisitWorkflow.AggregateRoots.Works.Queries
+namespace ColinCook.VisitWorkflow.Queries
 {
     public class AssignWorkQueryResult
     {
