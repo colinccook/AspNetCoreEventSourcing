@@ -19,7 +19,7 @@ The "business" is first line support for various `Sites` around the country.
 
 Assuming that `Operatives` have been hired and `Sites` acquired:
 
-* Response will raise `Work` when they are contacted by customers within those `Sites` ([WorkRaisedCommand.cs](WorkRaisedCommand.cs))
+* Response will raise `Work` when they are contacted by customers within those `Sites` ([src/EventFlow/AggregateRoots/Works/Commands/WorkRaisedCommand.cs](WorkRaisedCommand.cs))
 * Control will queue that `Work` to an `Operative` ([AssignWorkCommand.cs](AssignWorkCommand.cs))
 * `Operatives` will then dispatch, arrive and deal with the Work ([AssignWorkCommand.cs](AssignWorkCommand.cs), [AssignWorkCommand.cs](AssignWorkCommand.cs), [AssignWorkCommand.cs](AssignWorkCommand.cs))
   * When `Work` is completed it is marked as Completed ([AssignWorkCommand.cs](AssignWorkCommand.cs))
