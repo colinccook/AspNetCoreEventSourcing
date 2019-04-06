@@ -20,10 +20,10 @@ The "business" is first line support for various `Sites` around the country.
 Assuming that `Operatives` have been hired and `Sites` acquired:
 
 * Response will [raise Work](src/EventFlow/AggregateRoots/Works/Commands/WorkRaisedCommand.cs) when they are contacted by customers within those `Sites`
-* Control will queue that `Work` to an `Operative` ([AssignWorkCommand.cs](AssignWorkCommand.cs))
-* `Operatives` will then dispatch, arrive and deal with the Work ([AssignWorkCommand.cs](AssignWorkCommand.cs), [AssignWorkCommand.cs](AssignWorkCommand.cs), [AssignWorkCommand.cs](AssignWorkCommand.cs))
-  * When `Work` is completed it is marked as Completed ([AssignWorkCommand.cs](AssignWorkCommand.cs))
-  * If the `Operative` cannot complete work they abandon it. The `Work` is then back with Control to assign to another `Operative` ([AssignWorkCommand.cs](AssignWorkCommand.cs))
+* Control will [assign the Work](src/EventFlow/AggregateRoots/Works/Commands/WorkAssignedCommand.cs) to an `Operative` 
+* `Operatives` will then pick up this work and will result in one of two outcomes
+  * When `Work` is completed it is [marked as completed](src/EventFlow/AggregateRoots/Works/Commands/WorkCompletedCommand.cs)
+  * If the `Operative` cannot complete work they [abandon it](src/EventFlow/AggregateRoots/Works/Commands/WorkAbandonedCommand.cs)abandon it. The `Work` is then back with Control to assign to another `Operative`
 
 ### How it Works
 
