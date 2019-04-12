@@ -4,6 +4,8 @@ AspNetCoreEventSourcing is a prototype project to experiment event sourcing cove
 
 ![RazorPages End to End](docs/aspnet2.gif)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/5cg7m06lk9yutta9?svg=true)](https://ci.appveyor.com/project/colinccook/aspnetcoreeventsourcing)
+
 ### Features
 
 * **EventFlow** This is the magical framework used for CQRS and storing the entire state of the app as events
