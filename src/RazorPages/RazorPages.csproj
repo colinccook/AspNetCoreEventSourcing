@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
-    <PackageReference Include="EventFlow" Version="0.73.3933" />
+    <PackageReference Include="EventFlow" Version="0.77.4077" />
     <PackageReference Include="EventFlow.AspNetCore" Version="0.73.3933" />
     <PackageReference Include="EventFlow.Autofac" Version="0.72.3914" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
